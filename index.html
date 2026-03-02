@@ -1,22 +1,3 @@
-=============================================================================
-PROJETO: Calculadora de F-Stop Multi-Luz
-DESENVOLVEDOR: Harry Bour (Turma SCI-TPF43M)
-OBJETIVO: Mapear a iluminação de estúdio traduzindo leituras do fotômetro de mão para estabelecer o nivelamento exato entre diferentes fontes de luz.
-FUNÇÕES:
-
-Gerenciamento de até 5 pontos de luz simultâneos (Principal, Preenchimento, Recorte, Fundo, Cabelo).
-
-Cálculo automático da diferença de exposição em relação à luz âncora (Principal).
-
-Indicação precisa de ajustes físicos na tocha (clicks de 1/2 e 1/10 de ponto).
-
-Controles virtuais de ajuste fino (+/-).
-
-Interface com Modo Claro e Modo Escuro.
-DATA E HORA: 02/03/2026 às 14:23 (BRT)
-VERSÃO: 2.0
-=============================================================================
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -34,6 +15,7 @@ VERSÃO: 2.0
             --btn-secondary: #6c757d;
             --result-bg: #e9ecef;
             --action-bg: #fdf2f2;
+            --action-text: #c9302c;
             --input-bg: #fff;
             --input-text: #333;
             --highlight: #28a745;
@@ -49,6 +31,7 @@ VERSÃO: 2.0
             --btn-secondary: #495057;
             --result-bg: #2c2c2c;
             --action-bg: #4a1c1c;
+            --action-text: #ff8a8a;
             --input-bg: #333;
             --input-text: #e0e0e0;
             --highlight: #218838;
@@ -108,28 +91,17 @@ VERSÃO: 2.0
             background-color: var(--btn-secondary);
             color: white;
             cursor: pointer;
-            font-size: 0.9rem;
-            padding: 5px 10px;
+            font-size: 0.8rem;
+            padding: 5px 8px;
         }
-
-        .nudge-btns button:hover { opacity: 0.9; }
-
-        .btn-primary {
-            background-color: var(--btn-bg);
-            color: white;
-            cursor: pointer;
-            width: 100%;
-            font-weight: bold;
-            padding: 12px;
-            margin-top: 10px;
-        }
-        .btn-primary:hover { background-color: var(--btn-hover); }
 
         .btn-add {
             background-color: var(--highlight);
             color: white;
             cursor: pointer;
             margin-bottom: 20px;
+            width: 100%;
+            font-weight: bold;
         }
 
         .theme-btn {
@@ -179,11 +151,9 @@ VERSÃO: 2.0
     let lights = [];
     let lightIdCounter = 0;
 
-    // Inicializa com 3 luzes para exemplo
     window.onload = () => {
-        addLight('Principal', 8, 6); // f/16 6/10
-        addLight('Preenchimento', 5, 5); // f/5.6 5/10
-        addLight('Recorte', 7, 3); // f/11 3/10
+        addLight('Principal', 8, 6); // Exemplo f/16 6/10
+        addLight('Preenchimento', 5, 5); // Exemplo f/5.6 5/10
     };
 
     function toggleTheme() {
@@ -203,8 +173,7 @@ VERSÃO: 2.0
     }
 
     function addLight(role = 'Preenchimento', baseStop = 6, tenths = 0) {
-        if (lights.length >= 5) return alert("Máximo de 5 luzes atingido.");
-        
+        if (lights.length >= 5) return alert("Máximo de 5 luzes.");
         const id = lightIdCounter++;
         lights.push({ id, role, baseStop, tenths });
         renderLights();
@@ -219,8 +188,6 @@ VERSÃO: 2.0
         const light = lights.find(l => l.id === id);
         if (light) {
             light[field] = value;
-            
-            // Força que apenas uma luz seja Principal
             if (field === 'role' && value === 'Principal') {
                 lights.forEach(l => { if (l.id !== id && l.role === 'Principal') l.role = 'Preenchimento'; });
             }
@@ -231,144 +198,63 @@ VERSÃO: 2.0
     function nudgeLight(id, tenthsToAdd) {
         const light = lights.find(l => l.id === id);
         if (!light) return;
-
-        let currentAbs = getAbsoluteValue(light.baseStop, light.tenths);
-        let newAbs = currentAbs + tenthsToAdd;
-        
-        // Limites (f/1.0 até f/64)
+        let newAbs = getAbsoluteValue(light.baseStop, light.tenths) + tenthsToAdd;
         if (newAbs < 0) newAbs = 0;
         if (newAbs > 120) newAbs = 120;
-
         light.baseStop = Math.floor(newAbs / 10);
         light.tenths = newAbs % 10;
         renderLights();
     }
 
-    function calculateInstructions() {
-        // Encontra a luz principal
-        const principal = lights.find(l => l.role === 'Principal');
-        
-        lights.forEach(light => {
-            const resultDiv = document.getElementById(`result-${light.id}`);
-            
-            if (light.role === 'Principal') {
-                resultDiv.innerHTML = "<em>Luz Âncora (Referência)</em>";
-                resultDiv.style.color = "var(--highlight)";
-                return;
-            }
-
-            if (!principal) {
-                resultDiv.innerHTML = "Defina uma luz como 'Principal' para calcular os ajustes.";
-                resultDiv.style.color = "var(--action-text)";
-                return;
-            }
-
-            const absPrincipal = getAbsoluteValue(principal.baseStop, principal.tenths);
-            const absCurrent = getAbsoluteValue(light.baseStop, light.tenths);
-            const diff = absPrincipal - absCurrent;
-
-            if (diff === 0) {
-                resultDiv.innerHTML = "✅ Igualada com a Principal.";
-                resultDiv.style.color = "var(--text-color)";
-                return;
-            }
-
-            const direction = diff > 0 ? "Aumente" : "Reduza";
-            const absDiff = Math.abs(diff);
-            
-            const halfClicks = Math.floor(absDiff / 5);
-            const tenthClicks = absDiff % 5;
-
-            let instruction = `⚙️ Na Tocha: <strong>${direction}</strong> a luz em `;
-            let parts = [];
-            if (halfClicks > 0) parts.push(`${halfClicks} click(s) de 1/2 ponto`);
-            if (tenthClicks > 0) parts.push(`${tenthClicks} click(s) de 1/10`);
-            
-            instruction += parts.join(" e ") + ".";
-
-            resultDiv.innerHTML = instruction;
-            resultDiv.style.color = "var(--text-color)";
-        });
-    }
-
     function renderLights() {
         const container = document.getElementById('lightsContainer');
         container.innerHTML = '';
+        const principal = lights.find(l => l.role === 'Principal');
 
         lights.forEach(light => {
             const isPrincipal = light.role === 'Principal';
             const row = document.createElement('div');
             row.className = `light-row ${isPrincipal ? 'principal' : ''}`;
 
-            // Select Role
-            const roleSelect = document.createElement('select');
-            ['Principal', 'Preenchimento', 'Recorte', 'Fundo', 'Cabelo'].forEach(opt => {
-                const option = document.createElement('option');
-                option.value = opt;
-                option.text = opt;
-                if (light.role === opt) option.selected = true;
-                roleSelect.appendChild(option);
-            });
-            roleSelect.onchange = (e) => updateLight(light.id, 'role', e.target.value);
-
-            // Select Base F-Stop
-            const fStopSelect = document.createElement('select');
-            fStopsFull.forEach((f, index) => {
-                const option = document.createElement('option');
-                option.value = index;
-                option.text = f;
-                if (light.baseStop === index) option.selected = true;
-                fStopSelect.appendChild(option);
-            });
-            fStopSelect.onchange = (e) => updateLight(light.id, 'baseStop', parseInt(e.target.value));
-
-            // Select Tenths
-            const tenthsSelect = document.createElement('select');
-            for (let i = 0; i < 10; i++) {
-                const option = document.createElement('option');
-                option.value = i;
-                option.text = `${i}/10`;
-                if (light.tenths === i) option.selected = true;
-                tenthsSelect.appendChild(option);
-            }
-            tenthsSelect.onchange = (e) => updateLight(light.id, 'tenths', parseInt(e.target.value));
-
-            // Nudge Buttons (+/-)
-            const nudgeDiv = document.createElement('div');
-            nudgeDiv.className = 'nudge-btns';
-            nudgeDiv.innerHTML = `
-                <button onclick="nudgeLight(${light.id}, -5)" title="- 1/2 Ponto">-1/2</button>
-                <button onclick="nudgeLight(${light.id}, -1)" title="- 1/10 Ponto">-1/10</button>
-                <button onclick="nudgeLight(${light.id}, 1)" title="+ 1/10 Ponto">+1/10</button>
-                <button onclick="nudgeLight(${light.id}, 5)" title="+ 1/2 Ponto">+1/2</button>
+            row.innerHTML = `
+                <select onchange="updateLight(${light.id}, 'role', this.value)">
+                    <option ${light.role==='Principal'?'selected':''}>Principal</option>
+                    <option ${light.role==='Preenchimento'?'selected':''}>Preenchimento</option>
+                    <option ${light.role==='Recorte'?'selected':''}>Recorte</option>
+                    <option ${light.role==='Fundo'?'selected':''}>Fundo</option>
+                </select>
+                <select onchange="updateLight(${light.id}, 'baseStop', parseInt(this.value))">
+                    ${fStopsFull.map((f, i) => `<option value="${i}" ${light.baseStop===i?'selected':''}>${f}</option>`).join('')}
+                </select>
+                <select onchange="updateLight(${light.id}, 'tenths', parseInt(this.value))">
+                    ${[0,1,2,3,4,5,6,7,8,9].map(t => `<option value="${t}" ${light.tenths===t?'selected':''}>${t}/10</option>`).join('')}
+                </select>
+                <div class="nudge-btns">
+                    <button onclick="nudgeLight(${light.id}, -5)">-1/2</button>
+                    <button onclick="nudgeLight(${light.id}, -1)">-1/10</button>
+                    <button onclick="nudgeLight(${light.id}, 1)">+1/10</button>
+                    <button onclick="nudgeLight(${light.id}, 5)">+1/2</button>
+                </div>
+                <button style="color:red; border:none; background:none; cursor:pointer;" onclick="removeLight(${light.id})">✖</button>
+                <div class="result-text" id="res-${light.id}"></div>
             `;
-
-            // Delete Button
-            const deleteBtn = document.createElement('button');
-            deleteBtn.innerText = 'X';
-            deleteBtn.style.backgroundColor = 'var(--action-bg)';
-            deleteBtn.style.color = 'var(--action-text)';
-            deleteBtn.onclick = () => removeLight(light.id);
-
-            // Result Text Container
-            const resultText = document.createElement('div');
-            resultText.id = `result-${light.id}`;
-            resultText.className = 'result-text';
-
-            // Append elements
-            row.appendChild(roleSelect);
-            row.appendChild(fStopSelect);
-            row.appendChild(tenthsSelect);
-            row.appendChild(nudgeDiv);
-            if (!isPrincipal || lights.length > 1) row.appendChild(deleteBtn);
-            row.appendChild(resultText);
-
             container.appendChild(row);
-        });
 
-        calculateInstructions();
+            const resDiv = document.getElementById(`res-${light.id}`);
+            if (isPrincipal) {
+                resDiv.innerText = "Luz de Referência";
+            } else if (principal) {
+                const diff = getAbsoluteValue(principal.baseStop, principal.tenths) - getAbsoluteValue(light.baseStop, light.tenths);
+                if (diff === 0) resDiv.innerText = "✅ Luz igualada.";
+                else {
+                    const dir = diff > 0 ? "Aumente" : "Reduza";
+                    const h = Math.floor(Math.abs(diff) / 5);
+                    const t = Math.abs(diff) % 5;
+                    resDiv.innerHTML = `⚙️ ${dir}: <strong>${h} clicks (1/2)</strong> e <strong>${t} clicks (1/10)</strong>.`;
+                }
+            }
+        });
     }
 </script>
-
 </body>
 </html>
