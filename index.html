@@ -6,7 +6,7 @@
     <title>Hub TPF43M - Senac Lapa Scipião</title>
     <style>
         /* ==========================================
-           1. VARIÁVEIS GERAIS E TEMA ESCURO (PADRÃO)
+           1. VARIÁVEIS GERAIS E TEMA ESCURO
            ========================================== */
         :root {
             --bg-color: #121212;
@@ -81,7 +81,7 @@
         .disclaimer-box strong { color: var(--accent-warning); }
 
         /* ==========================================
-           2. TELA DE ABERTURA E CABEÇALHO DO MENU
+           2. SPLASH SCREEN E MENU
            ========================================== */
         .senac-logo-img {
             max-width: 180px;
@@ -117,9 +117,6 @@
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
         @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
 
-        /* ==========================================
-           3. MENU PRINCIPAL
-           ========================================== */
         #main-menu {
             display: flex;
             flex-direction: column;
@@ -130,68 +127,39 @@
             padding: 20px;
         }
 
-        .menu-header {
-            text-align: center;
-            margin-bottom: 20px;
-            animation: fadeIn 0.8s ease-in;
-        }
-
+        .menu-header { text-align: center; margin-bottom: 20px; animation: fadeIn 0.8s ease-in; }
         .menu-turma-badge {
-            font-size: 1.2rem;
-            color: #fff;
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            padding: 8px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            display: inline-block;
-            margin-top: 10px;
-            letter-spacing: 1px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+            font-size: 1.2rem; color: #fff; background-color: var(--bg-panel);
+            border: 1px solid var(--border-color); padding: 8px 20px;
+            border-radius: 20px; font-weight: bold; display: inline-block;
+            margin-top: 10px; letter-spacing: 1px; box-shadow: 0 4px 6px rgba(0,0,0,0.2);
         }
         
         .menu-btn {
-            background-color: var(--bg-panel);
-            border: 1px solid var(--border-color);
-            color: #fff;
-            width: 100%;
-            max-width: 400px;
-            padding: 25px 20px;
-            border-radius: 12px;
-            font-size: 1.2rem;
-            font-weight: bold;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            transition: transform 0.2s, background-color 0.2s;
+            background-color: var(--bg-panel); border: 1px solid var(--border-color);
+            color: #fff; width: 100%; max-width: 400px; padding: 25px 20px;
+            border-radius: 12px; font-size: 1.2rem; font-weight: bold;
+            cursor: pointer; display: flex; align-items: center; gap: 15px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.2s, background-color 0.2s;
         }
         .menu-btn:hover { transform: translateY(-3px); background-color: #2a2a2a; }
         .menu-icon { font-size: 2rem; }
         .menu-btn.btn-aulas { border-left: 5px solid var(--accent-aulas); }
         .menu-btn.btn-calc { border-left: 5px solid var(--accent-calc); }
         .menu-btn.btn-eventos { border-left: 5px solid var(--accent-eventos); }
+        .menu-btn:disabled { opacity: 0.6; cursor: wait; }
 
         /* ==========================================
-           4. PAINEL DE AULAS
+           3. PAINEL DE AULAS
            ========================================== */
         .search-box { background-color: var(--bg-panel); padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--accent-senac); }
         .search-box label { display: block; margin-bottom: 8px; font-weight: bold; color: #ccc; }
         .search-box select { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #444; background-color: #2c2c2c; color: white; font-size: 1em; }
         
-        /* Tag de UC Encerrada */
         .uc-encerrada {
-            background-color: #1b2a20; 
-            color: #4caf50; 
-            padding: 12px; 
-            text-align: center; 
-            font-weight: bold; 
-            border-radius: 4px; 
-            margin-bottom: 15px; 
-            border: 1px solid #4caf50; 
-            font-size: 0.9em; 
-            letter-spacing: 0.5px;
+            background-color: #1b2a20; color: #4caf50; padding: 12px; text-align: center; 
+            font-weight: bold; border-radius: 4px; margin-bottom: 15px; 
+            border: 1px solid #4caf50; font-size: 0.9em; letter-spacing: 0.5px;
         }
 
         .aulas-container { display: flex; flex-direction: column; gap: 15px; }
@@ -223,7 +191,7 @@
         .modal-header { border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px; }
 
         /* ==========================================
-           5. CALCULADORA DE F-STOP
+           4. CALCULADORA DE F-STOP
            ========================================== */
         .btn-add-luz { background-color: var(--accent-calc); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 20px; font-size: 1rem; }
         .light-row { border: 1px solid var(--border-color); padding: 15px; margin-bottom: 15px; border-radius: 6px; background-color: var(--bg-panel); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
@@ -234,7 +202,7 @@
         .result-text { width: 100%; margin-top: 10px; font-size: 0.95rem; font-weight: bold; }
 
         /* ==========================================
-           6. EVENTOS
+           5. EVENTOS
            ========================================== */
         .evento-card { background-color: var(--bg-panel); border-left: 5px solid var(--accent-eventos); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .evento-data { color: var(--accent-eventos); font-weight: bold; font-size: 1em; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
@@ -253,8 +221,11 @@
         <div class="splash-curso">Técnico em Processos Fotográficos</div>
         <div class="splash-turma">Turma 43M</div>
         <div class="splash-curso">SCI-TPF43M</div>
-        <div class="click-hint-splash">Toque em qualquer lugar para entrar</div>
-        <div class="splash-footer">Versão 3.3 | Desenvolvido por Harry Bour</div>
+        <div id="loading-text" style="color: var(--accent-senac); font-weight: bold; margin-top: 20px;">
+            Sincronizando banco de dados...
+        </div>
+        <div class="click-hint-splash hidden" id="click-hint">Toque em qualquer lugar para entrar</div>
+        <div class="splash-footer">Versão 4.0 | Desenvolvido por Harry Bour</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -312,7 +283,7 @@
                 <div id="modalUC" style="font-size: 1.2em; font-weight: bold; color: #fff;">UC e Aula</div>
                 <div id="modalProf" style="color: var(--accent-eventos); font-weight: bold;">Professor</div>
             </div>
-            <div id="modalTexto" style="line-height: 1.6; white-space: pre-wrap;">Conteúdo carregando...</div>
+            <div id="modalTexto" style="line-height: 1.6; white-space: pre-wrap;">Detalhes adicionais não fornecidos na planilha.</div>
         </div>
     </div>
 
@@ -335,19 +306,117 @@
     </div>
 
     <script>
-        /* --- NAVEGAÇÃO E SPLASH SCREEN --- */
+        // ==========================================
+        // 1. COLE AQUI OS LINKS TSV DO GOOGLE SHEETS
+        // ==========================================
+        
+        // Link da aba "Aulas" (termina com output=tsv)
+        const LINK_PLANILHA_AULAS = https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=0&single=true&output=tsv;
+        
+        // Link da aba "Eventos" (termina com output=tsv)
+        const LINK_PLANILHA_EVENTOS = https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv;
+
+        // ==========================================
+
+
+        let aulasArray = [];
+        let baseEventos = [];
+        let dadosCarregados = false;
+
+        const nomesUC = {
+            "UC1": "Captar imagens", "UC2": "Iluminar cenas", "UC3": "Revelação digital", "UC4": "Manipular imagens",
+            "UC5": "Finalizar imagens", "UC6": "Captar vídeos", "UC7": "Fotojornalismo", "UC8": "Social", 
+            "UC9": "Moda e Editoriais", "UC10": "Propaganda e Publi", "UC11": "Paisagem e Arq", 
+            "UC12": "Ensaios fotográficos", "UC13": "Portfólio", "UC14": "Projeto Integrador"
+        };
+
         document.addEventListener('DOMContentLoaded', () => {
-            if (!sessionStorage.getItem('splashShown')) {
-                document.getElementById('splash-screen').classList.remove('hidden');
+            // Se os links não foram colados ainda, usa dados de exemplo temporários
+            if(LINK_PLANILHA_AULAS.includes("COLE_AQUI")) {
+                alert("AVISO PARA O DESENVOLVEDOR: Você precisa colar os links TSV do Google Sheets no código-fonte!");
+                liberarAcesso(); // Libera com arrays vazios só pra não travar a tela
             } else {
-                dismissSplash();
+                carregarBancoDeDados();
             }
-            initAulas();
-            initEventos();
+
             if(lights.length === 0) { addLight('Principal', 8, 6); addLight('Preenchimento', 5, 5); }
         });
 
+        async function carregarBancoDeDados() {
+            try {
+                // Fetch das Aulas
+                const resAulas = await fetch(LINK_PLANILHA_AULAS);
+                const tsvAulas = await resAulas.text();
+                processarAulas(tsvAulas);
+
+                // Fetch dos Eventos
+                const resEventos = await fetch(LINK_PLANILHA_EVENTOS);
+                const tsvEventos = await resEventos.text();
+                processarEventos(tsvEventos);
+
+                liberarAcesso();
+
+            } catch (error) {
+                console.error("Erro na sincronização:", error);
+                document.getElementById('loading-text').innerText = "Erro ao sincronizar. Verifique a internet ou o link da planilha.";
+            }
+        }
+
+        function processarAulas(tsv) {
+            const linhas = tsv.split('\n').slice(1); // Ignora a primeira linha (cabeçalho)
+            aulasArray = [];
+            
+            linhas.forEach(linha => {
+                if(!linha.trim()) return;
+                const colunas = linha.split('\t').map(col => col.trim().replace(/^"|"$/g, ''));
+                
+                // Esperado: Data | UC | Docente | Aula
+                if(colunas.length >= 4 && colunas[0] && colunas[1]) {
+                    aulasArray.push({
+                        data: colunas[0],
+                        codigoUC: colunas[1],
+                        uc: `${colunas[1]} - ${nomesUC[colunas[1]] || ''}`,
+                        docente: colunas[2],
+                        aula: colunas[3]
+                    });
+                }
+            });
+        }
+
+        function processarEventos(tsv) {
+            const linhas = tsv.split('\n').slice(1); // Ignora cabeçalho
+            baseEventos = [];
+
+            linhas.forEach(linha => {
+                if(!linha.trim()) return;
+                const colunas = linha.split('\t').map(col => col.trim().replace(/^"|"$/g, ''));
+                
+                // Esperado: Data | Titulo | Descricao
+                if(colunas.length >= 2 && colunas[0] && colunas[1]) {
+                    baseEventos.push({
+                        data: colunas[0],
+                        titulo: colunas[1],
+                        desc: colunas[2] || ''
+                    });
+                }
+            });
+        }
+
+        function liberarAcesso() {
+            dadosCarregados = true;
+            initAulas();
+            initEventos();
+
+            document.getElementById('loading-text').style.display = 'none';
+            document.getElementById('click-hint').classList.remove('hidden');
+
+            if (sessionStorage.getItem('splashShown')) {
+                dismissSplash();
+            }
+        }
+
         function dismissSplash() {
+            if(!dadosCarregados) return; // Só permite sair se os dados chegaram
             sessionStorage.setItem('splashShown', 'true');
             document.getElementById('splash-screen').classList.add('hidden');
             document.getElementById('view-menu').classList.remove('hidden');
@@ -365,13 +434,6 @@
         }
 
         /* --- MÓDULO: EVENTOS DA TURMA --- */
-        const baseEventos = [
-            { data: "2026-03-20", titulo: "Entrega de Portfólio (Draft 1)", desc: "Envio do primeiro esboço do portfólio para avaliação dos professores." },
-            { data: "2026-04-10", titulo: "Passeio Fotográfico: Centro Histórico", desc: "Saída fotográfica focada em arquitetura e street photography. Ponto de encontro: Estação da Luz." },
-            { data: "2026-04-29", titulo: "Exposição PI 41M", desc: "Visita e análise da exposição da turma 41M." },
-            { data: "2026-07-02", titulo: "GRANDE EVENTO: EXPOSIÇÃO PI 43M", desc: "Apresentação final do Projeto Integrador da nossa turma. Divulgação aberta." }
-        ];
-
         function initEventos() {
             const container = document.getElementById('lista-eventos');
             let html = '';
@@ -382,26 +444,26 @@
             const hojeM = hojeDate.getMonth();
             const hojeD = hojeDate.getDate();
 
+            if (baseEventos.length === 0) {
+                container.innerHTML = "<p>Nenhum evento registrado na planilha.</p>";
+                return;
+            }
+
             baseEventos.forEach(ev => {
                 const [ano, mes, dia] = ev.data.split('-');
+                if(!ano || !mes || !dia) return; // Pula datas mal formatadas
+
                 const dataFormatada = `${dia}/${mes}/${ano}`;
-                
-                // Cálculo exato de dias ignorando fuso horário
                 const dataEvento = new Date(ano, mes - 1, dia);
                 const dataHojeLocal = new Date(hojeY, hojeM, hojeD);
                 const diffTime = dataEvento - dataHojeLocal;
                 const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
                 let countdownHTML = "";
-                if (diffDays > 1) {
-                    countdownHTML = `<span class="evento-countdown">(Faltam ${diffDays} dias)</span>`;
-                } else if (diffDays === 1) {
-                    countdownHTML = `<span class="evento-countdown urgente">(É amanhã!)</span>`;
-                } else if (diffDays === 0) {
-                    countdownHTML = `<span class="evento-countdown hoje">(É hoje!)</span>`;
-                } else {
-                    countdownHTML = `<span class="evento-countdown">(Realizado)</span>`;
-                }
+                if (diffDays > 1) { countdownHTML = `<span class="evento-countdown">(Faltam ${diffDays} dias)</span>`; } 
+                else if (diffDays === 1) { countdownHTML = `<span class="evento-countdown urgente">(É amanhã!)</span>`; } 
+                else if (diffDays === 0) { countdownHTML = `<span class="evento-countdown hoje">(É hoje!)</span>`; } 
+                else { countdownHTML = `<span class="evento-countdown">(Realizado)</span>`; }
 
                 html += `
                     <div class="evento-card">
@@ -417,7 +479,126 @@
             container.innerHTML = html;
         }
 
-        /* --- MÓDULO: CALCULADORA DE ESTÚDIO --- */
+        /* --- MÓDULO: PAINEL DE AULAS --- */
+        function toISODate(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
+        function formatarDataBR(iso) { const [a, m, d] = iso.split('-'); return `${d}/${m}/${a}`; }
+        function getDiaDaSemana(iso) {
+            const d = new Date(iso.split('-')[0], iso.split('-')[1] - 1, iso.split('-')[2], 12, 0, 0);
+            return ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'][d.getDay()];
+        }
+
+        function abrirModal(dataISO, ucNome, profNome, numAula) {
+            document.getElementById('modalData').innerText = `${getDiaDaSemana(dataISO)}, ${formatarDataBR(dataISO)}`;
+            document.getElementById('modalUC').innerText = `${ucNome} - Aula ${numAula}`;
+            document.getElementById('modalProf').innerText = `Prof. ${profNome}`;
+            document.getElementById('modalConteudo').style.display = 'flex';
+            document.body.style.overflow = 'hidden'; 
+        }
+
+        function fecharModal(e) { if (e.target.id === 'modalConteudo') fecharModalBtn(); }
+        function fecharModalBtn() { document.getElementById('modalConteudo').style.display = 'none'; document.body.style.overflow = 'auto'; }
+
+        function initAulas() {
+            const select = document.getElementById('filtroUC');
+            select.innerHTML = '<option value="">-- Selecione uma UC para ver todas as datas --</option>'; // Reseta
+            for (const [codigo, nome] of Object.entries(nomesUC)) {
+                const opt = document.createElement('option');
+                opt.value = codigo; opt.textContent = `${codigo} - ${nome}`;
+                select.appendChild(opt);
+            }
+            mudarSemana(0);
+        }
+
+        document.getElementById('filtroUC').addEventListener('change', function(e) {
+            const ucSelec = e.target.value;
+            if (!ucSelec) return window.limparBusca();
+            
+            document.getElementById('painel-aulas').style.display = 'none';
+            document.getElementById('rodape-semanas').style.display = 'none';
+            const resPanel = document.getElementById('resultado-pesquisa');
+            resPanel.style.display = 'flex';
+
+            const dUC = aulasArray.filter(a => a.codigoUC === ucSelec);
+            const hojeStr = toISODate(new Date());
+            const todasEncerradas = dUC.length > 0 && dUC.every(a => a.data < hojeStr);
+
+            let h = `<div class="card" style="border-left-color: #ff9800;">
+                        <button onclick="limparBusca()" class="btn-voltar" style="border-color: #ff9800; color:#ff9800;">⬅ Limpar Busca</button>
+                        <h3 style="margin-top:0; color:#ff9800;">${nomesUC[ucSelec]}</h3>`;
+            
+            if (todasEncerradas) {
+                h += `<div class="uc-encerrada">✅ UC Encerrada para a Turma 43M</div>`;
+            }
+
+            if(dUC.length === 0) h += `<p>Nenhuma aula agendada na planilha.</p>`;
+            dUC.forEach(a => {
+                h += `<div style="padding:10px 0; border-bottom:1px solid #333;" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
+                        <strong>${formatarDataBR(a.data)}</strong> - Prof. ${a.docente} (Aula ${a.aula})
+                      </div>`;
+            });
+            resPanel.innerHTML = h + `</div>`;
+        });
+
+        window.limparBusca = function() {
+            document.getElementById('filtroUC').value = "";
+            document.getElementById('resultado-pesquisa').style.display = 'none';
+            document.getElementById('painel-aulas').style.display = 'flex';
+            document.getElementById('rodape-semanas').style.display = 'flex';
+        }
+
+        function mudarSemana(offset) {
+            document.getElementById('btn-passada').classList.toggle('active', offset === -1);
+            document.getElementById('btn-atual').classList.toggle('active', offset === 0);
+            document.getElementById('btn-que-vem').classList.toggle('active', offset === 1);
+            
+            const hoje = new Date();
+            const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12, 0, 0);
+            const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12, 0, 0);
+            
+            const hojeStr = toISODate(hoje);
+            const amanha = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1);
+            const amanhaStr = toISODate(amanha);
+
+            const aSemana = aulasArray.filter(a => a.data >= toISODate(seg) && a.data <= toISODate(sex));
+            
+            let html = `<h3 style="text-align:center;">Sua Semana</h3>`;
+            if (aSemana.length === 0) html += `<div class="card"><div class="details">Nenhuma aula programada.</div></div>`;
+            
+            aSemana.forEach(a => {
+                const isCancelled = a.aula.toLowerCase().includes('cancelada');
+                let cardClass = '';
+                let statusMsg = '';
+
+                if (isCancelled) {
+                    cardClass = 'cancelled';
+                    statusMsg = `❌ CANCELADA - ${getDiaDaSemana(a.data)}`;
+                } else {
+                    if (a.data === hojeStr) {
+                        cardClass = 'today';
+                        statusMsg = '🔥 HOJE';
+                    } else if (a.data === amanhaStr) {
+                        cardClass = 'tomorrow';
+                        statusMsg = `${getDiaDaSemana(a.data)} - AMANHÃ! ⚡`;
+                    } else if (a.data < hojeStr) {
+                        cardClass = 'past';
+                        statusMsg = `✅ ${getDiaDaSemana(a.data)}`;
+                    } else {
+                        cardClass = 'next';
+                        statusMsg = `⏳ ${getDiaDaSemana(a.data)}`;
+                    }
+                }
+
+                html += `
+                <div class="card ${cardClass}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
+                    <div class="status">${statusMsg}</div>
+                    <div class="date">${formatarDataBR(a.data)}</div>
+                    <div class="details"><span style="color:#fff;font-weight:bold;">${a.uc}</span><br>Prof: ${a.docente}</div>
+                </div>`;
+            });
+            document.getElementById('painel-aulas').innerHTML = html;
+        }
+
+        /* --- MÓDULO: CALCULADORA DE ESTÚDIO (MANUAL) --- */
         const fStopsFull = ['f/1.0', 'f/1.4', 'f/2.0', 'f/2.8', 'f/4.0', 'f/5.6', 'f/8.0', 'f/11', 'f/16', 'f/22', 'f/32', 'f/45', 'f/64'];
         let lights = [];
         let lightIdCounter = 0;
@@ -497,223 +678,6 @@
                     }
                 }
             });
-        }
-
-        /* --- MÓDULO: PAINEL DE AULAS --- */
-        const nomesUC = {
-            "UC1": "Captar imagens", "UC2": "Iluminar cenas", "UC3": "Revelação digital", "UC4": "Manipular imagens",
-            "UC5": "Finalizar imagens", "UC6": "Captar vídeos", "UC7": "Fotojornalismo", "UC8": "Social", 
-            "UC9": "Moda e Editoriais", "UC10": "Propaganda e Publi", "UC11": "Paisagem e Arq", 
-            "UC12": "Ensaios fotográficos", "UC13": "Portfólio", "UC14": "Projeto Integrador"
-        };
-
-        const conteudosPrevistos = {
-            "2026-01-27": "Introdução a Portfólio e plataformas de criação de site.",
-            "2026-02-03": "Contrato e direitos autorais.",
-            "2026-02-10": "Empreendedorismo.",
-            "2026-02-11": "Coberta do espetáculo \"Heliogabalo\".",
-            "2026-02-12": "Edição das fotos do acervo e início de montagem do site.",
-            "2026-02-24": "Empreendedorismo.",
-            "2026-03-03": "⚠️ Aula cancelada.",
-            "2026-03-26": "Montagem de portfólio.",
-            "2026-04-29": "EXPOSIÇÃO PI 41M.",
-            "2026-04-30": "Portfólio e acompanhamento PI 43M.",
-            "2026-05-18": "Portfólio e acompanhamento PI 43M.",
-            "2026-07-01": "Portfólio - Apresentação.",
-            "2026-07-02": "EXPOSIÇÃO PI 43M."
-        };
-
-        const rawAulas = [
-            "2025-04-14|UC4|Marcella Camillo|1", "2025-04-15|UC1|Paula Lira|1", "2025-04-16|UC1|Paula Lira|2",
-            "2025-04-17|UC3|Guilherme Correia|1", "2025-04-22|UC1|Paula Lira|3", "2025-04-23|UC1|Paula Lira|4",
-            "2025-04-24|UC3|Guilherme Correia|2", "2025-04-28|UC2|Giovani Pagliusi|1", "2025-04-29|UC1|Paula Lira|5",
-            "2025-04-30|UC1|Paula Lira|6", "2025-05-06|UC14|Paula Lira|1", "2025-05-07|UC1|Paula Lira|7",
-            "2025-05-08|UC3|Guilherme Correia|3", "2025-05-12|UC1|Marcella Camillo|8", "2025-05-13|UC1|Paula Lira|9",
-            "2025-05-14|UC1|Paula Lira|10", "2025-05-15|UC1|Marcella Camillo|11", "2025-05-19|UC3|Flavia Guedes|4",
-            "2025-05-20|UC1|Paula Lira|12", "2025-05-21|UC14|Paula Lira|2", "2025-05-22|UC1|Marcella Camillo|13",
-            "2025-05-26|UC3|Flavia Guedes|5", "2025-05-27|UC3|Flavia Guedes|6", "2025-05-28|UC1|Paula Lira|14",
-            "2025-05-29|UC8|Marcella Camillo|1", "2025-06-02|UC1|Paula Lira|15", "2025-06-03|UC3|Guilherme Correia|7",
-            "2025-06-04|UC7|Paula Lira|1", "2025-06-05|UC7|Paula Lira|2", "2025-06-09|UC3|Flavia Guedes|8",
-            "2025-06-10|UC2|Marcella Camillo|2", "2025-06-11|UC7|Paula Lira|3", "2025-06-12|UC7|Paula Lira|4",
-            "2025-06-16|UC3|Flavia Guedes|9", "2025-06-17|UC8|Marcella Camillo|2", "2025-06-18|UC7|Paula Lira|5",
-            "2025-06-23|UC8|Marcella Camillo|3", "2025-06-24|UC2|Marcella Camillo|3", "2025-06-25|UC7|Paula Lira|6",
-            "2025-06-26|UC14|Guilherme Correia|3", "2025-06-30|UC8|Marcella Camillo|4", "2025-07-01|UC2|Marcella Camillo|4",
-            "2025-07-02|UC7|Paula Lira|7", "2025-07-03|UC7|Paula Lira|8", "2025-07-07|UC8|Marcella Camillo|5",
-            "2025-07-08|UC2|Marcella Camillo|5", "2025-07-28|UC5|Flavia Guedes|1", "2025-07-29|UC2|Marcella Camillo|6",
-            "2025-07-30|UC8|Marcella Camillo|6", "2025-07-31|UC8|Guilherme Correia|7", "2025-08-04|UC4|Flavia Guedes|2",
-            "2025-08-05|UC2|Marcella Camillo|7", "2025-08-07|UC4|Guilherme Correia|3", "2025-08-11|UC4|Flavia Guedes|4",
-            "2025-08-12|UC8|Giovani Pagliusi|8", "2025-08-13|UC2|Marcella Camillo|8", "2025-08-14|UC8|Guilherme Correia|9",
-            "2025-08-18|UC4|Flavia Guedes|5", "2025-08-19|UC2|Marcella Camillo|9", "2025-08-20|UC8|Marcella Camillo|10",
-            "2025-08-21|UC4|Guilherme Correia|6", "2025-08-25|UC8|Marcella Camillo|11", "2025-08-26|UC14|Marcella Camillo|4",
-            "2025-08-27|UC8|Marcella Camillo|12", "2025-08-28|UC8|Marcella Camillo|13", "2025-09-01|UC8|Marcella Camillo|14",
-            "2025-09-02|UC2|Marcella Camillo|10", "2025-09-03|UC7|Paula Lira|9", "2025-09-04|UC8|Jota Santos|15",
-            "2025-09-08|UC8|Marcella Camillo|16", "2025-09-10|UC7|Paula Lira|10", "2025-09-11|UC2|Marcella Camillo|11",
-            "2025-09-15|UC2|Marcella Camillo|12", "2025-09-16|UC6|Guilherme Correia|1", "2025-09-17|UC8|Marcella Camillo|17",
-            "2025-09-18|UC7|Paula Lira|11", "2025-09-22|UC7|Marcella Camillo|12", "2025-09-23|UC9|Marcella Camillo|1",
-            "2025-09-24|UC9|Marcella Camillo|2", "2025-09-29|UC9|Marcella Camillo|3", "2025-09-30|UC6|Guilherme Correia|2",
-            "2025-10-01|UC8|Jota Santos|18", "2025-10-02|UC7|Paula Lira|13", "2025-10-06|UC9|Marcella Camillo|4",
-            "2025-10-07|UC4|Flavia Guedes|7", "2025-10-08|UC7|Jota Santos|14", "2025-10-09|UC7|Paula Lira|15",
-            "2025-10-13|UC9|Marcella Camillo|5", "2025-10-14|UC5|Flavia Guedes|2", "2025-10-15|UC7|Jota Santos|16",
-            "2025-10-16|UC7|Paula Lira|17", "2025-10-20|UC6|Guilherme Correia|3", "2025-10-22|UC7|Marcella Camillo|18",
-            "2025-10-23|UC14|Paula Lira|5", "2025-10-27|UC9|Marcella Camillo|6", "2025-10-28|UC5|Flavia Guedes|3",
-            "2025-10-29|UC12|Marcella Camillo|1", "2025-10-30|UC6|Guilherme Correia|4", "2025-11-03|UC12|Marcella Camillo|2",
-            "2025-11-04|UC4|Flavia Guedes|8", "2025-11-05|UC6|Guilherme Correia|5", "2025-11-06|UC12|Jota Santos|3",
-            "2025-11-10|UC12|Marcella Camillo|4", "2025-11-11|UC12|Marcella Camillo|5", "2025-11-12|UC12|Marcella Camillo|6",
-            "2025-11-13|UC12|Marcella Camillo|7", "2025-11-18|UC4|Flavia Guedes|9", "2025-11-19|UC12|Jota Santos|8",
-            "2025-11-24|UC6|Guilherme Correia|6", "2025-11-25|UC4|Flavia Guedes|10", "2025-11-26|UC12|Marcella Camillo|9",
-            "2025-11-27|UC6|Guilherme Correia|7", "2025-12-01|UC6|Guilherme Correia|8", "2025-12-02|UC12|Marcella Camillo|10",
-            "2025-12-03|UC12|Marcella Camillo|11", "2026-01-26|UC12|Marcella Camillo|12", "2026-01-27|UC13|Marcella Camillo|1",
-            "2026-01-28|UC5|Guilherme Correia|4", "2026-01-29|UC5|Guilherme Correia|5", "2026-02-02|UC5|Guilherme Correia|6",
-            "2026-02-03|UC13|Barbara Milano|2", "2026-02-04|UC5|Jota Santos|7", "2026-02-05|UC5|Guilherme Correia|8",
-            "2026-02-09|UC6|Guilherme Correia|9", "2026-02-10|UC13|Barbara Milano|3", "2026-02-11|UC13|Marcella Camillo|4",
-            "2026-02-12|UC13|Marcella Camillo|5", "2026-02-19|UC11|Paula Lira|1", "2026-02-23|UC10|Guilherme Correia|1",
-            "2026-02-24|UC13|Barbara Milano|6", "2026-02-25|UC10|Guilherme Correia|2", "2026-02-26|UC11|Paula Lira|2",
-            "2026-03-02|UC10|Guilherme Correia|3", "2026-03-03|UC14|Flavia Guedes|6 (Cancelada)", "2026-03-04|UC10|Guilherme Correia|4",
-            "2026-03-05|UC10|Jota Santos|5", "2026-03-09|UC10|Guilherme Correia|6", "2026-03-10|UC4|Flavia Guedes|11",
-            "2026-03-11|UC10|Guilherme Correia|7", "2026-03-12|UC5|Jota Santos|9", "2026-03-16|UC11|Paula Lira|3",
-            "2026-03-17|UC4|Flavia Guedes|12", "2026-03-18|UC9|Jota Santos|7", "2026-03-19|UC11|Paula Lira|4",
-            "2026-03-23|UC10|Guilherme Correia|8", "2026-03-24|UC4|Flavia Guedes|13", "2026-03-25|UC9|Jota Santos|8",
-            "2026-03-26|UC13|Marcella Camillo|7", "2026-03-30|UC11|Paula Lira|5", "2026-03-31|UC11|Paula Lira|6",
-            "2026-04-01|UC9|Jota Santos|9", "2026-04-02|UC5|Jota Santos|10", "2026-04-06|UC10|Guilherme Correia|9",
-            "2026-04-07|UC4|Flavia Guedes|14", "2026-04-08|UC10|Guilherme Correia|10", "2026-04-09|UC10|Guilherme Correia|11",
-            "2026-04-13|UC11|Guilherme Correia|7", "2026-04-14|UC11|Paula Lira|8", "2026-04-15|UC11|Paula Lira|9",
-            "2026-04-16|UC11|Paula Lira|10", "2026-04-22|UC10|Guilherme Correia|12", "2026-04-23|UC9|Jota Santos|10",
-            "2026-04-27|UC4|Flavia Guedes|15", "2026-04-28|UC11|Paula Lira|11", "2026-04-29|UC14|Marcella Camillo|7",
-            "2026-04-30|UC13|Marcella Camillo|8", "2026-05-04|UC4|Guilherme Correia|16", "2026-05-05|UC11|Paula Lira|12",
-            "2026-05-06|UC11|Guilherme Correia|13", "2026-05-07|UC9|Jota Santos|11", "2026-05-11|UC11|Paula Lira|14",
-            "2026-05-12|UC4|Guilherme Correia|17", "2026-05-13|UC10|Guilherme Correia|13", "2026-05-14|UC9|Jota Santos|12",
-            "2026-05-18|UC13|Marcella Camillo|9", "2026-05-19|UC4|Guilherme Correia|18", "2026-05-20|UC11|Guilherme Correia|15",
-            "2026-05-21|UC9|Jota Santos|13", "2026-05-25|UC4|Guilherme Correia|19", "2026-05-26|UC10|Guilherme Correia|14",
-            "2026-05-27|UC9|Jota Santos|14", "2026-05-28|UC11|Guilherme Correia|16", "2026-06-01|UC5|Marcella Camillo|11",
-            "2026-06-02|UC4|Guilherme Correia|20", "2026-06-03|UC10|Guilherme Correia|15", "2026-06-08|UC11|Guilherme Correia|17",
-            "2026-06-09|UC4|Flavia Guedes|21", "2026-06-10|UC5|Guilherme Correia|12", "2026-06-11|UC9|Jota Santos|15",
-            "2026-06-15|UC11|Guilherme Correia|18", "2026-06-16|UC5|Flavia Guedes|13", "2026-06-17|UC10|Guilherme Correia|16",
-            "2026-06-18|UC9|Jota Santos|16", "2026-06-22|UC5|Flavia Guedes|14", "2026-06-23|UC5|Flavia Guedes|15",
-            "2026-06-24|UC9|Jota Santos|17", "2026-06-25|UC9|Jota Santos|18", "2026-06-30|UC10|Guilherme Correia|17",
-            "2026-07-01|UC13|Marcella Camillo|10", "2026-07-02|UC14|Jota Santos|8"
-        ];
-
-        const aulasArray = rawAulas.map(linha => {
-            const [data, uc, docente, aula] = linha.split('|');
-            return { data, codigoUC: uc, uc: `${uc} - ${nomesUC[uc] || ''}`, docente, aula };
-        });
-
-        function toISODate(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; }
-        function formatarDataBR(iso) { const [a, m, d] = iso.split('-'); return `${d}/${m}/${a}`; }
-        function getDiaDaSemana(iso) {
-            const d = new Date(iso.split('-')[0], iso.split('-')[1] - 1, iso.split('-')[2], 12, 0, 0);
-            return ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'][d.getDay()];
-        }
-
-        function abrirModal(dataISO, ucNome, profNome, numAula) {
-            document.getElementById('modalData').innerText = `${getDiaDaSemana(dataISO)}, ${formatarDataBR(dataISO)}`;
-            document.getElementById('modalUC').innerText = `${ucNome} - Aula ${numAula}`;
-            document.getElementById('modalProf').innerText = `Prof. ${profNome}`;
-            document.getElementById('modalTexto').innerText = conteudosPrevistos[dataISO] || "Conteúdo não cadastrado.";
-            document.getElementById('modalConteudo').style.display = 'flex';
-            document.body.style.overflow = 'hidden'; 
-        }
-
-        function fecharModal(e) { if (e.target.id === 'modalConteudo') fecharModalBtn(); }
-        function fecharModalBtn() { document.getElementById('modalConteudo').style.display = 'none'; document.body.style.overflow = 'auto'; }
-
-        function initAulas() {
-            const select = document.getElementById('filtroUC');
-            for (const [codigo, nome] of Object.entries(nomesUC)) {
-                const opt = document.createElement('option');
-                opt.value = codigo; opt.textContent = `${codigo} - ${nome}`;
-                select.appendChild(opt);
-            }
-            mudarSemana(0);
-        }
-
-        document.getElementById('filtroUC').addEventListener('change', function(e) {
-            const ucSelec = e.target.value;
-            if (!ucSelec) return window.limparBusca();
-            
-            document.getElementById('painel-aulas').style.display = 'none';
-            document.getElementById('rodape-semanas').style.display = 'none';
-            const resPanel = document.getElementById('resultado-pesquisa');
-            resPanel.style.display = 'flex';
-
-            const dUC = aulasArray.filter(a => a.codigoUC === ucSelec);
-            const hojeStr = toISODate(new Date());
-            const todasEncerradas = dUC.length > 0 && dUC.every(a => a.data < hojeStr);
-
-            let h = `<div class="card" style="border-left-color: #ff9800;">
-                        <button onclick="limparBusca()" class="btn-voltar" style="border-color: #ff9800; color:#ff9800;">⬅ Limpar Busca</button>
-                        <h3 style="margin-top:0; color:#ff9800;">${nomesUC[ucSelec]}</h3>`;
-            
-            if (todasEncerradas) {
-                h += `<div class="uc-encerrada">✅ UC Encerrada para a Turma 43M</div>`;
-            }
-
-            if(dUC.length === 0) h += `<p>Sem aulas agendadas.</p>`;
-            dUC.forEach(a => {
-                h += `<div style="padding:10px 0; border-bottom:1px solid #333;" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
-                        <strong>${formatarDataBR(a.data)}</strong> - Prof. ${a.docente} (Aula ${a.aula})
-                      </div>`;
-            });
-            resPanel.innerHTML = h + `</div>`;
-        });
-
-        window.limparBusca = function() {
-            document.getElementById('filtroUC').value = "";
-            document.getElementById('resultado-pesquisa').style.display = 'none';
-            document.getElementById('painel-aulas').style.display = 'flex';
-            document.getElementById('rodape-semanas').style.display = 'flex';
-        }
-
-        function mudarSemana(offset) {
-            document.getElementById('btn-passada').classList.toggle('active', offset === -1);
-            document.getElementById('btn-atual').classList.toggle('active', offset === 0);
-            document.getElementById('btn-que-vem').classList.toggle('active', offset === 1);
-            
-            const hoje = new Date();
-            const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12, 0, 0);
-            const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12, 0, 0);
-            
-            const hojeStr = toISODate(hoje);
-            const amanha = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1);
-            const amanhaStr = toISODate(amanha);
-
-            const aSemana = aulasArray.filter(a => a.data >= toISODate(seg) && a.data <= toISODate(sex));
-            
-            let html = `<h3 style="text-align:center;">Sua Semana</h3>`;
-            if (aSemana.length === 0) html += `<div class="card"><div class="details">Sem aulas programadas.</div></div>`;
-            
-            aSemana.forEach(a => {
-                const isCancelled = a.aula.includes('Cancelada');
-                let cardClass = '';
-                let statusMsg = '';
-
-                if (isCancelled) {
-                    cardClass = 'cancelled';
-                    statusMsg = `❌ CANCELADA - ${getDiaDaSemana(a.data)}`;
-                } else {
-                    if (a.data === hojeStr) {
-                        cardClass = 'today';
-                        statusMsg = '🔥 HOJE';
-                    } else if (a.data === amanhaStr) {
-                        cardClass = 'tomorrow';
-                        statusMsg = `${getDiaDaSemana(a.data)} - AMANHÃ! ⚡`;
-                    } else if (a.data < hojeStr) {
-                        cardClass = 'past';
-                        statusMsg = `✅ ${getDiaDaSemana(a.data)}`;
-                    } else {
-                        cardClass = 'next';
-                        statusMsg = `⏳ ${getDiaDaSemana(a.data)}`;
-                    }
-                }
-
-                html += `
-                <div class="card ${cardClass}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
-                    <div class="status">${statusMsg}</div>
-                    <div class="date">${formatarDataBR(a.data)}</div>
-                    <div class="details"><span style="color:#fff;font-weight:bold;">${a.uc}</span><br>Prof: ${a.docente}</div>
-                </div>`;
-            });
-            document.getElementById('painel-aulas').innerHTML = html;
         }
     </script>
 </body>
