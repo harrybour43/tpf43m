@@ -332,7 +332,7 @@
 
         document.addEventListener('DOMContentLoaded', () => {
             // Se os links não foram colados ainda, usa dados de exemplo temporários
-            if(LINK_PLANILHA_AULAS.includes("COLE_AQUI")) {
+            if(LINK_PLANILHA_AULAS.includes(https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=0&single=true&output=tsv)) {
                 alert("AVISO PARA O DESENVOLVEDOR: Você precisa colar os links TSV do Google Sheets no código-fonte!");
                 liberarAcesso(); // Libera com arrays vazios só pra não travar a tela
             } else {
@@ -343,25 +343,66 @@
         });
 
         async function carregarBancoDeDados() {
+            // 1. Tenta carregar do cache do celular primeiro (Acesso instantâneo)
+            const cacheAulas = localStorage.getItem('tpf43m_aulas');
+            const cacheEventos = localStorage.getItem('tpf43m_eventos');
+
+            if (cacheAulas && cacheEventos) {
+                processarAulas(cacheAulas);
+                processarEventos(cacheEventos);
+                liberarAcesso(); // Libera a tela imediatamente sem esperar o Google
+            }
+
+            // 2. Busca na internet as atualizações em segundo plano
             try {
-                // Fetch das Aulas
                 const resAulas = await fetch(LINK_PLANILHA_AULAS);
                 const tsvAulas = await resAulas.text();
-                processarAulas(tsvAulas);
 
-                // Fetch dos Eventos
                 const resEventos = await fetch(LINK_PLANILHA_EVENTOS);
                 const tsvEventos = await resEventos.text();
-                processarEventos(tsvEventos);
 
-                liberarAcesso();
+                // 3. Verifica se a planilha está diferente do que está salvo no celular
+                if (tsvAulas !== cacheAulas || tsvEventos !== cacheEventos) {
+                    // Atualiza o banco de dados do celular
+                    localStorage.setItem('tpf43m_aulas', tsvAulas);
+                    localStorage.setItem('tpf43m_eventos', tsvEventos);
+                    
+                    // Reprocessa os dados novos
+                    processarAulas(tsvAulas);
+                    processarEventos(tsvEventos);
+                    
+                    // Atualiza a tela silenciosamente para o usuário
+                    initAulas();
+                    initEventos();
+
+                    // Se era o primeiro acesso da vida do usuário (não tinha cache), libera a tela agora
+                    if (!dadosCarregados) liberarAcesso();
+                } else if (!dadosCarregados) {
+                    // Segurança: Dados iguais, mas tela ainda presa
+                    liberarAcesso();
+                }
 
             } catch (error) {
-                console.error("Erro na sincronização:", error);
-                document.getElementById('loading-text').innerText = "Erro ao sincronizar. Verifique a internet ou o link da planilha.";
+                console.error("Modo offline ou erro de conexão:", error);
+                if (!dadosCarregados) {
+                    // Só mostra erro se o aluno não tinha cache e está sem internet
+                    document.getElementById('loading-text').innerText = "Você está sem internet para fazer o primeiro download do cronograma.";
+                }
             }
         }
 
+        function liberarAcesso() {
+            dadosCarregados = true;
+            initAulas();
+            initEventos();
+
+            document.getElementById('loading-text').style.display = 'none';
+            document.getElementById('click-hint').classList.remove('hidden');
+
+            if (sessionStorage.getItem('splashShown')) {
+                dismissSplash();
+            }
+        }
         function processarAulas(tsv) {
             const linhas = tsv.split('\n').slice(1); // Ignora a primeira linha (cabeçalho)
             aulasArray = [];
