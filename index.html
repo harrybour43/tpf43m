@@ -189,8 +189,8 @@
         .light-row.principal { border-left: 5px solid #28a745; border-color: #28a745; }
         .light-row select, .light-row button { padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background-color: #333; color: white; }
         .nudge-btns { display: flex; gap: 5px; }
-        .nudge-btns button { background-color: #495057; border: none; cursor: pointer; }
-        .result-text { width: 100%; margin-top: 10px; font-size: 0.95rem; font-weight: bold; }
+        .nudge-btns button { background-color: #495057; border: none; cursor: pointer; font-size: 0.9em; padding: 8px 10px; }
+        .result-text { width: 100%; margin-top: 10px; font-size: 0.95rem; line-height: 1.5; }
 
         /* ==========================================
            5. EVENTOS
@@ -221,7 +221,7 @@
             Sincronizando banco de dados...
         </div>
         <div class="click-hint-splash hidden" id="click-hint">Toque em qualquer lugar para entrar</div>
-        <div class="splash-footer">Versão 4.3 | Desenvolvido por Harry Bour</div>
+        <div class="splash-footer">Versão 4.4 | Desenvolvido por Harry Bour</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -307,7 +307,6 @@
         const LINK_PLANILHA_AULAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=0&single=true&output=tsv";
         const LINK_PLANILHA_EVENTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv";
         // ==========================================
-
 
         let aulasArray = [];
         let baseEventos = [];
@@ -503,7 +502,7 @@
 
         function initAulas() {
             const select = document.getElementById('filtroUC');
-            select.innerHTML = '<option value="">-- Selecione uma UC para ver todas as datas --</option>'; // Reseta
+            select.innerHTML = '<option value="">-- Selecione uma UC para ver todas as datas --</option>'; 
             for (const [codigo, nome] of Object.entries(nomesUC)) {
                 const opt = document.createElement('option');
                 opt.value = codigo; opt.textContent = `${codigo} - ${nome}`;
@@ -601,18 +600,40 @@
             document.getElementById('painel-aulas').innerHTML = html;
         }
 
-        /* --- MÓDULO: CALCULADORA DE ESTÚDIO (MANUAL) --- */
+        /* --- MÓDULO: CALCULADORA DE ESTÚDIO (HÍBRIDA) --- */
+        // Tabela completa de f-stops para o select
         const fStopsFull = ['f/1.0', 'f/1.4', 'f/2.0', 'f/2.8', 'f/4.0', 'f/5.6', 'f/8.0', 'f/11', 'f/16', 'f/22', 'f/32', 'f/45', 'f/64'];
+        
+        // Tabela de dados para as regras de terços na Câmera
+        const fStopsData = [
+            { f: '1.0', t1: '1.1', t2: '1.2', next: '1.4' },
+            { f: '1.4', t1: '1.6', t2: '1.8', next: '2.0' },
+            { f: '2.0', t1: '2.2', t2: '2.5', next: '2.8' },
+            { f: '2.8', t1: '3.2', t2: '3.5', next: '4.0' },
+            { f: '4.0', t1: '4.5', t2: '5.0', next: '5.6' },
+            { f: '5.6', t1: '6.3', t2: '7.1', next: '8.0' },
+            { f: '8.0', t1: '9.0', t2: '10', next: '11' },
+            { f: '11', t1: '13', t2: '14', next: '16' },
+            { f: '16', t1: '18', t2: '20', next: '22' },
+            { f: '22', t1: '25', t2: '29', next: '32' },
+            { f: '32', t1: '36', t2: '40', next: '45' },
+            { f: '45', t1: '51', t2: '57', next: '64' },
+            { f: '64', t1: '72', t2: '81', next: '90' } // Fallback para f/64
+        ];
+
         let lights = [];
         let lightIdCounter = 0;
 
         function getAbsoluteValue(stopIndex, tenths) { return (stopIndex * 10) + tenths; }
+        
         function addLight(role = 'Preenchimento', baseStop = 6, tenths = 0) {
             if (lights.length >= 5) return alert("Máximo de 5 luzes.");
             lights.push({ id: lightIdCounter++, role, baseStop, tenths });
             renderLights();
         }
+        
         function removeLight(id) { lights = lights.filter(l => l.id !== id); renderLights(); }
+        
         function updateLight(id, field, value) {
             const light = lights.find(l => l.id === id);
             if (light) {
@@ -621,6 +642,7 @@
                 renderLights();
             }
         }
+        
         function nudgeLight(id, tenthsToAdd) {
             const light = lights.find(l => l.id === id);
             if (!light) return;
@@ -630,6 +652,44 @@
             light.baseStop = Math.floor(newAbs / 10);
             light.tenths = newAbs % 10;
             renderLights();
+        }
+
+        // Nova função para resgatar a regra antiga dos terços
+        function getCameraAdvice(stopIndex, tenths) {
+            const stopData = fStopsData[stopIndex];
+            let message = "";
+            let isWarning = false;
+
+            switch(tenths) {
+                case 0:
+                case 1:
+                    message = `📸 Câmera: Use <strong>f/${stopData.f}</strong> (Ponto inteiro)`;
+                    break;
+                case 2:
+                    message = `⚠️ MEXE NA LUZ! (-2/10 para <strong>f/${stopData.f}</strong> ou +1/10 para <strong>f/${stopData.t1}</strong>)`;
+                    isWarning = true;
+                    break;
+                case 3:
+                case 4:
+                    message = `📸 Câmera: Use <strong>f/${stopData.t1}</strong> (1º Terço)`;
+                    break;
+                case 5:
+                    message = `⚠️ MEXE NA LUZ! (Mude 1/2 ponto para <strong>f/${stopData.f}</strong> ou <strong>f/${stopData.next}</strong>)`;
+                    isWarning = true;
+                    break;
+                case 6:
+                case 7:
+                    message = `📸 Câmera: Use <strong>f/${stopData.t2}</strong> (2º Terço)`;
+                    break;
+                case 8:
+                    message = `⚠️ MEXE NA LUZ! (-1/10 para <strong>f/${stopData.t2}</strong> ou +2/10 para <strong>f/${stopData.next}</strong>)`;
+                    isWarning = true;
+                    break;
+                case 9:
+                    message = `📸 Câmera: Use <strong>f/${stopData.next}</strong> (Próximo Inteiro)`;
+                    break;
+            }
+            return { message, isWarning };
         }
 
         function renderLights() {
@@ -668,18 +728,25 @@
                 `;
                 container.appendChild(row);
 
+                // Geração das respostas (Câmera + Tocha)
                 const resDiv = document.getElementById(`res-${light.id}`);
+                const advice = getCameraAdvice(light.baseStop, light.tenths);
+                const adviceStyle = advice.isWarning ? "color: var(--accent-warning); font-weight: bold;" : "color: #bbb;";
+                
+                let resultHTML = `<div style="${adviceStyle} margin-bottom: 8px; padding-bottom: 8px; border-bottom: 1px dashed #444;">${advice.message}</div>`;
+
                 if (isPrincipal) {
-                    resDiv.innerText = "Luz de Referência (Âncora)";
-                    resDiv.style.color = "#28a745";
+                    resultHTML += `<div style="color: #28a745;">⚓ Luz de Referência (Âncora para as demais)</div>`;
                 } else if (principal) {
                     const diff = getAbsoluteValue(principal.baseStop, principal.tenths) - getAbsoluteValue(light.baseStop, light.tenths);
-                    if (diff === 0) { resDiv.innerText = "✅ Luz igualada."; } 
-                    else {
+                    if (diff === 0) { 
+                        resultHTML += `<div>✅ Luz igualada com a principal.</div>`; 
+                    } else {
                         const dir = diff > 0 ? "Aumente" : "Reduza";
-                        resDiv.innerHTML = `⚙️ Na Tocha: <strong>${dir}</strong> luz em <strong>${Math.floor(Math.abs(diff) / 5)} clicks (1/2)</strong> e <strong>${Math.abs(diff) % 5} clicks (1/10)</strong>.`;
+                        resultHTML += `<div>⚙️ Na Tocha: <strong>${dir}</strong> luz em <strong>${Math.floor(Math.abs(diff) / 5)} clicks (1/2)</strong> e <strong>${Math.abs(diff) % 5} clicks (1/10)</strong>.</div>`;
                     }
                 }
+                resDiv.innerHTML = resultHTML;
             });
         }
     </script>
