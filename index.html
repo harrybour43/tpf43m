@@ -95,7 +95,6 @@
         }
         .disclaimer-box strong { color: var(--accent-warning); }
 
-        /* Botão de Contribuição */
         .btn-contribuir {
             background-color: var(--bg-panel);
             color: var(--accent-datas);
@@ -111,43 +110,22 @@
             justify-content: center;
             gap: 10px;
             transition: 0.2s;
-            font-size: 1rem;
         }
-        .btn-contribuir:hover { background-color: rgba(0, 188, 212, 0.1); transform: translateY(-2px); }
+        .btn-contribuir:hover { background-color: rgba(0, 188, 212, 0.1); }
 
-        /* Estilo do Iframe do Form */
-        .form-wrapper {
-            width: 100%;
-            height: 80vh;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            background: #fff; 
-        }
+        .form-wrapper { width: 100%; height: 80vh; border-radius: 8px; overflow: hidden; border: 1px solid var(--border-color); background: #fff; }
 
-        /* ==========================================
-           2. SPLASH SCREEN E MENU 
-           ========================================== */
+        /* SPLASH E MENU */
         #splash-screen { 
-            position: fixed; 
-            top: 0; left: 0; 
-            width: 100%; height: 100%; 
-            background-color: var(--bg-color); 
-            z-index: 9999; 
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center; 
-            align-items: center; 
-            text-align: center; 
-            cursor: pointer; 
-            padding: 20px; 
-            box-sizing: border-box; 
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
+            background-color: var(--bg-color); z-index: 9999; 
+            display: flex; flex-direction: column; justify-content: center; align-items: center; 
+            text-align: center; cursor: pointer; padding: 20px; box-sizing: border-box; 
             animation: fadeIn 0.5s ease-in; 
         }
         
         .clara-logo-text { font-size: 2.8rem; font-weight: 800; letter-spacing: 4px; color: #fff; margin: 0; }
         .clara-tagline { color: var(--accent-snc); font-weight: bold; font-size: 0.9rem; margin-top: 8px; text-transform: uppercase; max-width: 80%; line-height: 1.4;}
-        
         .splash-footer { position: absolute; bottom: 20px; font-size: 0.8rem; color: #666; }
         .click-hint-splash { margin-top: 40px; font-size: 0.9rem; color: #555; animation: pulse 2s infinite; }
 
@@ -158,95 +136,38 @@
         #main-menu { display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100vh; gap: 15px; padding: 20px; position: relative; }
         
         .btn-sync {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            background: transparent;
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 1.2rem;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            transition: 0.2s;
-            z-index: 10;
+            position: absolute; top: 20px; right: 20px; background: transparent; border: 1px solid var(--border-color);
+            color: var(--text-muted); font-size: 1.2rem; width: 40px; height: 40px; border-radius: 50%;
+            display: flex; justify-content: center; align-items: center; cursor: pointer; transition: 0.2s; z-index: 10;
         }
         .btn-sync:hover { background: #2a2a2a; color: #fff; border-color: #555; }
         .btn-sync.spinning { animation: spin 1s linear infinite; pointer-events: none; opacity: 0.5; }
 
-        .menu-header { text-align: center; margin-bottom: 25px; animation: fadeIn 0.8s ease-in; display: flex; flex-direction: column; align-items: center;}
-        
+        .menu-header { text-align: center; margin-bottom: 25px; display: flex; flex-direction: column; align-items: center;}
         .menu-turma-badge { font-size: 0.85rem; color: #fff; background-color: var(--bg-panel); border: 1px solid var(--border-color); padding: 6px 15px; border-radius: 20px; font-weight: normal; display: inline-block; margin-top: 15px; letter-spacing: 1px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); }
         
-        .menu-btn { background-color: var(--bg-panel); border: 1px solid var(--border-color); color: #fff; width: 100%; max-width: 400px; padding: 20px 20px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 15px; box-shadow: 0 4px 10px rgba(0,0,0,0.3); transition: transform 0.2s, background-color 0.2s; border-left: 5px solid transparent;}
+        .menu-btn { background-color: var(--bg-panel); border: 1px solid var(--border-color); color: #fff; width: 100%; max-width: 400px; padding: 20px 20px; border-radius: 12px; font-size: 1.1rem; font-weight: bold; cursor: pointer; display: flex; align-items: center; gap: 15px; transition: transform 0.2s; border-left: 5px solid transparent;}
         .menu-btn:hover { transform: translateY(-2px); background-color: #2a2a2a; }
         .menu-icon { font-size: 1.8rem; }
+        
+        .menu-btn.btn-turma { border-left-color: var(--accent-snc); }
         .menu-btn.btn-aulas { border-left-color: var(--accent-aulas); }
         .menu-btn.btn-eventos { border-left-color: var(--accent-eventos); }
         .menu-btn.btn-datas { border-left-color: var(--accent-datas); }
         .menu-btn.btn-sun { border-left-color: var(--accent-sun); }
         .menu-btn.btn-calc { border-left-color: var(--accent-calc); }
         .menu-btn.btn-dicio { border-left-color: var(--accent-dicio); }
-        
-        .menu-btn.btn-turma { border-left-color: var(--accent-snc); }
 
         .clara-footer { text-align: center; padding: 20px 0; margin-top: 20px; color: #555; font-size: 0.75rem; letter-spacing: 2px; width: 100%; text-transform: uppercase; font-weight: bold; border-top: 1px solid #222;}
 
-        /* ==========================================
-           3. TELA DE AUTENTICAÇÃO E SUB-MENU
-           ========================================== */
-        .auth-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 70vh;
-        }
-        .auth-box {
-            background: var(--bg-panel);
-            padding: 30px;
-            border-radius: 12px;
-            border-top: 5px solid var(--accent-snc);
-            text-align: center;
-            width: 100%;
-            max-width: 350px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
-        }
-        .auth-input {
-            width: 100%;
-            padding: 12px;
-            border-radius: 6px;
-            border: 1px solid #444;
-            background: #2c2c2c;
-            color: #fff;
-            margin-bottom: 15px;
-            text-align: center;
-            font-size: 1.2em;
-            letter-spacing: 2px;
-            box-sizing: border-box;
-        }
+        /* ÁREAS RESTRITAS E LISTAS */
+        .auth-container { display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 70vh; }
+        .auth-box { background: var(--bg-panel); padding: 30px; border-radius: 12px; border-top: 5px solid var(--accent-snc); text-align: center; width: 100%; max-width: 350px; box-shadow: 0 4px 15px rgba(0,0,0,0.5); }
+        .auth-input { width: 100%; padding: 12px; border-radius: 6px; border: 1px solid #444; background: #2c2c2c; color: #fff; margin-bottom: 15px; text-align: center; font-size: 1.2em; letter-spacing: 2px; box-sizing: border-box; }
         .auth-input:focus { outline: none; border-color: var(--accent-snc); }
-        .auth-btn {
-            width: 100%;
-            padding: 12px;
-            background: var(--accent-snc);
-            color: #fff;
-            border: none;
-            border-radius: 6px;
-            font-weight: bold;
-            font-size: 1.1em;
-            cursor: pointer;
-            transition: 0.2s;
-        }
+        .auth-btn { width: 100%; padding: 12px; background: var(--accent-snc); color: #fff; border: none; border-radius: 6px; font-weight: bold; font-size: 1.1em; cursor: pointer; transition: 0.2s; }
         .auth-btn:hover { background: #e06915; }
 
-        /* ==========================================
-           4. PAINEL DE AULAS, EVENTOS E DATAS
-           ========================================== */
         .search-box { background-color: var(--bg-panel); padding: 15px 20px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--accent-snc); }
         .search-box label { display: block; margin-bottom: 8px; font-weight: bold; color: #ccc; }
         .search-box select { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #444; background-color: #2c2c2c; color: white; font-size: 1em; }
@@ -261,26 +182,24 @@
         .card.tomorrow { border-left-color: var(--accent-warning); background-color: #2a2015; }
         .card.next { border-left-color: #2196f3; }
         .card.cancelled { border-left-color: #f44336; opacity: 0.8; }
-        
         .status { font-size: 0.85em; text-transform: uppercase; font-weight: bold; margin-bottom: 10px; }
         .today .status { color: #ff4081; } .tomorrow .status { color: var(--accent-warning); } .next .status { color: #64b5f6; } .cancelled .status { color: #f44336; }
         .date { font-size: 1.2em; margin-bottom: 5px; color: #fff; }
         .details { font-size: 1em; color: #ccc; }
-        
+
         .footer-nav { position: fixed; bottom: 0; left: 0; width: 100%; background-color: var(--bg-panel); display: flex; justify-content: center; padding: 15px 10px; z-index: 100; box-sizing: border-box; box-shadow: 0 -4px 10px rgba(0,0,0,0.5); border-top: 1px solid #333;}
         .footer-nav-inner { display: flex; justify-content: space-between; width: 100%; max-width: 600px; gap: 5px; }
         .footer-nav button { background-color: #2c2c2c; color: #ccc; border: 1px solid #444; padding: 10px; border-radius: 6px; cursor: pointer; flex: 1; font-weight: bold; }
         .footer-nav button.active { background-color: var(--accent-aulas); color: white; border-color: var(--accent-aulas); }
-        
+
         .modal-overlay { display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 1000; justify-content: center; align-items: center; padding: 20px; box-sizing: border-box; }
         .modal-box { background: var(--bg-panel); border-top: 5px solid var(--accent-eventos); padding: 25px; border-radius: 12px; width: 100%; max-width: 500px; position: relative; max-height: 80vh; overflow-y: auto;}
         .modal-close { position: absolute; top: 15px; right: 15px; background: none; border: none; color: #aaa; font-size: 1.8em; cursor: pointer; }
         .modal-header { border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px; }
-        
+
         .evento-card { background-color: var(--bg-panel); border-left: 5px solid var(--accent-eventos); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .evento-card.datas-int { border-left-color: var(--accent-datas); } 
-        .evento-card.past { border-left-color: #555; background-color: #161616; opacity: 0.6; }
-        .evento-card.past .evento-titulo, .evento-card.past .evento-desc, .evento-card.past .evento-data span, .evento-card.past .evento-countdown { color: #777 !important; }
+        .evento-card.past { opacity: 0.5; border-left-color: #555; }
         .evento-data { color: var(--accent-eventos); font-weight: bold; font-size: 1em; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
         .evento-card.datas-int .evento-data { color: var(--accent-datas); }
         .evento-countdown { font-weight: normal; font-size: 0.85em; opacity: 0.8; }
@@ -289,9 +208,7 @@
         .evento-titulo { font-size: 1.2em; color: #fff; margin-bottom: 5px; }
         .evento-desc { color: #ccc; font-size: 0.95em; line-height: 1.4; white-space: pre-wrap; }
 
-        /* ==========================================
-           5. LUZ NATURAL E CALCULADORA
-           ========================================== */
+        /* LUZ NATURAL E LUA */
         .sun-card { background-color: var(--bg-panel); padding: 15px; border-radius: 8px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; border-left: 3px solid #555; }
         .sun-card.golden { border-left-color: var(--accent-sun); background-color: rgba(255, 179, 0, 0.1); }
         .sun-card.blue { border-left-color: #2196f3; background-color: rgba(33, 150, 243, 0.1); }
@@ -302,7 +219,7 @@
         
         .btn-gps { background-color: transparent; color: var(--accent-sun); border: 1px solid var(--accent-sun); padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 20px; transition: 0.2s; }
         .btn-gps:hover { background-color: rgba(255, 179, 0, 0.1); }
-        
+
         .calc-settings { background-color: var(--bg-panel); padding: 15px; border-radius: 8px; margin-bottom: 20px; border-left: 5px solid var(--accent-calc); }
         .calc-settings label { font-weight: bold; color: #ccc; display: block; margin-bottom: 8px;}
         .calc-settings select { width: 100%; padding: 10px; border-radius: 4px; border: 1px solid #444; background-color: #2c2c2c; color: white; font-size: 1em;}
@@ -310,21 +227,19 @@
         .calc-settings input[type="date"]::-webkit-calendar-picker-indicator { filter: invert(1); cursor: pointer; }
         
         .btn-add-luz { background-color: var(--accent-calc); color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; width: 100%; font-weight: bold; margin-bottom: 20px; font-size: 1rem; }
-        
         .light-row { border: 1px solid var(--border-color); padding: 15px; margin-bottom: 15px; border-radius: 6px; background-color: var(--bg-panel); display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
         .light-row.principal { border-left: 5px solid #28a745; border-color: #28a745; }
         .light-row select, .light-row button { padding: 8px; border: 1px solid var(--border-color); border-radius: 4px; background-color: #333; color: white; }
-        
         .nudge-btns { display: flex; gap: 5px; }
         .nudge-btns button { background-color: #495057; border: none; cursor: pointer; font-size: 0.9em; padding: 8px 10px; }
         .result-text { width: 100%; margin-top: 10px; font-size: 0.95rem; line-height: 1.5; }
         .success-box { color: #4caf50; font-weight: bold; background-color: rgba(76, 175, 80, 0.1); padding: 12px; border-radius: 4px; border-left: 4px solid #4caf50; margin-top: 10px; }
 
-        /* ==========================================
-           6. ENCICLOPÉDIA / DICIONÁRIO
-           ========================================== */
-        .dicio-search { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #444; background-color: var(--bg-panel); color: white; font-size: 1rem; margin-bottom: 20px; box-sizing: border-box; }
+        /* DICIONÁRIO E DROPDOWN */
+        .dicio-search { width: 100%; padding: 15px; border-radius: 8px; border: 1px solid #444; background-color: var(--bg-panel); color: white; font-size: 1rem; margin-bottom: 10px; box-sizing: border-box; }
         .dicio-search:focus { outline: none; border-color: var(--accent-dicio); }
+        .dicio-select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #444; background-color: var(--bg-panel); color: white; font-size: 1rem; box-sizing: border-box; cursor: pointer; }
+        .dicio-select:focus { outline: none; border-color: var(--accent-dicio); }
         .dicio-card { background-color: var(--bg-panel); border-left: 5px solid var(--accent-dicio); padding: 15px; border-radius: 8px; margin-bottom: 15px; }
         .dicio-term { font-size: 1.2em; font-weight: bold; color: #fff; margin-bottom: 5px; }
         .dicio-cat { font-size: 0.8em; background: #333; padding: 4px 10px; border-radius: 12px; color: var(--accent-dicio); display: inline-block; margin-bottom: 10px; font-weight: bold; letter-spacing: 0.5px;}
@@ -350,7 +265,7 @@
         
         <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">A carregar base de dados...</div>
         <div class="click-hint-splash hidden" id="click-hint">Toque em qualquer lugar para entrar</div>
-        <div class="splash-footer">Versão 6.4 | Desenvolvido por Harry Bour</div>
+        <div class="splash-footer">Versão 6.6.1 | Desenvolvido por Harry Bour</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -364,15 +279,14 @@
                 </div>
                 <div class="menu-turma-badge">Central de Luz e Apoio ao Repertório de Artistas do Audiovisual</div>
             </div>
-
-            <button class="menu-btn btn-datas" onclick="switchView('view-datas')"><span class="menu-icon">🌍</span> Datas de Interesse</button>
-                        <button class="menu-btn btn-dicio" onclick="switchView('view-dicio')"><span class="menu-icon">📖</span> Enciclopédia</button>
-            <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Luz Natural</button>
-            <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Luz de Estúdio</button>
-
-             <button class="menu-btn btn-turma" onclick="requireAuth('view-turma-menu')"><span class="menu-icon">🔒</span> Área da Turma SCI-TPF43M</button>
             
-            <div class="clara-footer">C.L.A.R.A. v6.4 | Desenvolvido por Harry Bour</div>
+            <button class="menu-btn btn-turma" onclick="requireAuth('view-turma-menu')"><span class="menu-icon">🔒</span> Área da Turma SCI-TPF43M</button>
+            <button class="menu-btn btn-datas" onclick="switchView('view-datas')"><span class="menu-icon">🌍</span> Datas de Interesse</button>
+            <button class="menu-btn btn-dicio" onclick="switchView('view-dicio')"><span class="menu-icon">📖</span> Enciclopédia</button>
+            <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Luz Natural</button>
+            <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Mapa de Luz</button>
+            
+            <div class="clara-footer">C.L.A.R.A. v6.6.1 | Desenvolvido por Harry Bour</div>
         </div>
     </div>
 
@@ -383,9 +297,7 @@
                 <div style="font-size: 3.5rem; margin-bottom: 10px;">🔒</div>
                 <h2 style="margin-top: 0; color: #fff; font-weight: 300;">Área Restrita</h2>
                 <p style="color: #aaa; font-size: 0.9em; margin-bottom: 25px;">Acesso exclusivo para alunos da Turma 43M.</p>
-                
                 <input type="password" id="input-senha" class="auth-input" placeholder="Digite a senha">
-                
                 <button class="auth-btn" onclick="validarSenha()">Acessar Módulo</button>
                 <div id="auth-error" style="color: #f44336; margin-top: 15px; font-size: 0.9em; display: none; font-weight: bold;">❌ Senha incorreta. Tente novamente.</div>
             </div>
@@ -401,7 +313,6 @@
             <button class="menu-btn btn-aulas" onclick="switchView('view-aulas')"><span class="menu-icon">📅</span> Crono de Aulas</button>
             <button class="menu-btn btn-eventos" onclick="switchView('view-eventos')"><span class="menu-icon">📷</span> Eventos da Turma</button>
         </div>
-        
         <div class="clara-footer" style="position: absolute; bottom: 0;">C.L.A.R.A. HUB</div>
     </div>
 
@@ -431,27 +342,13 @@
             </div>
         </div>
     </div>
-    
-    <div class="modal-overlay" id="modalConteudo" onclick="fecharModal(event)">
-        <div class="modal-box">
-            <button class="modal-close" onclick="fecharModalBtn()">&times;</button>
-            <div class="modal-header">
-                <div id="modalData" style="font-size: 0.9em; color: #aaa; text-transform: uppercase;">Data/Categoria</div>
-                <div id="modalUC" style="font-size: 1.2em; font-weight: bold; color: #fff;">UC/Termo</div>
-                <div id="modalProf" style="color: var(--accent-eventos); font-weight: bold;">Professor</div>
-            </div>
-            <div id="modalTexto" style="line-height: 1.6; white-space: pre-wrap; color: #e0e0e0;">Detalhes adicionais.</div>
-        </div>
-    </div>
 
     <div id="view-eventos" class="view page-container hidden">
         <button class="btn-voltar" onclick="switchView('view-turma-menu')">⬅ Área da Turma</button>
         <h1 class="page-title" style="border-bottom-color: var(--accent-eventos);">Eventos da Turma</h1>
-        
         <div class="disclaimer-box">
             <strong>⚠️ Atenção:</strong> Informações de uso interno e organização dos alunos.
         </div>
-        
         <div id="lista-eventos"></div>
         <div class="clara-footer">C.L.A.R.A. ASSISTENTE DE AGENDA</div>
     </div>
@@ -476,21 +373,14 @@
 
     <div id="view-contribuir" class="view page-container hidden">
         <button class="btn-voltar" onclick="switchView('view-datas')">⬅ Voltar para Datas</button>
-        <h1 class="page-title" style="border-bottom-color: var(--accent-datas);">Sugerir Evento</h1>
-        
         <div class="form-wrapper">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJIJG-CJE4uulWWJPDnExFqLrt1fl-5FAxh2DWfcizv2bb8A/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Carregando formulário...</iframe>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJIJG-CJE4uulWWJPDnExFqLrt1fl-5FAxh2DWfcizv2bb8A/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando...</iframe>
         </div>
     </div>
 
     <div id="view-dicio" class="view page-container hidden">
         <button class="btn-voltar" onclick="switchView('view-menu')">⬅ Menu Principal</button>
-        
-        <h1 class="page-title" style="border-bottom-color: var(--accent-dicio);">
-            Enciclopédia 🚧
-            <br>
-            <span style="font-size: 0.45em; color: #aaa; text-transform: uppercase; letter-spacing: 1px;">Ferramenta em desenvolvimento</span>
-        </h1>
+        <h1 class="page-title" style="border-bottom-color: var(--accent-dicio);">Enciclopédia</h1>
         
         <div style="display: flex; justify-content: flex-end; margin-bottom: 15px;">
             <button id="btn-toggle-dicio" onclick="toggleDicioMode()" style="background: transparent; color: var(--accent-dicio); border: 1px solid var(--accent-dicio); padding: 8px 15px; border-radius: 6px; cursor: pointer; font-weight: bold; transition: 0.2s;">
@@ -498,8 +388,11 @@
             </button>
         </div>
 
-        <div id="dicio-search-area">
-            <input type="text" id="buscaDicio" class="dicio-search" placeholder="Buscar termo, categoria ou dica..." onkeyup="filtrarDicio()">
+        <div id="dicio-search-area" style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 25px;">
+            <input type="text" id="buscaDicio" class="dicio-search" placeholder="Buscar termo ou palavra-chave..." onkeyup="filtrarDicio()">
+            <select id="filtroCategoriaDicio" class="dicio-select" onchange="filtrarDicio()">
+                <option value="">Todas as Categorias</option>
+            </select>
         </div>
 
         <div id="dicio-alpha-area" class="hidden" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px;">
@@ -521,7 +414,6 @@
                 <input type="text" id="buscaLocalSunCalc" placeholder="Ex: Ubatuba, SP..." style="flex: 1; padding: 10px; border-radius: 4px; border: 1px solid #444; background-color: #2c2c2c; color: white; font-size: 1em;">
                 <button id="btn-buscar-local" onclick="buscarLocalidadeSunCalc()" style="background-color: var(--accent-sun); color: #121212; border: none; padding: 10px 15px; border-radius: 4px; font-weight: bold; cursor: pointer; transition: 0.2s;">Buscar</button>
             </div>
-            
             <label for="dataSunCalc">Data do ensaio:</label>
             <input type="date" id="dataSunCalc" onchange="atualizarDataSunCalc()">
         </div>
@@ -530,7 +422,6 @@
         
         <div id="weather-results" class="sun-card weather-card hidden"></div>
         <div id="moon-results"></div>
-
         <div id="suncalc-results"></div>
         <div class="clara-footer">C.L.A.R.A. GEOMETRIA DA LUZ</div>
     </div>
@@ -553,16 +444,26 @@
         <div class="clara-footer">C.L.A.R.A. ASSISTENTE DE ESTÚDIO</div>
     </div>
 
+    <div class="modal-overlay" id="modalConteudo" onclick="fecharModal(event)">
+        <div class="modal-box">
+            <button class="modal-close" onclick="fecharModalBtn()">&times;</button>
+            <div class="modal-header">
+                <div id="modalData" style="font-size: 0.9em; color: #aaa; text-transform: uppercase;"></div>
+                <div id="modalUC" style="font-size: 1.2em; font-weight: bold; color: #fff;"></div>
+                <div id="modalProf" style="color: var(--accent-eventos); font-weight: bold;"></div>
+            </div>
+            <div id="modalTexto" style="line-height: 1.6; white-space: pre-wrap; color: #e0e0e0;"></div>
+        </div>
+    </div>
+
     <script>
         // ==========================================
         // DECLARAÇÕES GLOBAIS E LINKS
         // ==========================================
         const LINK_PLANILHA_AULAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=0&single=true&output=tsv";
         const LINK_PLANILHA_EVENTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv";
-        const LINK_PLANILHA_DICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1758081988&single=true&output=tsv"; 
-        
-        // Link Atualizado para output=tsv com gid
-        const LINK_PLANILHA_DATAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=2069138341&single=true&output=tsv"; 
+        const LINK_PLANILHA_DATAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=2069138341&single=true&output=tsv";
+        const LINK_PLANILHA_DICIO = "COLE_AQUI_O_LINK_TSV_DA_ABA_ENCICLOPEDIA"; 
         
         let aulasArray = []; 
         let baseEventos = []; 
@@ -572,7 +473,6 @@
         
         let dicioMode = 'search'; 
         let currentLetter = 'A';
-
         let targetViewAfterAuth = '';
 
         const nomesUC = { 
@@ -592,18 +492,15 @@
             "UC14": "Projeto Integrador" 
         };
 
-        // INICIALIZAÇÃO E LIMPEZA FORÇADA DE CACHE (Versão 6.4)
+        // ==========================================
+        // INICIALIZAÇÃO
+        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            // Garante que o cache antigo seja apagado para forçar leitura nova
-            const currentVersion = "6.4";
+            const currentVersion = "6.6.1";
             if (localStorage.getItem('clara_version') !== currentVersion) {
-                localStorage.removeItem('tpf43m_aulas');
-                localStorage.removeItem('tpf43m_eventos');
-                localStorage.removeItem('tpf43m_datas');
-                localStorage.removeItem('tpf43m_dicio');
+                localStorage.clear();
                 localStorage.setItem('clara_version', currentVersion);
             }
-
             gerenciarSplash();
             carregarBancoDeDados();
             if (lights.length === 0) { 
@@ -612,19 +509,14 @@
             }
         });
 
-        // ==========================================
-        // CONTROLE DE ACESSO E SPLASH SCREEN
-        // ==========================================
         function gerenciarSplash() {
             if (sessionStorage.getItem('sessionActive')) {
                 document.getElementById('splash-screen').classList.add('hidden');
                 document.getElementById('view-menu').classList.remove('hidden');
                 return;
             }
-            
             sessionStorage.setItem('sessionActive', 'true');
             let count = parseInt(localStorage.getItem('visitCount') || '0');
-            
             if (count === 0 || count >= 10) {
                 document.getElementById('splash-screen').classList.remove('hidden');
                 localStorage.setItem('visitCount', '1');
@@ -641,12 +533,8 @@
         }
 
         function switchView(viewId) { 
-            document.querySelectorAll('.view').forEach(v => {
-                v.classList.add('hidden');
-            }); 
-            
+            document.querySelectorAll('.view').forEach(v => { v.classList.add('hidden'); }); 
             document.getElementById(viewId).classList.remove('hidden'); 
-            
             const rodapeAulas = document.getElementById('rodape-semanas'); 
             if (rodapeAulas) {
                 rodapeAulas.style.display = (viewId === 'view-aulas' && document.getElementById('filtroUC').value === "") ? 'flex' : 'none'; 
@@ -666,7 +554,6 @@
         function validarSenha() {
             const input = document.getElementById('input-senha').value.toUpperCase();
             const errorDiv = document.getElementById('auth-error');
-            
             if (input === 'TPF43M') {
                 localStorage.setItem('auth_tpf43m', 'true');
                 errorDiv.style.display = 'none';
@@ -682,105 +569,57 @@
         });
 
         // ==========================================
-        // SYNC FORÇADO
+        // DADOS E INTEGRAÇÃO GOOGLE SHEETS
         // ==========================================
         function forceSync() {
             const btn = document.getElementById('btn-force-sync');
             btn.classList.add('spinning');
-            
             localStorage.removeItem('tpf43m_aulas');
             localStorage.removeItem('tpf43m_eventos');
             localStorage.removeItem('tpf43m_datas');
             localStorage.removeItem('tpf43m_dicio');
-            
             const noCacheUrl = `&nocache=${new Date().getTime()}`;
-            
             carregarBancoDeDados(noCacheUrl).then(() => {
-                setTimeout(() => {
-                    btn.classList.remove('spinning');
-                }, 1000); 
+                setTimeout(() => { btn.classList.remove('spinning'); }, 1000); 
             });
         }
 
-        // ==========================================
-        // ESCUDO ANTI-ERRO DE DATA (NOVO)
-        // Inteligência para processar YYYY-MM-DD ou DD/MM/YYYY
-        // ==========================================
         function processarDataInteligente(dataRaw) {
             if (!dataRaw) return null;
-            
             let dia, mes, ano;
-            
-            // Se tiver barra, é padrão brasileiro vindo do Forms (DD/MM/AAAA)
             if (dataRaw.includes('/')) { 
                 [dia, mes, ano] = dataRaw.split('/');
-            } 
-            // Se tiver hífen, é padrão Sheets / Banco de Dados (AAAA-MM-DD)
-            else if (dataRaw.includes('-')) {
+            } else if (dataRaw.includes('-')) {
                 [ano, mes, dia] = dataRaw.split('-');
-            } else {
-                return null;
-            }
-            
+            } else { return null; }
             if (!ano || !mes || !dia) return null;
-            
-            // Garante que o ano sempre tenha 4 dígitos (ex: "26" vira "2026")
             if (ano.length === 2) ano = "20" + ano;
-            
             return { 
-                ano: parseInt(ano), 
-                mes: parseInt(mes), 
-                dia: parseInt(dia), 
-                // Retorna um ISO seguro para fazer comparações matemáticas
+                ano: parseInt(ano), mes: parseInt(mes), dia: parseInt(dia), 
                 iso: `${ano}-${mes.toString().padStart(2,'0')}-${dia.toString().padStart(2,'0')}` 
             };
         }
 
-        // ==========================================
-        // NOVO PARSER TSV (Alt+Enter do Google Sheets)
-        // ==========================================
         function tratarTSV(tsv) {
-            // Rede de segurança: se o Google falhar e mandar um arquivo HTML
-            if (tsv.includes('<html') || tsv.includes('<!DOCTYPE')) {
-                console.error("O Google enviou um HTML em vez de TSV.");
-                return [];
-            }
-
-            let linhas = [];
-            let celulaAtual = "";
-            let linhaAtual = [];
-            let dentroDeAspas = false;
-
+            if (tsv.includes('<html') || tsv.includes('<!DOCTYPE')) return [];
+            let linhas = []; let celulaAtual = ""; let linhaAtual = []; let dentroDeAspas = false;
             for (let i = 0; i < tsv.length; i++) {
                 let char = tsv[i];
                 if (char === '"') {
-                    if (dentroDeAspas && tsv[i + 1] === '"') {
-                        celulaAtual += '"'; i++; 
-                    } else {
-                        dentroDeAspas = !dentroDeAspas;
-                    }
+                    if (dentroDeAspas && tsv[i + 1] === '"') { celulaAtual += '"'; i++; } 
+                    else { dentroDeAspas = !dentroDeAspas; }
                 } else if (char === '\t' && !dentroDeAspas) {
-                    linhaAtual.push(celulaAtual);
-                    celulaAtual = "";
+                    linhaAtual.push(celulaAtual); celulaAtual = "";
                 } else if (char === '\n' && !dentroDeAspas) {
-                    linhaAtual.push(celulaAtual.replace(/\r$/, '')); 
-                    linhas.push(linhaAtual);
-                    linhaAtual = [];
-                    celulaAtual = "";
-                } else {
-                    celulaAtual += char;
-                }
+                    linhaAtual.push(celulaAtual.replace(/\r$/, '')); linhas.push(linhaAtual); linhaAtual = []; celulaAtual = "";
+                } else { celulaAtual += char; }
             }
             if (celulaAtual || linhaAtual.length > 0) {
-                linhaAtual.push(celulaAtual.replace(/\r$/, ''));
-                linhas.push(linhaAtual);
+                linhaAtual.push(celulaAtual.replace(/\r$/, '')); linhas.push(linhaAtual);
             }
             return linhas;
         }
 
-        // ==========================================
-        // CARREGAMENTO DE DADOS (CACHE E OFFLINE)
-        // ==========================================
         async function carregarBancoDeDados(noCacheStr = "") {
             const cacheAulas = localStorage.getItem('tpf43m_aulas'); 
             const cacheEventos = localStorage.getItem('tpf43m_eventos');
@@ -788,460 +627,113 @@
             const cacheDicio = localStorage.getItem('tpf43m_dicio');
             
             if (noCacheStr === "" && cacheAulas && cacheEventos) { 
-                processarAulas(cacheAulas); 
-                processarEventos(cacheEventos); 
+                processarAulas(cacheAulas); processarEventos(cacheEventos); 
                 if (cacheDatas) processarDatas(cacheDatas);
                 if (cacheDicio) processarDicio(cacheDicio);
                 liberarAcesso(); 
             }
 
             try {
-                const resAulas = await fetch(LINK_PLANILHA_AULAS + noCacheStr);
-                const tsvAulas = await resAulas.text();
+                const resAulas = await fetch(LINK_PLANILHA_AULAS + noCacheStr); const tsvAulas = await resAulas.text();
+                const resEventos = await fetch(LINK_PLANILHA_EVENTOS + noCacheStr); const tsvEventos = await resEventos.text();
+                const resDatas = await fetch(LINK_PLANILHA_DATAS + noCacheStr); const tsvDatas = await resDatas.text();
                 
-                const resEventos = await fetch(LINK_PLANILHA_EVENTOS + noCacheStr);
-                const tsvEventos = await resEventos.text();
-                
-                if (tsvAulas && tsvAulas.length > 50 && !tsvAulas.includes('<html')) {
-                    localStorage.setItem('tpf43m_aulas', tsvAulas); 
-                    processarAulas(tsvAulas); 
-                }
-                
-                if (tsvEventos && tsvEventos.length > 20 && !tsvEventos.includes('<html')) {
-                    localStorage.setItem('tpf43m_eventos', tsvEventos);
-                    processarEventos(tsvEventos); 
-                }
-
-                if (LINK_PLANILHA_DATAS.startsWith("http")) {
-                    const resDatas = await fetch(LINK_PLANILHA_DATAS + noCacheStr);
-                    if (resDatas.ok) {
-                        const tsvDatas = await resDatas.text();
-                        if (tsvDatas && tsvDatas.length > 20 && !tsvDatas.includes('<html')) {
-                            localStorage.setItem('tpf43m_datas', tsvDatas);
-                            processarDatas(tsvDatas);
-                        }
-                    }
-                }
+                if (tsvAulas && !tsvAulas.includes('<html')) { localStorage.setItem('tpf43m_aulas', tsvAulas); processarAulas(tsvAulas); }
+                if (tsvEventos && !tsvEventos.includes('<html')) { localStorage.setItem('tpf43m_eventos', tsvEventos); processarEventos(tsvEventos); }
+                if (tsvDatas && !tsvDatas.includes('<html')) { localStorage.setItem('tpf43m_datas', tsvDatas); processarDatas(tsvDatas); }
 
                 if (LINK_PLANILHA_DICIO.startsWith("http")) {
                     const resDicio = await fetch(LINK_PLANILHA_DICIO + noCacheStr);
                     if (resDicio.ok) {
                         const tsvDicio = await resDicio.text();
-                        if (tsvDicio && tsvDicio.length > 20 && !tsvDicio.includes('<html')) {
-                            localStorage.setItem('tpf43m_dicio', tsvDicio);
-                            processarDicio(tsvDicio);
-                        }
+                        if (tsvDicio && !tsvDicio.includes('<html')) { localStorage.setItem('tpf43m_dicio', tsvDicio); processarDicio(tsvDicio); }
                     }
                 }
             } catch (error) { 
                 console.error("Modo Offline Ativado", error); 
-                if (!dadosCarregados) {
-                    document.getElementById('loading-text').innerText = "Modo Offline Ativado."; 
-                }
-            } finally { 
-                if (!dadosCarregados) { liberarAcesso(); }
-            }
-        }
-
-        // Funções de Processamento TSV
-        function processarAulas(tsv) { 
-            const linhas = tratarTSV(tsv).slice(1); 
-            aulasArray = []; 
-            if(linhas.length === 0) return;
-            linhas.forEach(colunas => { 
-                if (colunas.length >= 4 && colunas[0] && colunas[1] && colunas[0].trim() !== '') {
-                    // Usa o escudo anti-erro para normalizar as datas da aula também
-                    const dataFormatada = processarDataInteligente(colunas[0].trim());
-                    if (dataFormatada) {
-                        aulasArray.push({
-                            data: dataFormatada.iso, // Salva seguro como YYYY-MM-DD
-                            codigoUC: colunas[1].trim(), 
-                            uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, 
-                            docente: colunas[2].trim(), 
-                            aula: colunas[3].trim()
-                        });
-                    } 
-                }
-            }); 
-        }
-
-        function processarEventos(tsv) { 
-            const linhas = tratarTSV(tsv).slice(1); 
-            baseEventos = []; 
-            if(linhas.length === 0) return;
-            linhas.forEach(colunas => { 
-                if (colunas.length >= 2 && colunas[0] && colunas[0].trim() !== '') {
-                    baseEventos.push({ 
-                        data: colunas[0].trim(), 
-                        titulo: colunas[1] ? colunas[1].trim() : '', 
-                        desc: colunas[2] ? colunas[2].trim() : '' 
-                    }); 
-                }
-            }); 
-        }
-
-        // Nova lógica de Datas de Interesse que suporta a Coluna "Categoria" se houver
-        function processarDatas(tsv) { 
-            const linhas = tratarTSV(tsv).slice(1); 
-            baseDatas = []; 
-            if(linhas.length === 0) return;
-            linhas.forEach(colunas => { 
-                if (colunas.length >= 2 && colunas[0] && colunas[0].trim() !== '') {
-                    
-                    // Se o usuário tiver 4 colunas (Data, Categoria, Titulo, Descrição)
-                    let categoria = "";
-                    let titulo = "";
-                    let desc = "";
-                    
-                    if (colunas.length >= 4) {
-                        categoria = colunas[1].trim();
-                        titulo = colunas[2].trim();
-                        desc = colunas[3] ? colunas[3].trim() : '';
-                    } else {
-                        // Se tiver apenas 3 colunas (Data, Titulo, Descrição)
-                        titulo = colunas[1] ? colunas[1].trim() : '';
-                        desc = colunas[2] ? colunas[2].trim() : '';
-                    }
-
-                    baseDatas.push({ 
-                        data: colunas[0].trim(), 
-                        categoria: categoria,
-                        titulo: titulo, 
-                        desc: desc 
-                    }); 
-                }
-            }); 
-            if (baseDatas.length > 0) initDatas(); 
-        }
-
-        function processarDicio(tsv) {
-            const linhas = tratarTSV(tsv).slice(1); 
-            dicioArray = [];
-            if(linhas.length === 0) return;
-            linhas.forEach(colunas => {
-                if (colunas.length >= 3 && colunas[0] && colunas[0].trim() !== '') {
-                    dicioArray.push({ 
-                        termo: colunas[0].trim(), 
-                        categoria: colunas[1] ? colunas[1].trim() : 'Geral', 
-                        definicao: colunas[2] ? colunas[2].trim() : '' 
-                    });
-                }
-            });
-            if (dicioMode === 'search') renderDicioSearch();
+                if (!dadosCarregados) document.getElementById('loading-text').innerText = "Modo Offline Ativado."; 
+            } finally { if (!dadosCarregados) liberarAcesso(); }
         }
 
         function liberarAcesso() { 
             dadosCarregados = true; 
-            initAulas(); 
-            initEventos();
-            if (baseDatas.length > 0) initDatas();
             document.getElementById('loading-text').style.display = 'none'; 
             document.getElementById('click-hint').classList.remove('hidden'); 
         }
 
         // ==========================================
-        // MÓDULO DA ENCICLOPÉDIA (C.L.A.R.A. Knowledge Base)
+        // MÓDULOS DE AULAS, EVENTOS E DATAS
         // ==========================================
-        function toggleDicioMode() {
-            const btn = document.getElementById('btn-toggle-dicio');
-            const areaSearch = document.getElementById('dicio-search-area');
-            const areaAlpha = document.getElementById('dicio-alpha-area');
-            
-            if (dicioMode === 'search') {
-                dicioMode = 'index';
-                btn.innerText = "🔍 Voltar para Busca";
-                btn.style.backgroundColor = "var(--accent-dicio)";
-                btn.style.color = "#fff";
-                areaSearch.classList.add('hidden');
-                areaAlpha.classList.remove('hidden');
-                renderAlphabet();
-                renderDicioIndex(currentLetter);
-            } else {
-                dicioMode = 'search';
-                btn.innerText = "🔤 Ver Índice A-Z";
-                btn.style.backgroundColor = "transparent";
-                btn.style.color = "var(--accent-dicio)";
-                areaSearch.classList.remove('hidden');
-                areaAlpha.classList.add('hidden');
-                document.getElementById('buscaDicio').value = '';
-                renderDicioSearch();
-            }
-        }
-
-        function renderAlphabet() {
-            const cont = document.getElementById('dicio-alpha-area');
-            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split('');
-            let html = '';
-            
-            letters.forEach(l => {
-                const activeClass = (l === currentLetter) ? 'active' : '';
-                html += `<div class="dicio-letter ${activeClass}" onclick="selectLetter('${l}')">${l}</div>`;
-            });
-            cont.innerHTML = html;
-        }
-
-        function selectLetter(l) {
-            currentLetter = l;
-            renderAlphabet();
-            renderDicioIndex(l);
-        }
-
-        function filtrarDicio() {
-            if (dicioMode === 'search') {
-                const valor = document.getElementById('buscaDicio').value;
-                renderDicioSearch(valor);
-            }
-        }
-
-        function renderDicioSearch(filtro = "") {
-            const container = document.getElementById('lista-dicio');
-            if (dicioArray.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum dado vinculado ainda.</p>"; return;
-            }
-
-            let html = "";
-            const filtroLower = filtro.toLowerCase();
-
-            const itensFiltrados = dicioArray.filter(item => {
-                return item.termo.toLowerCase().includes(filtroLower) || 
-                       item.categoria.toLowerCase().includes(filtroLower) ||
-                       item.definicao.toLowerCase().includes(filtroLower);
-            }).sort((a, b) => a.termo.localeCompare(b.termo));
-
-            if (itensFiltrados.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum termo encontrado.</p>"; return;
-            }
-
-            itensFiltrados.forEach(item => {
-                html += `
-                    <div class="dicio-card">
-                        <div class="dicio-term">${item.termo}</div>
-                        <div class="dicio-cat">${item.categoria}</div>
-                        <div class="dicio-def">${item.definicao}</div>
-                    </div>
-                `;
-            });
-            container.innerHTML = html;
-        }
-
-        function renderDicioIndex(letter) {
-            const container = document.getElementById('lista-dicio');
-            if (dicioArray.length === 0) {
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum dado vinculado ainda.</p>"; return;
-            }
-
-            const itensFiltrados = dicioArray.filter(item => item.termo.toUpperCase().startsWith(letter))
-                                             .sort((a, b) => a.termo.localeCompare(b.termo));
-
-            if (itensFiltrados.length === 0) {
-                container.innerHTML = `<p style='text-align:center; color:#888; margin-top:20px;'>Nenhum verbete com a letra <strong>${letter}</strong>.</p>`; return;
-            }
-
-            let html = '<div class="dicio-list-view">';
-            itensFiltrados.forEach(item => {
-                const termoSafe = item.termo.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-                const catSafe = item.categoria.replace(/'/g, "\\'").replace(/"/g, "&quot;");
-                const defSafe = item.definicao.replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, '\\n');
-
-                html += `
-                    <div class="dicio-list-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
-                        <div class="dicio-list-term">${item.termo}</div>
-                        <div class="dicio-list-def-preview">${item.definicao}</div>
-                    </div>
-                `;
-            });
-            html += '</div>';
-            container.innerHTML = html;
-        }
-
-        // ==========================================
-        // MÓDULO DE EVENTOS DA TURMA 
-        // ==========================================
-        function initEventos() { 
-            const container = document.getElementById('lista-eventos'); 
-            let html = ''; 
-            
-            if (baseEventos.length === 0) { 
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum evento programado.</p>"; 
-                return; 
-            } 
-            
-            // Ordenação Segura
-            baseEventos.sort((a, b) => {
-                const dtA = processarDataInteligente(a.data);
-                const dtB = processarDataInteligente(b.data);
-                if (!dtA || !dtB) return 0;
-                const timeA = new Date(dtA.iso).getTime();
-                const timeB = new Date(dtB.iso).getTime();
-                if(timeA === timeB) return a.titulo.localeCompare(b.titulo);
-                return timeA - timeB;
-            });
-            
-            const hojeLocal = new Date(); 
-            hojeLocal.setHours(0,0,0,0);
-            
-            let eventosExibidos = 0; 
-            
-            baseEventos.forEach(ev => { 
-                const dt = processarDataInteligente(ev.data);
-                if (!dt) return; 
-                
-                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
-                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
-                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
-                
-                if (diffDays < -10) return; 
-                
-                let countdownHTML = ""; 
-                let extraClass = ""; 
-                
-                if (diffDays > 1) { countdownHTML = `<span class="evento-countdown">(Faltam ${diffDays} dias)</span>`; } 
-                else if (diffDays === 1) { countdownHTML = `<span class="evento-countdown urgente">(É amanhã!)</span>`; } 
-                else if (diffDays === 0) { countdownHTML = `<span class="evento-countdown hoje">(É hoje!)</span>`; } 
-                else if (diffDays === -1) { countdownHTML = `<span class="evento-countdown">(Ontem)</span>`; extraClass = "past"; } 
-                else { countdownHTML = `<span class="evento-countdown">(Há ${Math.abs(diffDays)} dias)</span>`; extraClass = "past"; } 
-                
-                html += `
-                    <div class="evento-card ${extraClass}">
-                        <div class="evento-data"><span>📅 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
-                        <div class="evento-titulo">${ev.titulo}</div>
-                        <div class="evento-desc">${ev.desc}</div>
-                    </div>
-                `; 
-                eventosExibidos++; 
-            }); 
-            
-            if (eventosExibidos === 0) { html = "<p style='text-align:center; color:#888;'>Nenhum evento recente ou futuro.</p>"; }
-            container.innerHTML = html; 
-        }
-
-        // ==========================================
-        // MÓDULO DE DATAS DE INTERESSE
-        // ==========================================
-        function initDatas() { 
-            const container = document.getElementById('lista-datas'); 
-            let html = ''; 
-            
-            if (baseDatas.length === 0) { 
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhuma data de interesse cadastrada.</p>"; 
-                return; 
-            } 
-            
-            baseDatas.sort((a, b) => {
-                const dtA = processarDataInteligente(a.data);
-                const dtB = processarDataInteligente(b.data);
-                if (!dtA || !dtB) return 0;
-                const timeA = new Date(dtA.iso).getTime();
-                const timeB = new Date(dtB.iso).getTime();
-                if(timeA === timeB) return a.titulo.localeCompare(b.titulo);
-                return timeA - timeB;
-            });
-            
-            const hojeLocal = new Date(); 
-            hojeLocal.setHours(0,0,0,0);
-            
-            let datasExibidas = 0; 
-            
-            baseDatas.forEach(ev => { 
-                const dt = processarDataInteligente(ev.data);
-                if (!dt) return; 
-                
-                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
-                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
-                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
-                
-                let countdownHTML = ""; 
-                let extraClass = "datas-int"; 
-                
-                if (diffDays > 1) { countdownHTML = `<span class="evento-countdown">(Faltam ${diffDays} dias)</span>`; } 
-                else if (diffDays === 1) { countdownHTML = `<span class="evento-countdown urgente">(É amanhã!)</span>`; } 
-                else if (diffDays === 0) { countdownHTML = `<span class="evento-countdown hoje">(É hoje!)</span>`; } 
-                else if (diffDays === -1) { countdownHTML = `<span class="evento-countdown">(Ontem)</span>`; extraClass += " past"; } 
-                else { countdownHTML = `<span class="evento-countdown">(Há ${Math.abs(diffDays)} dias)</span>`; extraClass += " past"; } 
-                
-                let displayTitulo = ev.titulo;
-                if (ev.categoria && ev.categoria !== '') {
-                    displayTitulo = `[${ev.categoria}] ${ev.titulo}`;
+        function processarAulas(tsv) { 
+            const linhas = tratarTSV(tsv).slice(1); aulasArray = []; 
+            if(linhas.length === 0) return;
+            linhas.forEach(colunas => { 
+                if (colunas.length >= 4 && colunas[0] && colunas[1]) {
+                    const dt = processarDataInteligente(colunas[0].trim());
+                    if (dt) {
+                        aulasArray.push({
+                            data: dt.iso, codigoUC: colunas[1].trim(), 
+                            uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, 
+                            docente: colunas[2].trim(), aula: colunas[3].trim()
+                        });
+                    } 
                 }
-
-                html += `
-                    <div class="evento-card ${extraClass}">
-                        <div class="evento-data"><span>🌍 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
-                        <div class="evento-titulo">${displayTitulo}</div>
-                        <div class="evento-desc">${ev.desc}</div>
-                    </div>
-                `; 
-                datasExibidas++; 
             }); 
-            
-            if (datasExibidas === 0) { html = "<p style='text-align:center; color:#888;'>Nenhuma data de interesse carregada.</p>"; }
-            container.innerHTML = html; 
+            initAulas();
         }
 
-        // ==========================================
-        // MÓDULO DE AULAS E CONTROLE DE MODAL
-        // ==========================================
-        function toISODate(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; } 
-        function formatarDataBR(iso) { const [a, m, d] = iso.split('-'); return `${d}/${m}/${a}`; } 
-        function getDiaDaSemana(iso) { 
-            const d = new Date(iso.split('-')[0], iso.split('-')[1] - 1, iso.split('-')[2], 12, 0, 0);
-            return ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'][d.getDay()]; 
-        } 
-        
-        function abrirModal(dataISO, ucNome, profNome, numAula) { 
-            document.getElementById('modalData').innerText = `${getDiaDaSemana(dataISO)}, ${formatarDataBR(dataISO)}`; 
-            document.getElementById('modalData').style.color = "#aaa"; 
-            document.getElementById('modalUC').innerText = `${ucNome} - Aula ${numAula}`; 
-            document.getElementById('modalProf').innerText = `Prof. ${profNome}`; 
-            document.getElementById('modalTexto').innerText = "Detalhes adicionais não fornecidos na base de dados."; 
-            document.getElementById('modalConteudo').style.display = 'flex'; 
-            document.body.style.overflow = 'hidden'; 
-        } 
-        
-        function abrirVerbeteModal(termo, categoria, definicao) {
-            document.getElementById('modalData').innerText = categoria;
-            document.getElementById('modalData').style.color = "var(--accent-dicio)"; 
-            document.getElementById('modalUC').innerText = termo;
-            document.getElementById('modalProf').innerText = ""; 
-            document.getElementById('modalTexto').innerText = definicao;
-            document.getElementById('modalConteudo').style.display = 'flex'; 
-            document.body.style.overflow = 'hidden'; 
+        function processarEventos(tsv) { 
+            const linhas = tratarTSV(tsv).slice(1); baseEventos = []; 
+            if(linhas.length === 0) return;
+            linhas.forEach(colunas => { 
+                if (colunas.length >= 2 && colunas[0]) {
+                    baseEventos.push({ data: colunas[0].trim(), titulo: colunas[1] ? colunas[1].trim() : '', desc: colunas[2] ? colunas[2].trim() : '' }); 
+                }
+            }); 
+            initEventos();
         }
 
-        function fecharModal(e) { if (e.target.id === 'modalConteudo') fecharModalBtn(); } 
-        function fecharModalBtn() { document.getElementById('modalConteudo').style.display = 'none'; document.body.style.overflow = 'auto'; } 
-        
+        function processarDatas(tsv) { 
+            const linhas = tratarTSV(tsv).slice(1); baseDatas = []; 
+            if(linhas.length === 0) return;
+            linhas.forEach(colunas => { 
+                if (colunas.length >= 2 && colunas[0]) {
+                    let categoria = ""; let titulo = ""; let desc = "";
+                    if (colunas.length >= 4) {
+                        categoria = colunas[1].trim(); titulo = colunas[2].trim(); desc = colunas[3] ? colunas[3].trim() : '';
+                    } else {
+                        titulo = colunas[1] ? colunas[1].trim() : ''; desc = colunas[2] ? colunas[2].trim() : '';
+                    }
+                    baseDatas.push({ data: colunas[0].trim(), categoria: categoria, titulo: titulo, desc: desc }); 
+                }
+            }); 
+            initDatas(); 
+        }
+
         function initAulas() { 
             const select = document.getElementById('filtroUC'); 
             select.innerHTML = '<option value="">-- Selecione uma UC para ver todas as datas --</option>'; 
             for (const [codigo, nome] of Object.entries(nomesUC)) { 
-                const opt = document.createElement('option'); 
-                opt.value = codigo; opt.textContent = `${codigo} - ${nome}`; 
-                select.appendChild(opt); 
+                const opt = document.createElement('option'); opt.value = codigo; opt.textContent = `${codigo} - ${nome}`; select.appendChild(opt); 
             } 
             mudarSemana(0); 
         } 
-        
+
         document.getElementById('filtroUC').addEventListener('change', function(e) { 
             const ucSelec = e.target.value; 
             if (!ucSelec) return window.limparBusca(); 
-            
             document.getElementById('painel-aulas').style.display = 'none'; 
             document.getElementById('rodape-semanas').style.display = 'none'; 
             const resPanel = document.getElementById('resultado-pesquisa'); 
             resPanel.style.display = 'flex'; 
-            
             const dUC = aulasArray.filter(a => a.codigoUC === ucSelec); 
             const hojeStr = toISODate(new Date()); 
             const todasEncerradas = dUC.length > 0 && dUC.every(a => a.data < hojeStr); 
-            
             let h = `<div class="card" style="border-left-color: #ff9800;">
                         <button onclick="limparBusca()" class="btn-voltar" style="border-color: #ff9800; color:#ff9800;">⬅ Limpar Busca</button>
                         <h3 style="margin-top:0; color:#ff9800;">${nomesUC[ucSelec]}</h3>`; 
-            
             if (todasEncerradas) h += `<div class="uc-encerrada">✅ UC Encerrada para a Turma 43M</div>`; 
             if (dUC.length === 0) h += `<p>Nenhuma aula agendada na planilha.</p>`; 
-            
             dUC.forEach(a => { 
                 const isPast = a.data < hojeStr; 
                 const rowStyle = isPast ? "padding:10px 0; border-bottom:1px solid #333; color:#777; opacity:0.6;" : "padding:10px 0; border-bottom:1px solid #333;"; 
@@ -1251,35 +743,30 @@
             }); 
             resPanel.innerHTML = h + `</div>`; 
         }); 
-        
+
         window.limparBusca = function() { 
             document.getElementById('filtroUC').value = ""; 
             document.getElementById('resultado-pesquisa').style.display = 'none'; 
             document.getElementById('painel-aulas').style.display = 'flex'; 
             document.getElementById('rodape-semanas').style.display = 'flex'; 
         } 
-        
+
         function mudarSemana(offset) { 
             document.getElementById('btn-passada').classList.toggle('active', offset === -1); 
             document.getElementById('btn-atual').classList.toggle('active', offset === 0); 
             document.getElementById('btn-que-vem').classList.toggle('active', offset === 1); 
-            
             const hoje = new Date(); 
             const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12, 0, 0); 
             const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12, 0, 0); 
             const hojeStr = toISODate(hoje); 
             const amanha = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1); 
             const amanhaStr = toISODate(amanha); 
-            
             const aSemana = aulasArray.filter(a => a.data >= toISODate(seg) && a.data <= toISODate(sex)); 
             let html = `<h3 style="text-align:center;">Sua Semana</h3>`; 
-            
             if (aSemana.length === 0) { html += `<div class="card"><div class="details" style="text-align:center;">Nenhuma aula programada para esta semana.</div></div>`; } 
-            
             aSemana.forEach(a => { 
                 const isCancelled = a.aula.toLowerCase().includes('cancelada'); 
                 let cardClass = ''; let statusMsg = ''; 
-                
                 if (isCancelled) { cardClass = 'cancelled'; statusMsg = `❌ CANCELADA - ${getDiaDaSemana(a.data)}`; } 
                 else { 
                     if (a.data === hojeStr) { cardClass = 'today'; statusMsg = '🔥 HOJE'; } 
@@ -1287,24 +774,214 @@
                     else if (a.data < hojeStr) { cardClass = 'past'; statusMsg = `✅ ${getDiaDaSemana(a.data)}`; } 
                     else { cardClass = 'next'; statusMsg = `⏳ ${getDiaDaSemana(a.data)}`; } 
                 } 
-                
-                html += `
-                    <div class="card ${cardClass}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
-                        <div class="status">${statusMsg}</div>
-                        <div class="date">${formatarDataBR(a.data)}</div>
-                        <div class="details"><span style="font-weight:bold;">${a.uc}</span><br>Prof: ${a.docente}</div>
-                    </div>
-                `; 
+                html += `<div class="card ${cardClass}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
+                            <div class="status">${statusMsg}</div>
+                            <div class="date">${formatarDataBR(a.data)}</div>
+                            <div class="details"><span style="font-weight:bold;">${a.uc}</span><br>Prof: ${a.docente}</div>
+                        </div>`; 
             }); 
             document.getElementById('painel-aulas').innerHTML = html; 
         }
 
+        function initEventos() { 
+            const container = document.getElementById('lista-eventos'); let html = ''; 
+            if (baseEventos.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum evento programado.</p>"; return; } 
+            baseEventos.sort((a, b) => {
+                const dtA = processarDataInteligente(a.data); const dtB = processarDataInteligente(b.data);
+                if (!dtA || !dtB) return 0;
+                const timeA = new Date(dtA.iso).getTime(); const timeB = new Date(dtB.iso).getTime();
+                if(timeA === timeB) return a.titulo.localeCompare(b.titulo);
+                return timeA - timeB;
+            });
+            const hojeLocal = new Date(); hojeLocal.setHours(0,0,0,0); let eventosExibidos = 0; 
+            baseEventos.forEach(ev => { 
+                const dt = processarDataInteligente(ev.data); if (!dt) return; 
+                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
+                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
+                if (diffDays < -10) return; 
+                let countdownHTML = ""; let extraClass = ""; 
+                if (diffDays > 1) { countdownHTML = `<span class="evento-countdown">(Faltam ${diffDays} dias)</span>`; } 
+                else if (diffDays === 1) { countdownHTML = `<span class="evento-countdown urgente">(É amanhã!)</span>`; } 
+                else if (diffDays === 0) { countdownHTML = `<span class="evento-countdown hoje">(É hoje!)</span>`; } 
+                else if (diffDays === -1) { countdownHTML = `<span class="evento-countdown">(Ontem)</span>`; extraClass = "past"; } 
+                else { countdownHTML = `<span class="evento-countdown">(Há ${Math.abs(diffDays)} dias)</span>`; extraClass = "past"; } 
+                html += `<div class="evento-card ${extraClass}">
+                            <div class="evento-data"><span>📅 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
+                            <div class="evento-titulo">${ev.titulo}</div>
+                            <div class="evento-desc">${ev.desc}</div>
+                        </div>`; 
+                eventosExibidos++; 
+            }); 
+            if (eventosExibidos === 0) { html = "<p style='text-align:center; color:#888;'>Nenhum evento recente ou futuro.</p>"; }
+            container.innerHTML = html; 
+        }
+
+        function initDatas() { 
+            const container = document.getElementById('lista-datas'); let html = ''; 
+            if (baseDatas.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhuma data de interesse cadastrada.</p>"; return; } 
+            baseDatas.sort((a, b) => {
+                const dtA = processarDataInteligente(a.data); const dtB = processarDataInteligente(b.data);
+                if (!dtA || !dtB) return 0;
+                const timeA = new Date(dtA.iso).getTime(); const timeB = new Date(dtB.iso).getTime();
+                if(timeA === timeB) return a.titulo.localeCompare(b.titulo);
+                return timeA - timeB;
+            });
+            const hojeLocal = new Date(); hojeLocal.setHours(0,0,0,0); let datasExibidas = 0; 
+            baseDatas.forEach(ev => { 
+                const dt = processarDataInteligente(ev.data); if (!dt) return; 
+                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
+                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
+                let countdownHTML = ""; let extraClass = "datas-int"; 
+                if (diffDays > 1) { countdownHTML = `<span class="evento-countdown">(Faltam ${diffDays} dias)</span>`; } 
+                else if (diffDays === 1) { countdownHTML = `<span class="evento-countdown urgente">(É amanhã!)</span>`; } 
+                else if (diffDays === 0) { countdownHTML = `<span class="evento-countdown hoje">(É hoje!)</span>`; } 
+                else if (diffDays === -1) { countdownHTML = `<span class="evento-countdown">(Ontem)</span>`; extraClass += " past"; } 
+                else { countdownHTML = `<span class="evento-countdown">(Há ${Math.abs(diffDays)} dias)</span>`; extraClass += " past"; } 
+                let displayTitulo = ev.titulo;
+                if (ev.categoria && ev.categoria !== '') { displayTitulo = `[${ev.categoria}] ${ev.titulo}`; }
+                html += `<div class="evento-card ${extraClass}">
+                            <div class="evento-data"><span>🌍 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
+                            <div class="evento-titulo">${displayTitulo}</div>
+                            <div class="evento-desc">${ev.desc}</div>
+                        </div>`; 
+                datasExibidas++; 
+            }); 
+            if (datasExibidas === 0) { html = "<p style='text-align:center; color:#888;'>Nenhuma data de interesse carregada.</p>"; }
+            container.innerHTML = html; 
+        }
+
         // ==========================================
-        // MÓDULO DE LUZ NATURAL E LUA (SUNCALC + OPEN-METEO)
+        // MÓDULO DA ENCICLOPÉDIA (DICIONÁRIO)
         // ==========================================
-        let locLat = -23.5266; 
-        let locLng = -46.6963;
-        let locName = "SNC Lapa Scipião (São Paulo)";
+        function processarDicio(tsv) {
+            const linhas = tratarTSV(tsv).slice(1); 
+            dicioArray = [];
+            let categoriasSet = new Set();
+            if(linhas.length === 0) return;
+            linhas.forEach(colunas => {
+                if (colunas.length >= 3 && colunas[0] && colunas[0].trim() !== '') {
+                    let cat = colunas[1] ? colunas[1].trim() : 'Geral';
+                    dicioArray.push({ termo: colunas[0].trim(), categoria: cat, definicao: colunas[2] ? colunas[2].trim() : '' });
+                    categoriasSet.add(cat);
+                }
+            });
+            const selectCat = document.getElementById('filtroCategoriaDicio');
+            if (selectCat) {
+                let optionsHtml = '<option value="">Todas as Categorias</option>';
+                Array.from(categoriasSet).sort().forEach(c => { optionsHtml += `<option value="${c}">${c}</option>`; });
+                selectCat.innerHTML = optionsHtml;
+            }
+            if (dicioMode === 'search') renderDicioSearch();
+        }
+
+        function toggleDicioMode() {
+            const btn = document.getElementById('btn-toggle-dicio');
+            const areaSearch = document.getElementById('dicio-search-area');
+            const areaAlpha = document.getElementById('dicio-alpha-area');
+            if (dicioMode === 'search') {
+                dicioMode = 'index';
+                btn.innerText = "🔍 Voltar para Busca"; btn.style.backgroundColor = "var(--accent-dicio)"; btn.style.color = "#fff";
+                areaSearch.classList.add('hidden'); areaAlpha.classList.remove('hidden');
+                renderAlphabet(); renderDicioIndex(currentLetter);
+            } else {
+                dicioMode = 'search';
+                btn.innerText = "🔤 Ver Índice A-Z"; btn.style.backgroundColor = "transparent"; btn.style.color = "var(--accent-dicio)";
+                areaSearch.classList.remove('hidden'); areaAlpha.classList.add('hidden');
+                document.getElementById('buscaDicio').value = ''; renderDicioSearch();
+            }
+        }
+
+        function renderAlphabet() {
+            const cont = document.getElementById('dicio-alpha-area');
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''); let html = '';
+            letters.forEach(l => {
+                const activeClass = (l === currentLetter) ? 'active' : '';
+                html += `<div class="dicio-letter ${activeClass}" onclick="selectLetter('${l}')">${l}</div>`;
+            });
+            cont.innerHTML = html;
+        }
+
+        function selectLetter(l) { currentLetter = l; renderAlphabet(); renderDicioIndex(l); }
+
+        function filtrarDicio() { if (dicioMode === 'search') renderDicioSearch(); }
+
+        function renderDicioSearch() {
+            const container = document.getElementById('lista-dicio');
+            if (dicioArray.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum dado vinculado ainda.</p>"; return; }
+            const inputFiltro = document.getElementById('buscaDicio').value.toLowerCase();
+            const catFiltro = document.getElementById('filtroCategoriaDicio').value;
+            let html = "";
+            const itensFiltrados = dicioArray.filter(item => {
+                const matchTexto = item.termo.toLowerCase().includes(inputFiltro) || item.definicao.toLowerCase().includes(inputFiltro);
+                const matchCat = catFiltro === "" || item.categoria === catFiltro;
+                return matchTexto && matchCat;
+            }).sort((a, b) => a.termo.localeCompare(b.termo));
+            if (itensFiltrados.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum termo encontrado.</p>"; return; }
+            itensFiltrados.forEach(item => {
+                html += `<div class="dicio-card">
+                            <div class="dicio-term">${item.termo}</div>
+                            <div class="dicio-cat">${item.categoria}</div>
+                            <div class="dicio-def">${item.definicao}</div>
+                        </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        function renderDicioIndex(letter) {
+            const container = document.getElementById('lista-dicio');
+            if (dicioArray.length === 0) return;
+            const itensFiltrados = dicioArray.filter(item => item.termo.toUpperCase().startsWith(letter)).sort((a, b) => a.termo.localeCompare(b.termo));
+            if (itensFiltrados.length === 0) { container.innerHTML = `<p style='text-align:center; color:#888; margin-top:20px;'>Nenhum verbete com a letra <strong>${letter}</strong>.</p>`; return; }
+            let html = '<div class="dicio-list-view">';
+            itensFiltrados.forEach(item => {
+                const termoSafe = item.termo.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const catSafe = item.categoria.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const defSafe = item.definicao.replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, '\\n');
+                html += `<div class="dicio-list-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
+                            <div class="dicio-list-term">${item.termo}</div>
+                            <div class="dicio-list-def-preview">${item.definicao}</div>
+                        </div>`;
+            });
+            html += '</div>';
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // MODAIS
+        // ==========================================
+        function toISODate(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; } 
+        function formatarDataBR(iso) { const [a, m, d] = iso.split('-'); return `${d}/${m}/${a}`; } 
+        function getDiaDaSemana(iso) { 
+            const d = new Date(iso.split('-')[0], iso.split('-')[1] - 1, iso.split('-')[2], 12, 0, 0);
+            return ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'][d.getDay()]; 
+        } 
+        function abrirModal(dataISO, ucNome, profNome, numAula) { 
+            document.getElementById('modalData').innerText = `${getDiaDaSemana(dataISO)}, ${formatarDataBR(dataISO)}`; 
+            document.getElementById('modalData').style.color = "#aaa"; 
+            document.getElementById('modalUC').innerText = `${ucNome} - Aula ${numAula}`; 
+            document.getElementById('modalProf').innerText = `Prof. ${profNome}`; 
+            document.getElementById('modalTexto').innerText = "Detalhes adicionais não fornecidos na base de dados."; 
+            document.getElementById('modalConteudo').style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
+        } 
+        function abrirVerbeteModal(termo, categoria, definicao) {
+            document.getElementById('modalData').innerText = categoria;
+            document.getElementById('modalData').style.color = "var(--accent-dicio)"; 
+            document.getElementById('modalUC').innerText = termo;
+            document.getElementById('modalProf').innerText = ""; 
+            document.getElementById('modalTexto').innerText = definicao;
+            document.getElementById('modalConteudo').style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
+        }
+        function fecharModal(e) { if (e.target.id === 'modalConteudo') fecharModalBtn(); } 
+        function fecharModalBtn() { document.getElementById('modalConteudo').style.display = 'none'; document.body.style.overflow = 'auto'; } 
+
+        // ==========================================
+        // MÓDULO DE LUZ NATURAL E LUA
+        // ==========================================
+        let locLat = -23.5266; let locLng = -46.6963; let locName = "SNC Lapa Scipião (São Paulo)";
         
         function formatTime(date) { 
             if (isNaN(date.getTime())) return "--:--"; 
@@ -1344,49 +1021,32 @@
         
         function getMoonInfo(targetDate) {
             const moonIllum = SunCalc.getMoonIllumination(targetDate);
-            const phase = moonIllum.phase; 
-            const fraction = moonIllum.fraction; 
-            const distance = moonIllum.distance; 
+            const phase = moonIllum.phase; const fraction = moonIllum.fraction; const distance = moonIllum.distance; 
             
-            let phaseName = "";
-            let emoji = "";
-            let witticism = "";
+            let phaseName = ""; let emoji = ""; let witticism = "";
 
             if (phase < 0.03 || phase > 0.97) { 
-                phaseName = "Lua Nova"; emoji = "🌑"; 
-                witticism = "Hoje à noite não tem luar. Você está com ela? (Zero luz = paraíso das astrofotografias)."; 
+                phaseName = "Lua Nova"; emoji = "🌑"; witticism = "Hoje à noite não tem luar. Você está com ela? (Zero luz = paraíso das astrofotografias)."; 
             } else if (phase < 0.25) { 
-                phaseName = "Crescente"; emoji = "🌒"; 
-                witticism = "A lua está crescendo, igual à sua vontade de comprar equipamento. Rende fotos com luz suave noturna."; 
+                phaseName = "Crescente"; emoji = "🌒"; witticism = "A lua está crescendo, igual à sua vontade de comprar equipamento. Rende fotos com luz suave noturna."; 
             } else if (phase < 0.28) { 
-                phaseName = "Quarto Crescente"; emoji = "🌓"; 
-                witticism = "Metade iluminada, metade misteriosa. Luz lateral dramática, ótima para texturas e crateras."; 
+                phaseName = "Quarto Crescente"; emoji = "🌓"; witticism = "Metade iluminada, metade misteriosa. Luz lateral dramática, ótima para texturas e crateras."; 
             } else if (phase < 0.47) { 
-                phaseName = "Gibosa Crescente"; emoji = "🌔"; 
-                witticism = "Quase cheia! A luz noturna já começa a ofuscar suas fotos de Via Láctea."; 
+                phaseName = "Gibosa Crescente"; emoji = "🌔"; witticism = "Quase cheia! A luz noturna já começa a ofuscar suas fotos de Via Láctea."; 
             } else if (phase < 0.53) { 
-                phaseName = "Cheia"; emoji = "🌕"; 
-                witticism = "Lobisomens à solta! Luz dura noturna. A lua virou um rebatedor gigante lá no céu."; 
+                phaseName = "Cheia"; emoji = "🌕"; witticism = "Lobisomens à solta! Luz dura noturna. A lua virou um rebatedor gigante lá no céu."; 
             } else if (phase < 0.72) { 
-                phaseName = "Gibosa Minguante"; emoji = "🌖"; 
-                witticism = "A iluminação começa a diminuir, mas ainda há luz suficiente para iluminar paisagens terrestres longas."; 
+                phaseName = "Gibosa Minguante"; emoji = "🌖"; witticism = "A iluminação começa a diminuir, mas ainda há luz suficiente para iluminar paisagens terrestres longas."; 
             } else if (phase < 0.78) { 
-                phaseName = "Quarto Minguante"; emoji = "🌗"; 
-                witticism = "Fim de festa. Fase ideal para captar o nascer da lua silencioso de madrugada."; 
+                phaseName = "Quarto Minguante"; emoji = "🌗"; witticism = "Fim de festa. Fase ideal para captar o nascer da lua silencioso de madrugada."; 
             } else { 
-                phaseName = "Minguante"; emoji = "🌘"; 
-                witticism = "A lua está diminuindo o brilho, igual à bateria da sua câmera no fim do ensaio. O céu noturno volta a ficar incrivelmente escuro."; 
+                phaseName = "Minguante"; emoji = "🌘"; witticism = "A lua está diminuindo o brilho, igual à bateria da sua câmera no fim do ensaio. O céu noturno volta a ficar incrivelmente escuro."; 
             }
 
             let supermoonTag = "";
-            if (distance < 365000 && (phase > 0.45 && phase < 0.55)) {
-                supermoonTag = "<br><br>🌕 <strong>SUPER LUA:</strong> A lua está no perigeu (mais próxima da Terra). Prepare a teleobjetiva!";
-            } else if (distance > 400000 && (phase < 0.05 || phase > 0.95)) {
-                supermoonTag = "<br><br>🌑 <strong>Minilua (Micro Lua):</strong> A lua está no apogeu (mais distante).";
-            }
-            
-            let eclipseText = (phase < 0.03 || phase > 0.97 || (phase > 0.47 && phase < 0.53)) 
-                ? " (Em fases extremas, há risco de eclipses, confira seu calendário astronômico!)." : "";
+            if (distance < 365000 && (phase > 0.45 && phase < 0.55)) { supermoonTag = "<br><br>🌕 <strong>SUPER LUA:</strong> A lua está no perigeu (mais próxima da Terra). Prepare a teleobjetiva!"; } 
+            else if (distance > 400000 && (phase < 0.05 || phase > 0.95)) { supermoonTag = "<br><br>🌑 <strong>Minilua (Micro Lua):</strong> A lua está no apogeu (mais distante)."; }
+            let eclipseText = (phase < 0.03 || phase > 0.97 || (phase > 0.47 && phase < 0.53)) ? " (Em fases extremas, há risco de eclipses, confira seu calendário astronômico!)." : "";
 
             return `
                 <div class="sun-card moon-card" style="flex-direction: column; align-items: flex-start;">
@@ -1404,48 +1064,27 @@
         async function fetchWeather(lat, lng) {
             try {
                 const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true`);
-                const data = await response.json();
-                return data.current_weather;
-            } catch (e) {
-                console.error("Erro ao buscar clima", e);
-                return null;
-            }
+                const data = await response.json(); return data.current_weather;
+            } catch (e) { return null; }
         }
 
         async function updateWeatherUI(targetDate) {
             const weatherDiv = document.getElementById('weather-results');
-            const hojeStr = toISODate(new Date());
-            const targetStr = toISODate(targetDate);
-            
-            if (targetStr !== hojeStr) {
-                weatherDiv.innerHTML = '';
-                weatherDiv.classList.add('hidden');
-                return;
-            }
-
-            weatherDiv.innerHTML = '<span style="color:#aaa;">🌤️ Consultando meteorologia...</span>';
-            weatherDiv.classList.remove('hidden');
-
+            const hojeStr = toISODate(new Date()); const targetStr = toISODate(targetDate);
+            if (targetStr !== hojeStr) { weatherDiv.innerHTML = ''; weatherDiv.classList.add('hidden'); return; }
+            weatherDiv.innerHTML = '<span style="color:#aaa;">🌤️ Consultando meteorologia...</span>'; weatherDiv.classList.remove('hidden');
             const weather = await fetchWeather(locLat, locLng);
-            if (!weather) {
-                weatherDiv.innerHTML = '<span style="color:#aaa;">⚠️ Clima indisponível no modo offline.</span>';
-                return;
-            }
-
-            const code = weather.weathercode;
-            let icon = '🌤️'; let condicao = 'Misto'; let dica = '';
-
+            if (!weather) { weatherDiv.innerHTML = '<span style="color:#aaa;">⚠️ Clima indisponível no modo offline.</span>'; return; }
+            const code = weather.weathercode; let icon = '🌤️'; let condicao = 'Misto'; let dica = '';
             if (code === 0) { icon = '☀️'; condicao = 'Céu Limpo'; dica = 'Luz dura e sombras muito marcadas. Excelente para alto contraste, mas prepare rebatedores ou difusores para retratos.'; }
             else if (code >= 1 && code <= 3) { icon = '☁️'; condicao = 'Nublado / Parcial'; dica = 'Luz suave e difusa (funciona como um softbox gigante). Excelente para retratos com cores fiéis e baixo contraste.'; }
             else if (code === 45 || code === 48) { icon = '🌫️'; condicao = 'Névoa / Neblina'; dica = 'Baixo contraste e redução severa de saturação. Aproveite a profundidade atmosférica para fotos misteriosas ou silhuetas.'; }
             else if (code >= 51 && code <= 67) { icon = '🌧️'; condicao = 'Chuva'; dica = 'Luz muito fraca, porém o ambiente molhado satura as cores. Proteja rigorosamente seu equipamento fotográfico.'; }
             else if (code >= 80 && code <= 99) { icon = '⛈️'; condicao = 'Tempestade'; dica = 'Risco ao equipamento. Possibilidade de luz extremamente dramática e feixes de alto contraste localizado entre as nuvens.'; }
-
             weatherDiv.innerHTML = `
                 <div style="display:flex; flex-direction:column; gap:5px; width: 100%;">
                     <div style="display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#fff; font-size: 1.1em;">
-                        <span>${icon} Clima Agora (${weather.temperature}°C)</span>
-                        <span>${condicao}</span>
+                        <span>${icon} Clima Agora (${weather.temperature}°C)</span><span>${condicao}</span>
                     </div>
                     <div style="font-size:0.85em; color:#ccc; border-top:1px dashed #444; padding-top:8px; margin-top:5px; line-height: 1.4;">
                         📸 <strong>Dica C.L.A.R.A:</strong> ${dica}
@@ -1456,113 +1095,59 @@
 
         function renderSunCalc(targetDate) { 
             const times = SunCalc.getTimes(targetDate, locLat, locLng); 
-            
-            let html = `
-                <div style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.9em; text-align: center;">
-                    📍 Referência: <strong>${locName}</strong>
-                </div>
-            `; 
-            
+            let html = `<div style="margin-bottom: 15px; color: var(--text-muted); font-size: 0.9em; text-align: center;">📍 Referência: <strong>${locName}</strong></div>`; 
             html += `
                 <div class="sun-card" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="label">🌅 Nascer do Sol</span>
-                        <span class="time">${formatTime(times.sunrise)}</span>
-                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;"><span class="label">🌅 Nascer do Sol</span><span class="time">${formatTime(times.sunrise)}</span></div>
                     ${getEducativeInfo(times.sunrise, locLat, locLng)}
                 </div>
                 <div class="sun-card golden" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="label">✨ Hora Dourada (Manhã)</span>
-                        <span class="time">${formatTime(times.sunriseEnd)} - ${formatTime(times.goldenHourEnd)}</span>
-                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;"><span class="label">✨ Hora Dourada (Manhã)</span><span class="time">${formatTime(times.sunriseEnd)} - ${formatTime(times.goldenHourEnd)}</span></div>
                     ${getEducativeInfo(times.sunriseEnd, locLat, locLng)}
                 </div>
                 <div class="sun-card golden" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="label">✨ Hora Dourada (Tarde)</span>
-                        <span class="time">${formatTime(times.goldenHour)} - ${formatTime(times.sunsetStart)}</span>
-                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;"><span class="label">✨ Hora Dourada (Tarde)</span><span class="time">${formatTime(times.goldenHour)} - ${formatTime(times.sunsetStart)}</span></div>
                     ${getEducativeInfo(times.goldenHour, locLat, locLng)}
                 </div>
                 <div class="sun-card" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="label">🌇 Pôr do Sol</span>
-                        <span class="time">${formatTime(times.sunset)}</span>
-                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;"><span class="label">🌇 Pôr do Sol</span><span class="time">${formatTime(times.sunset)}</span></div>
                     ${getEducativeInfo(times.sunset, locLat, locLng)}
                 </div>
                 <div class="sun-card blue" style="flex-direction: column; align-items: flex-start;">
-                    <div style="display: flex; justify-content: space-between; width: 100%;">
-                        <span class="label">🌃 Hora Azul</span>
-                        <span class="time">${formatTime(times.sunset)} - ${formatTime(times.dusk)}</span>
-                    </div>
+                    <div style="display: flex; justify-content: space-between; width: 100%;"><span class="label">🌃 Hora Azul</span><span class="time">${formatTime(times.sunset)} - ${formatTime(times.dusk)}</span></div>
                     ${getEducativeInfo(times.dusk, locLat, locLng)}
                 </div>
             `; 
             document.getElementById('suncalc-results').innerHTML = html; 
-            
             document.getElementById('moon-results').innerHTML = getMoonInfo(targetDate);
             updateWeatherUI(targetDate);
         }
         
-        function initSunCalc() { 
-            const hoje = new Date();
-            const dataInput = document.getElementById('dataSunCalc');
-            if(!dataInput.value) { dataInput.value = toISODate(hoje); }
-            renderSunCalc(hoje); 
-        }
-
-        function atualizarDataSunCalc() {
-            const dataString = document.getElementById('dataSunCalc').value;
-            if(!dataString) return;
-            const [ano, mes, dia] = dataString.split('-');
-            const targetDate = new Date(ano, mes - 1, dia, 12, 0, 0); 
-            renderSunCalc(targetDate);
-        }
+        function initSunCalc() { const hoje = new Date(); const dataInput = document.getElementById('dataSunCalc'); if(!dataInput.value) { dataInput.value = toISODate(hoje); } renderSunCalc(hoje); }
+        function atualizarDataSunCalc() { const dataString = document.getElementById('dataSunCalc').value; if(!dataString) return; const [ano, mes, dia] = dataString.split('-'); const targetDate = new Date(ano, mes - 1, dia, 12, 0, 0); renderSunCalc(targetDate); }
 
         async function buscarLocalidadeSunCalc() {
-            const query = document.getElementById('buscaLocalSunCalc').value;
-            if (!query) return;
-            const btn = document.getElementById('btn-buscar-local');
-            const originalText = btn.innerText;
-            btn.innerText = "..."; btn.disabled = true;
-            
+            const query = document.getElementById('buscaLocalSunCalc').value; if (!query) return;
+            const btn = document.getElementById('btn-buscar-local'); const originalText = btn.innerText; btn.innerText = "..."; btn.disabled = true;
             try {
                 const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
                 const data = await res.json();
                 if (data && data.length > 0) {
-                    locLat = parseFloat(data[0].lat);
-                    locLng = parseFloat(data[0].lon);
-                    locName = data[0].display_name.split(',')[0] + " - Busca"; 
+                    locLat = parseFloat(data[0].lat); locLng = parseFloat(data[0].lon); locName = data[0].display_name.split(',')[0] + " - Busca"; 
                     atualizarDataSunCalc(); 
-                } else {
-                    alert("Localidade não encontrada. Tente um nome mais específico.");
-                }
-            } catch(e) {
-                alert("Erro ao buscar localidade. Verifique sua conexão com a internet.");
-            } finally {
-                btn.innerText = originalText; btn.disabled = false;
-            }
+                } else { alert("Localidade não encontrada. Tente um nome mais específico."); }
+            } catch(e) { alert("Erro ao buscar localidade. Verifique sua conexão com a internet."); } 
+            finally { btn.innerText = originalText; btn.disabled = false; }
         }
         
         function getMyLocation() { 
-            const btn = document.getElementById('btn-gps'); 
-            const btnOriginalText = btn.innerText; 
-            btn.innerText = "Buscando..."; btn.disabled = true; 
-            
+            const btn = document.getElementById('btn-gps'); const btnOriginalText = btn.innerText; btn.innerText = "Buscando..."; btn.disabled = true; 
             if ("geolocation" in navigator) { 
                 navigator.geolocation.getCurrentPosition(
                     (position) => { 
-                        locLat = position.coords.latitude;
-                        locLng = position.coords.longitude;
-                        locName = "Sua localização atual (GPS)";
-                        const dataString = document.getElementById('dataSunCalc').value;
-                        let targetDate = new Date();
-                        if (dataString) {
-                            const [ano, mes, dia] = dataString.split('-');
-                            targetDate = new Date(ano, mes - 1, dia, 12, 0, 0);
-                        }
+                        locLat = position.coords.latitude; locLng = position.coords.longitude; locName = "Sua localização atual (GPS)";
+                        const dataString = document.getElementById('dataSunCalc').value; let targetDate = new Date();
+                        if (dataString) { const [ano, mes, dia] = dataString.split('-'); targetDate = new Date(ano, mes - 1, dia, 12, 0, 0); }
                         renderSunCalc(targetDate); 
                         btn.innerText = "📍 Atualizado!"; btn.style.borderColor = "#4caf50"; btn.style.color = "#4caf50"; 
                         setTimeout(() => { btn.innerText = btnOriginalText; btn.style.borderColor = "var(--accent-sun)"; btn.style.color = "var(--accent-sun)"; btn.disabled = false; }, 3000); 
@@ -1570,17 +1155,13 @@
                     (error) => { alert("Erro ao obter GPS. Verifique as permissões do navegador."); btn.innerText = btnOriginalText; btn.disabled = false; }, 
                     { timeout: 10000 }
                 ); 
-            } else { alert("Geolocalização não suportada no seu navegador."); btn.innerText = btnOriginalText; btn.disabled = false; } 
+            } else { alert("Geolocalização não suportada."); btn.innerText = btnOriginalText; btn.disabled = false; } 
         }
 
         // ==========================================
-        // MÓDULO CALCULADORA DE ESTÚDIO (C.L.A.R.A. INTENÇÃO)
+        // MÓDULO CALCULADORA DE ESTÚDIO
         // ==========================================
-        const fStopsFull = [
-            'f/1.0', 'f/1.4', 'f/2.0', 'f/2.8', 'f/4.0', 'f/5.6', 
-            'f/8.0', 'f/11', 'f/16', 'f/22', 'f/32', 'f/45', 'f/64'
-        ];
-        
+        const fStopsFull = [ 'f/1.0', 'f/1.4', 'f/2.0', 'f/2.8', 'f/4.0', 'f/5.6', 'f/8.0', 'f/11', 'f/16', 'f/22', 'f/32', 'f/45', 'f/64' ];
         const fStopsData = [ 
             { f: '1.0', t1: '1.1', t2: '1.2', next: '1.4' }, { f: '1.4', t1: '1.6', t2: '1.8', next: '2.0' }, 
             { f: '2.0', t1: '2.2', t2: '2.5', next: '2.8' }, { f: '2.8', t1: '3.2', t2: '3.5', next: '4.0' }, 
