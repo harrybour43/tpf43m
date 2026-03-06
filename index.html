@@ -95,36 +95,6 @@
         }
         .disclaimer-box strong { color: var(--accent-warning); }
 
-        /* Botão de Contribuição */
-        .btn-contribuir {
-            background-color: var(--bg-panel);
-            color: var(--accent-datas);
-            border: 1px solid var(--accent-datas);
-            width: 100%;
-            padding: 15px;
-            border-radius: 8px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            transition: 0.2s;
-            font-size: 1rem;
-        }
-        .btn-contribuir:hover { background-color: rgba(0, 188, 212, 0.1); transform: translateY(-2px); }
-
-        /* Estilo do Iframe do Form */
-        .form-wrapper {
-            width: 100%;
-            height: 80vh;
-            border-radius: 8px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            background: #fff; 
-        }
-
         /* ==========================================
            2. SPLASH SCREEN E MENU 
            ========================================== */
@@ -350,7 +320,7 @@
         
         <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">A carregar base de dados...</div>
         <div class="click-hint-splash hidden" id="click-hint">Toque em qualquer lugar para entrar</div>
-        <div class="splash-footer">Versão 6.4 | Desenvolvido por Harry Bour</div>
+        <div class="splash-footer">Versão 6.2.1 | Desenvolvido por Harry Bour</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -370,10 +340,10 @@
             <button class="menu-btn btn-datas" onclick="switchView('view-datas')"><span class="menu-icon">🌍</span> Datas de Interesse</button>
             
             <button class="menu-btn btn-dicio" onclick="switchView('view-dicio')"><span class="menu-icon">📖</span> Enciclopédia</button>
-            <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Unidade de Inteligência Solar</button>
+            <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Luz Solar</button>
             <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Luz de Estúdio</button>
             
-            <div class="clara-footer">C.L.A.R.A. v6.4 | Desenvolvido por Harry Bour</div>
+            <div class="clara-footer">C.L.A.R.A. v6.2.1 | Desenvolvido por Harry Bour</div>
         </div>
     </div>
 
@@ -465,23 +435,10 @@
             <strong>🌍 Fique de olho:</strong> Exposições, editais, feiras e prazos externos relevantes para a área fotográfica.
         </div>
         
-        <button class="btn-contribuir" onclick="switchView('view-contribuir')">
-            <span>➕</span> Está faltando alguma informação? Contribua com a CLARA!
-        </button>
-
         <div id="lista-datas">
             <p style="text-align:center; color:#888;">Nenhuma data de interesse carregada.</p>
         </div>
         <div class="clara-footer">C.L.A.R.A. RADAR CULTURAL</div>
-    </div>
-
-    <div id="view-contribuir" class="view page-container hidden">
-        <button class="btn-voltar" onclick="switchView('view-datas')">⬅ Voltar para Datas</button>
-        <h1 class="page-title" style="border-bottom-color: var(--accent-datas);">Sugerir Evento</h1>
-        
-        <div class="form-wrapper">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJIJG-CJE4uulWWJPDnExFqLrt1fl-5FAxh2DWfcizv2bb8A/viewform?embedded=true" width="100%" height="100%" frameborder="0" marginheight="0" marginwidth="0">Carregando formulário...</iframe>
-        </div>
     </div>
 
     <div id="view-dicio" class="view page-container hidden">
@@ -562,7 +519,6 @@
         const LINK_PLANILHA_EVENTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv";
         const LINK_PLANILHA_DICIO = "COLE_AQUI_O_LINK_TSV_DA_ABA_ENCICLOPEDIA"; 
         
-        // Link Atualizado para output=tsv com gid
         const LINK_PLANILHA_DATAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=2069138341&single=true&output=tsv"; 
         
         let aulasArray = []; 
@@ -593,10 +549,10 @@
             "UC14": "Projeto Integrador" 
         };
 
-        // INICIALIZAÇÃO E LIMPEZA FORÇADA DE CACHE (Versão 6.4)
+        // INICIALIZAÇÃO E LIMPEZA FORÇADA DE CACHE (Versão 6.2.1)
         document.addEventListener('DOMContentLoaded', () => {
             // Garante que o cache antigo seja apagado para forçar leitura nova
-            const currentVersion = "6.4";
+            const currentVersion = "6.2.1";
             if (localStorage.getItem('clara_version') !== currentVersion) {
                 localStorage.removeItem('tpf43m_aulas');
                 localStorage.removeItem('tpf43m_eventos');
@@ -704,47 +660,13 @@
         }
 
         // ==========================================
-        // ESCUDO ANTI-ERRO DE DATA (NOVO)
-        // Inteligência para processar YYYY-MM-DD ou DD/MM/YYYY
-        // ==========================================
-        function processarDataInteligente(dataRaw) {
-            if (!dataRaw) return null;
-            
-            let dia, mes, ano;
-            
-            // Se tiver barra, é padrão brasileiro vindo do Forms (DD/MM/AAAA)
-            if (dataRaw.includes('/')) { 
-                [dia, mes, ano] = dataRaw.split('/');
-            } 
-            // Se tiver hífen, é padrão Sheets / Banco de Dados (AAAA-MM-DD)
-            else if (dataRaw.includes('-')) {
-                [ano, mes, dia] = dataRaw.split('-');
-            } else {
-                return null;
-            }
-            
-            if (!ano || !mes || !dia) return null;
-            
-            // Garante que o ano sempre tenha 4 dígitos (ex: "26" vira "2026")
-            if (ano.length === 2) ano = "20" + ano;
-            
-            return { 
-                ano: parseInt(ano), 
-                mes: parseInt(mes), 
-                dia: parseInt(dia), 
-                // Retorna um ISO seguro para fazer comparações matemáticas
-                iso: `${ano}-${mes.toString().padStart(2,'0')}-${dia.toString().padStart(2,'0')}` 
-            };
-        }
-
-        // ==========================================
         // NOVO PARSER TSV (Alt+Enter do Google Sheets)
         // ==========================================
         function tratarTSV(tsv) {
-            // Rede de segurança: se o Google falhar e mandar um arquivo HTML
-            if (tsv.includes('<html') || tsv.includes('<!DOCTYPE')) {
-                console.error("O Google enviou um HTML em vez de TSV.");
-                return [];
+            // Rede de segurança: se o arquivo baixar como HTML por erro do Google
+            if (tsv.includes('<!DOCTYPE html>') || tsv.includes('<html')) {
+                console.error("Erro: O Google enviou um arquivo HTML em vez de TSV.");
+                return []; 
             }
 
             let linhas = [];
@@ -851,17 +773,13 @@
             if(linhas.length === 0) return;
             linhas.forEach(colunas => { 
                 if (colunas.length >= 4 && colunas[0] && colunas[1] && colunas[0].trim() !== '') {
-                    // Usa o escudo anti-erro para normalizar as datas da aula também
-                    const dataFormatada = processarDataInteligente(colunas[0].trim());
-                    if (dataFormatada) {
-                        aulasArray.push({
-                            data: dataFormatada.iso, // Salva seguro como YYYY-MM-DD
-                            codigoUC: colunas[1].trim(), 
-                            uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, 
-                            docente: colunas[2].trim(), 
-                            aula: colunas[3].trim()
-                        });
-                    } 
+                    aulasArray.push({
+                        data: colunas[0].trim(), 
+                        codigoUC: colunas[1].trim(), 
+                        uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, 
+                        docente: colunas[2].trim(), 
+                        aula: colunas[3].trim()
+                    }); 
                 }
             }); 
         }
@@ -879,36 +797,19 @@
                     }); 
                 }
             }); 
+            initEventos();
         }
 
-        // Nova lógica de Datas de Interesse que suporta a Coluna "Categoria" se houver
         function processarDatas(tsv) { 
             const linhas = tratarTSV(tsv).slice(1); 
             baseDatas = []; 
             if(linhas.length === 0) return;
             linhas.forEach(colunas => { 
                 if (colunas.length >= 2 && colunas[0] && colunas[0].trim() !== '') {
-                    
-                    // Se o usuário tiver 4 colunas (Data, Categoria, Titulo, Descrição)
-                    let categoria = "";
-                    let titulo = "";
-                    let desc = "";
-                    
-                    if (colunas.length >= 4) {
-                        categoria = colunas[1].trim();
-                        titulo = colunas[2].trim();
-                        desc = colunas[3] ? colunas[3].trim() : '';
-                    } else {
-                        // Se tiver apenas 3 colunas (Data, Titulo, Descrição)
-                        titulo = colunas[1] ? colunas[1].trim() : '';
-                        desc = colunas[2] ? colunas[2].trim() : '';
-                    }
-
                     baseDatas.push({ 
                         data: colunas[0].trim(), 
-                        categoria: categoria,
-                        titulo: titulo, 
-                        desc: desc 
+                        titulo: colunas[1] ? colunas[1].trim() : '', 
+                        desc: colunas[2] ? colunas[2].trim() : '' 
                     }); 
                 }
             }); 
@@ -1063,32 +964,32 @@
             let html = ''; 
             
             if (baseEventos.length === 0) { 
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum evento programado.</p>"; 
+                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum evento recuperado da base de dados.</p>"; 
                 return; 
             } 
             
-            // Ordenação Segura
             baseEventos.sort((a, b) => {
-                const dtA = processarDataInteligente(a.data);
-                const dtB = processarDataInteligente(b.data);
-                if (!dtA || !dtB) return 0;
-                const timeA = new Date(dtA.iso).getTime();
-                const timeB = new Date(dtB.iso).getTime();
-                if(timeA === timeB) return a.titulo.localeCompare(b.titulo);
-                return timeA - timeB;
+                const dateA = new Date(a.data).getTime();
+                const dateB = new Date(b.data).getTime();
+                if(dateA === dateB) return a.titulo.localeCompare(b.titulo);
+                return dateA - dateB;
             });
             
-            const hojeLocal = new Date(); 
-            hojeLocal.setHours(0,0,0,0);
+            const hojeDate = new Date(); 
+            const hojeY = hojeDate.getFullYear(); 
+            const hojeM = hojeDate.getMonth(); 
+            const hojeD = hojeDate.getDate(); 
             
             let eventosExibidos = 0; 
             
             baseEventos.forEach(ev => { 
-                const dt = processarDataInteligente(ev.data);
-                if (!dt) return; 
+                const [ano, mes, dia] = ev.data.split('-'); 
+                if (!ano || !mes || !dia) return; 
                 
-                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
-                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
+                const dataEvento = new Date(ano, mes - 1, dia);
+                const dataHojeLocal = new Date(hojeY, hojeM, hojeD);
+                
+                const diffTime = dataEvento.getTime() - dataHojeLocal.getTime();
                 const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
                 
                 if (diffDays < -10) return; 
@@ -1104,7 +1005,7 @@
                 
                 html += `
                     <div class="evento-card ${extraClass}">
-                        <div class="evento-data"><span>📅 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
+                        <div class="evento-data"><span>📅 ${dia}/${mes}/${ano}</span>${countdownHTML}</div>
                         <div class="evento-titulo">${ev.titulo}</div>
                         <div class="evento-desc">${ev.desc}</div>
                     </div>
@@ -1124,31 +1025,32 @@
             let html = ''; 
             
             if (baseDatas.length === 0) { 
-                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhuma data de interesse cadastrada.</p>"; 
+                container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhuma data de interesse recuperada da base de dados.</p>"; 
                 return; 
             } 
             
             baseDatas.sort((a, b) => {
-                const dtA = processarDataInteligente(a.data);
-                const dtB = processarDataInteligente(b.data);
-                if (!dtA || !dtB) return 0;
-                const timeA = new Date(dtA.iso).getTime();
-                const timeB = new Date(dtB.iso).getTime();
-                if(timeA === timeB) return a.titulo.localeCompare(b.titulo);
-                return timeA - timeB;
+                const dateA = new Date(a.data).getTime();
+                const dateB = new Date(b.data).getTime();
+                if(dateA === dateB) return a.titulo.localeCompare(b.titulo);
+                return dateA - dateB;
             });
             
-            const hojeLocal = new Date(); 
-            hojeLocal.setHours(0,0,0,0);
+            const hojeDate = new Date(); 
+            const hojeY = hojeDate.getFullYear(); 
+            const hojeM = hojeDate.getMonth(); 
+            const hojeD = hojeDate.getDate(); 
             
             let datasExibidas = 0; 
             
             baseDatas.forEach(ev => { 
-                const dt = processarDataInteligente(ev.data);
-                if (!dt) return; 
+                const [ano, mes, dia] = ev.data.split('-'); 
+                if (!ano || !mes || !dia) return; 
                 
-                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
-                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
+                const dataEvento = new Date(ano, mes - 1, dia);
+                const dataHojeLocal = new Date(hojeY, hojeM, hojeD);
+                
+                const diffTime = dataEvento.getTime() - dataHojeLocal.getTime();
                 const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
                 
                 let countdownHTML = ""; 
@@ -1160,15 +1062,10 @@
                 else if (diffDays === -1) { countdownHTML = `<span class="evento-countdown">(Ontem)</span>`; extraClass += " past"; } 
                 else { countdownHTML = `<span class="evento-countdown">(Há ${Math.abs(diffDays)} dias)</span>`; extraClass += " past"; } 
                 
-                let displayTitulo = ev.titulo;
-                if (ev.categoria && ev.categoria !== '') {
-                    displayTitulo = `[${ev.categoria}] ${ev.titulo}`;
-                }
-
                 html += `
                     <div class="evento-card ${extraClass}">
-                        <div class="evento-data"><span>🌍 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
-                        <div class="evento-titulo">${displayTitulo}</div>
+                        <div class="evento-data"><span>🌍 ${dia}/${mes}/${ano}</span>${countdownHTML}</div>
+                        <div class="evento-titulo">${ev.titulo}</div>
                         <div class="evento-desc">${ev.desc}</div>
                     </div>
                 `; 
