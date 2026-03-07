@@ -47,15 +47,6 @@
 
         .hidden { display: none !important; }
         
-        /* INDICADOR DE STATUS */
-        #status-bar {
-            position: fixed; top: 0; width: 100%; height: 4px; z-index: 10001; transition: background 0.5s;
-        }
-        .status-online { background: #4caf50; }
-        .status-syncing { background: #2196f3; }
-        .status-cache { background: var(--accent-warning); }
-        .status-offline { background: #f44336; }
-        
         .btn-voltar { 
             background-color: transparent; 
             color: var(--text-main); 
@@ -182,8 +173,10 @@
         .menu-btn.btn-calc { border-left-color: var(--accent-calc); }
         .menu-btn.btn-dicio { border-left-color: var(--accent-dicio); }
 
+        .clara-footer { text-align: center; padding: 20px 0; margin-top: 20px; color: #555; font-size: 0.75rem; letter-spacing: 2px; width: 100%; text-transform: uppercase; font-weight: bold; border-top: 1px solid #222;}
+
         /* ==========================================
-           3. STATUS DE CONEXÃO
+           3. INDICADOR DE STATUS V4
            ========================================== */
         .status-bar-container {
             position: fixed;
@@ -202,7 +195,6 @@
             font-weight: bold;
             letter-spacing: 1px;
             text-transform: uppercase;
-            transition: 0.3s;
         }
         .status-dot {
             width: 10px;
@@ -211,7 +203,6 @@
             margin-right: 8px;
         }
         .status-online .status-dot { background-color: #4caf50; box-shadow: 0 0 6px #4caf50; }
-        .status-syncing .status-dot { background-color: #2196f3; box-shadow: 0 0 6px #2196f3; }
         .status-cache .status-dot { background-color: var(--accent-warning); box-shadow: 0 0 6px var(--accent-warning); }
         .status-offline .status-dot { background-color: #f44336; box-shadow: 0 0 6px #f44336; }
 
@@ -258,21 +249,23 @@
            5. EVENTOS E AGENDA V4
            ========================================== */
         .evento-card { background-color: var(--bg-panel); border-left: 5px solid var(--accent-eventos); padding: 18px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
-        .evento-card.past { opacity: 0.5; border-left-color: #555; }
-        .evento-data { color: var(--accent-eventos); font-weight: bold; display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;}
-        .evento-countdown { font-weight: normal; font-size: 0.85em; opacity: 0.8; margin-left: auto;}
-        .evento-countdown.urgente { color: var(--accent-warning); font-weight: bold; opacity: 1; }
-        .evento-countdown.hoje { color: #ff4081; font-weight: bold; opacity: 1; }
-
-        /* Estilos específicos para Datas de Interesse (Agenda V4) */
-        .evento-card.datas-int { border-left-color: var(--accent-datas); opacity: 1 !important; filter: none !important; } 
+        .evento-card.datas-int { border-left-color: var(--accent-datas); } 
+        .evento-card.past { opacity: 0.4; filter: grayscale(0.8); }
+        
         .ev-tipo { font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--accent-datas); margin-bottom: 5px; display: inline-block; background: rgba(0, 188, 212, 0.1); padding: 3px 8px; border-radius: 4px;}
+        .evento-card:not(.datas-int) .ev-tipo { color: var(--accent-eventos); background: rgba(156, 39, 176, 0.1);}
+        
         .ev-titulo { font-size: 1.3rem; font-weight: bold; color: #fff; margin: 8px 0 5px 0; line-height: 1.2; }
         .ev-periodo { font-size: 0.95rem; color: #fff; font-weight: 600; margin-bottom: 8px; display: flex; align-items: center; gap: 5px; }
         .ev-local { font-size: 0.85rem; color: var(--accent-warning); margin-bottom: 12px; display: flex; align-items: center; gap: 5px; font-weight: bold;}
         .ev-desc { color: #bbb; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap; margin-bottom: 15px; }
+        
         .btn-saiba-mais { display: inline-block; padding: 10px 20px; background: transparent; border: 1px solid var(--accent-datas); color: var(--accent-datas); text-decoration: none; border-radius: 6px; font-weight: bold; font-size: 0.85rem; transition: 0.2s; text-align: center; }
         .btn-saiba-mais:hover { background: var(--accent-datas); color: #121212; }
+
+        .evento-countdown { font-weight: normal; font-size: 0.85em; opacity: 0.8; margin-left: auto;}
+        .evento-countdown.urgente { color: var(--accent-warning); font-weight: bold; opacity: 1; }
+        .evento-countdown.hoje { color: #ff4081; font-weight: bold; opacity: 1; }
 
         /* ==========================================
            6. LUZ NATURAL E LUA
@@ -336,7 +329,7 @@
         <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">Iniciando sistema local...</div>
         <button id="btn-entrar" class="btn-entrar hidden" onclick="dismissSplash()">ENTRAR NA CLARA</button>
 
-        <div class="splash-footer">Versão 4.0.2 | Desenvolvido por Harry Bour</div>
+        <div class="splash-footer">Versão 4.0.0 | Desenvolvido por Harry Bour</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -357,7 +350,7 @@
             <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Luz Natural</button>
             <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Mapa de Luz</button>
             
-            <div class="clara-footer">CLARA v4.0.2 | Harry Bour</div>
+            <div class="clara-footer">CLARA v4.0.0 | Harry Bour</div>
         </div>
     </div>
 
@@ -423,10 +416,6 @@
         <button class="btn-voltar" onclick="switchView('view-menu')">⬅ Menu Principal</button>
         <h1 class="page-title" style="border-bottom-color: var(--accent-datas);">Datas de Interesse</h1>
         
-        <div class="disclaimer-box" style="border-left-color: var(--accent-datas);">
-            <strong>Fique de olho:</strong> Exposições, editais, feiras e prazos externos relevantes para a área fotográfica.
-        </div>
-        
         <button class="btn-contribuir" onclick="switchView('view-contribuir')">
             <span>➕</span> Está faltando alguma informação? Contribua com a CLARA!
         </button>
@@ -442,7 +431,7 @@
             <strong>⚠️ Atenção:</strong> Você está offline. Conecte-se à internet para preencher o formulário.
         </div>
         <div class="form-wrapper">
-            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJIJG-CJE4uulWWJPDnExFqLrt1fl-5FAxh2DWfcizv2bb8A/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando formulário...</iframe>
+            <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJIJG-CJE4uulWWJPDnExFqLrt1fl-5FAxh2DWfcizv2bb8A/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando...</iframe>
         </div>
     </div>
 
@@ -525,7 +514,7 @@
         </div>
     </div>
 
-    <div class="status-bar-container status-offline" id="connection-status-footer">
+    <div class="status-bar-container" id="connection-status-footer">
         <div class="status-dot"></div> <span id="status-text">Verificando Ambiente...</span>
     </div>
 
@@ -555,16 +544,12 @@
         };
 
         // ==========================================
-        // INICIALIZAÇÃO V4.0.2 (OFFLINE FIRST COM PARALELISMO)
+        // INICIALIZAÇÃO V4 (OFFLINE FIRST)
         // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            const currentVersion = "4.0.2";
+            const currentVersion = "4.0.0";
             if (localStorage.getItem('clara_version') !== currentVersion) {
-                // Remove caches de dados APENAS (preserva auth_tpf43m para não bloquear o aluno)
-                localStorage.removeItem('tpf43m_aulas');
-                localStorage.removeItem('tpf43m_eventos');
-                localStorage.removeItem('tpf43m_datas');
-                localStorage.removeItem('tpf43m_dicio');
+                localStorage.clear();
                 localStorage.setItem('clara_version', currentVersion);
             }
             
@@ -583,30 +568,38 @@
             const cacheDatas = localStorage.getItem('tpf43m_datas');
             const cacheDicio = localStorage.getItem('tpf43m_dicio');
             
-            let hasCache = (cacheAulas || cacheDatas || cacheEventos || cacheDicio);
+            let hasCache = (cacheAulas || cacheDatas || cacheEventos);
 
-            // 2. Libera a Splash instantaneamente se houver cache
             if (hasCache) {
                 if (cacheAulas) processarAulas(cacheAulas);
                 if (cacheEventos) processarEventos(cacheEventos);
                 if (cacheDatas) processarDatas(cacheDatas);
                 if (cacheDicio) processarDicio(cacheDicio);
                 
-                liberarEntrada("Cache local carregado. Atualizando em segundo plano...");
-                updateConnectionStatus('syncing');
+                liberarEntrada("Cache carregado. Atualizando em segundo plano...");
+                updateConnectionStatus('cache');
             } else {
-                document.getElementById('loading-text').innerText = "Primeiro acesso. Baixando arquivos da nuvem...";
-                updateConnectionStatus('syncing');
+                document.getElementById('loading-text').innerText = "Primeiro acesso. Baixando arquivos...";
+                updateConnectionStatus('offline');
             }
 
-            // 3. Sincronização em Background (Paralela e Blindada)
-            const isConnected = await fetchGoogleSheets();
-            if (isConnected) {
+            // 2. Dispara a sincronização de fundo
+            try {
+                await fetchGoogleSheets();
+                updateConnectionStatus('online');
                 if (!hasCache) liberarEntrada("Bancos de dados atualizados!");
-            } else {
+            } catch (e) {
+                console.warn("Falha na sincronização online:", e);
                 if (!hasCache) {
                     document.getElementById('loading-text').innerText = "⚠️ Você está offline e não possui cache salvo. Conecte-se para o primeiro acesso.";
+                    updateConnectionStatus('offline');
+                } else {
+                    updateConnectionStatus('cache');
                 }
+                
+                // Ativa avisos de ferramentas externas
+                document.getElementById('offline-warning-suncalc').style.display = 'block';
+                document.getElementById('offline-warning-forms').style.display = 'block';
             }
         }
 
@@ -625,107 +618,63 @@
             const container = document.getElementById('connection-status-footer');
             const text = document.getElementById('status-text');
             
-            bar.className = ''; container.className = 'status-bar-container';
+            // Remove as classes antigas
+            bar.className = '';
+            container.className = 'status-bar-container';
 
             if (status === 'online') {
-                bar.classList.add('status-online'); container.classList.add('status-online');
-                text.innerText = "🟢 DADOS ATUALIZADOS AGORA";
-            } else if (status === 'syncing') {
-                bar.classList.add('status-syncing'); container.classList.add('status-syncing');
-                text.innerText = "🔄 SINCRONIZANDO DADOS...";
+                bar.classList.add('status-online');
+                container.classList.add('status-online');
+                text.innerText = "🟢 DADOS ATUALIZADOS";
             } else if (status === 'cache') {
-                bar.classList.add('status-cache'); container.classList.add('status-cache');
-                text.innerText = "🟡 MODO OFFLINE (CACHE LOCAL)";
+                bar.classList.add('status-cache');
+                container.classList.add('status-cache');
+                text.innerText = "🟡 VERSÃO OFFLINE (CACHE LOCAL)";
             } else {
-                bar.classList.add('status-offline'); container.classList.add('status-offline');
+                bar.classList.add('status-offline');
+                container.classList.add('status-offline');
                 text.innerText = "🔴 DESCONECTADO (SEM DADOS)";
             }
         }
 
         // ==========================================
-        // DADOS E INTEGRAÇÃO GOOGLE SHEETS (PARALELO E COM TIMEOUT)
+        // DADOS E INTEGRAÇÃO GOOGLE SHEETS
         // ==========================================
         function forceSync() {
             const btn = document.getElementById('btn-force-sync');
             btn.classList.add('spinning');
-            updateConnectionStatus('syncing');
             
-            fetchGoogleSheets().then((success) => {
-                if(!success) alert("Falha na sincronização. Verifique sua conexão com a internet. A CLARA continuará rodando com a última versão salva em seu dispositivo.");
+            fetchGoogleSheets().then(() => {
+                updateConnectionStatus('online');
+                document.getElementById('offline-warning-suncalc').style.display = 'none';
+                document.getElementById('offline-warning-forms').style.display = 'none';
                 setTimeout(() => { btn.classList.remove('spinning'); }, 1000); 
+            }).catch(e => {
+                alert("Falha ao sincronizar. Verifique sua conexão.");
+                btn.classList.remove('spinning');
             });
         }
 
         async function fetchGoogleSheets() {
             const noCacheStr = `&nocache=${Date.now()}`;
-            let hasAnySuccess = false;
+            
+            const resAulas = await fetch(LINK_PLANILHA_AULAS + noCacheStr); const tsvAulas = await resAulas.text();
+            const resEventos = await fetch(LINK_PLANILHA_EVENTOS + noCacheStr); const tsvEventos = await resEventos.text();
+            const resDatas = await fetch(LINK_PLANILHA_DATAS + noCacheStr); const tsvDatas = await resDatas.text();
+            
+            if (tsvAulas && !tsvAulas.includes('<html')) { localStorage.setItem('tpf43m_aulas', tsvAulas); processarAulas(tsvAulas); }
+            if (tsvEventos && !tsvEventos.includes('<html')) { localStorage.setItem('tpf43m_eventos', tsvEventos); processarEventos(tsvEventos); }
+            if (tsvDatas && !tsvDatas.includes('<html')) { localStorage.setItem('tpf43m_datas', tsvDatas); processarDatas(tsvDatas); }
 
-            // Função auxiliadora: Dispara o fetch, mas corta a conexão se demorar mais de 8 segundos (Evita o travamento eterno)
-            const fetchWithTimeout = async (url, ms = 8000) => {
-                const controller = new AbortController();
-                const id = setTimeout(() => controller.abort(), ms);
-                try {
-                    const response = await fetch(url, { signal: controller.signal });
-                    clearTimeout(id);
-                    return response;
-                } catch (err) {
-                    clearTimeout(id);
-                    throw err;
-                }
-            };
-
-            // Criamos uma lista de tarefas para baixar tudo ao mesmo tempo (Paralelismo)
-            const fetchTasks = [];
-
-            // Tarefa 1: Aulas
-            fetchTasks.push(fetchWithTimeout(LINK_PLANILHA_AULAS + noCacheStr)
-                .then(async res => {
-                    if (res.ok) { const tsv = await res.text(); if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_aulas', tsv); processarAulas(tsv); hasAnySuccess = true; } }
-                }).catch(e => console.warn("Aulas indisponíveis offline"))
-            );
-
-            // Tarefa 2: Eventos
-            fetchTasks.push(fetchWithTimeout(LINK_PLANILHA_EVENTOS + noCacheStr)
-                .then(async res => {
-                    if (res.ok) { const tsv = await res.text(); if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_eventos', tsv); processarEventos(tsv); hasAnySuccess = true; } }
-                }).catch(e => console.warn("Eventos indisponíveis offline"))
-            );
-
-            // Tarefa 3: Datas (Agenda)
-            fetchTasks.push(fetchWithTimeout(LINK_PLANILHA_DATAS + noCacheStr)
-                .then(async res => {
-                    if (res.ok) { const tsv = await res.text(); if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_datas', tsv); processarDatas(tsv); hasAnySuccess = true; } }
-                }).catch(e => console.warn("Agenda indisponível offline"))
-            );
-
-            // Tarefa 4: Enciclopédia
             if (LINK_PLANILHA_DICIO.startsWith("http")) {
-                fetchTasks.push(fetchWithTimeout(LINK_PLANILHA_DICIO + noCacheStr)
-                    .then(async res => {
-                        if (res.ok) { const tsv = await res.text(); if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_dicio', tsv); processarDicio(tsv); hasAnySuccess = true; } }
-                    }).catch(e => console.warn("Enciclopédia indisponível offline"))
-                );
+                const resDicio = await fetch(LINK_PLANILHA_DICIO + noCacheStr);
+                if (resDicio.ok) {
+                    const tsvDicio = await resDicio.text();
+                    if (tsvDicio && !tsvDicio.includes('<html')) { localStorage.setItem('tpf43m_dicio', tsvDicio); processarDicio(tsvDicio); }
+                }
             }
-
-            // Manda a CLARA executar todas as tarefas simultaneamente (Fim da fila de espera)
-            await Promise.all(fetchTasks);
-
-            if (hasAnySuccess) {
-                updateConnectionStatus('online');
-                document.getElementById('offline-warning-suncalc').style.display = 'none';
-                document.getElementById('offline-warning-forms').style.display = 'none';
-            } else {
-                updateConnectionStatus('cache');
-                document.getElementById('offline-warning-suncalc').style.display = 'block';
-                document.getElementById('offline-warning-forms').style.display = 'block';
-            }
-
-            return hasAnySuccess;
         }
 
-        // ==========================================
-        // PARSERS GERAIS DE DATA E TEXTO
-        // ==========================================
         function processarDataInteligente(dataRaw) {
             if (!dataRaw) return null;
             let dia, mes, ano;
@@ -772,7 +721,11 @@
                 if (colunas.length >= 4 && colunas[0] && colunas[1]) {
                     const dt = processarDataInteligente(colunas[0].trim());
                     if (dt) {
-                        aulasArray.push({ data: dt.iso, codigoUC: colunas[1].trim(), uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, docente: colunas[2].trim(), aula: colunas[3].trim() });
+                        aulasArray.push({
+                            data: dt.iso, codigoUC: colunas[1].trim(), 
+                            uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, 
+                            docente: colunas[2].trim(), aula: colunas[3].trim()
+                        });
                     } 
                 }
             }); 
@@ -804,37 +757,61 @@
             if (!ucSelec) return window.limparBusca(); 
             document.getElementById('painel-aulas').style.display = 'none'; 
             document.getElementById('rodape-semanas').style.display = 'none'; 
-            const resPanel = document.getElementById('resultado-pesquisa'); resPanel.style.display = 'flex'; 
+            const resPanel = document.getElementById('resultado-pesquisa'); 
+            resPanel.style.display = 'flex'; 
             const dUC = aulasArray.filter(a => a.codigoUC === ucSelec); 
             const hojeStr = toISODate(new Date()); 
             const todasEncerradas = dUC.length > 0 && dUC.every(a => a.data < hojeStr); 
-            let h = `<div class="card" style="border-left-color: #ff9800;"><button onclick="limparBusca()" class="btn-voltar" style="border-color: #ff9800; color:#ff9800;">⬅ Limpar Busca</button><h3 style="margin-top:0; color:#ff9800;">${nomesUC[ucSelec]}</h3>`; 
+            let h = `<div class="card" style="border-left-color: #ff9800;">
+                        <button onclick="limparBusca()" class="btn-voltar" style="border-color: #ff9800; color:#ff9800;">⬅ Limpar Busca</button>
+                        <h3 style="margin-top:0; color:#ff9800;">${nomesUC[ucSelec]}</h3>`; 
             if (todasEncerradas) h += `<div class="uc-encerrada">✅ UC Encerrada para a Turma 43M</div>`; 
             if (dUC.length === 0) h += `<p>Nenhuma aula agendada na planilha.</p>`; 
             dUC.forEach(a => { 
                 const isPast = a.data < hojeStr; 
                 const rowStyle = isPast ? "padding:10px 0; border-bottom:1px solid #333; color:#777; opacity:0.6;" : "padding:10px 0; border-bottom:1px solid #333;"; 
-                h += `<div style="${rowStyle}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')"><strong>${formatarDataBR(a.data)}</strong> - Prof. ${a.docente} (Aula ${a.aula})</div>`; 
+                h += `<div style="${rowStyle}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
+                        <strong>${formatarDataBR(a.data)}</strong> - Prof. ${a.docente} (Aula ${a.aula})
+                      </div>`; 
             }); 
             resPanel.innerHTML = h + `</div>`; 
         }); 
 
-        window.limparBusca = function() { document.getElementById('filtroUC').value = ""; document.getElementById('resultado-pesquisa').style.display = 'none'; document.getElementById('painel-aulas').style.display = 'flex'; document.getElementById('rodape-semanas').style.display = 'flex'; } 
+        window.limparBusca = function() { 
+            document.getElementById('filtroUC').value = ""; 
+            document.getElementById('resultado-pesquisa').style.display = 'none'; 
+            document.getElementById('painel-aulas').style.display = 'flex'; 
+            document.getElementById('rodape-semanas').style.display = 'flex'; 
+        } 
 
         function mudarSemana(offset) { 
-            document.getElementById('btn-passada').classList.toggle('active', offset === -1); document.getElementById('btn-atual').classList.toggle('active', offset === 0); document.getElementById('btn-que-vem').classList.toggle('active', offset === 1); 
-            const hoje = new Date(); const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12, 0, 0); const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12, 0, 0); 
-            const hojeStr = toISODate(hoje); const amanha = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1); const amanhaStr = toISODate(amanha); 
+            document.getElementById('btn-passada').classList.toggle('active', offset === -1); 
+            document.getElementById('btn-atual').classList.toggle('active', offset === 0); 
+            document.getElementById('btn-que-vem').classList.toggle('active', offset === 1); 
+            const hoje = new Date(); 
+            const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12, 0, 0); 
+            const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12, 0, 0); 
+            const hojeStr = toISODate(hoje); 
+            const amanha = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1); 
+            const amanhaStr = toISODate(amanha); 
             const aSemana = aulasArray.filter(a => a.data >= toISODate(seg) && a.data <= toISODate(sex)); 
             let html = `<h3 style="text-align:center;">Sua Semana</h3>`; 
             if (aSemana.length === 0) { html += `<div class="card"><div class="details" style="text-align:center;">Nenhuma aula programada para esta semana.</div></div>`; } 
             aSemana.forEach(a => { 
-                const isCancelled = a.aula.toLowerCase().includes('cancelada'); let cardClass = ''; let statusMsg = ''; 
+                const isCancelled = a.aula.toLowerCase().includes('cancelada'); 
+                let cardClass = ''; let statusMsg = ''; 
                 if (isCancelled) { cardClass = 'cancelled'; statusMsg = `❌ CANCELADA - ${getDiaDaSemana(a.data)}`; } 
                 else { 
-                    if (a.data === hojeStr) { cardClass = 'today'; statusMsg = '🔥 HOJE'; } else if (a.data === amanhaStr) { cardClass = 'tomorrow'; statusMsg = `${getDiaDaSemana(a.data)} - AMANHÃ! ⚡`; } else if (a.data < hojeStr) { cardClass = 'past'; statusMsg = `✅ ${getDiaDaSemana(a.data)}`; } else { cardClass = 'next'; statusMsg = `⏳ ${getDiaDaSemana(a.data)}`; } 
+                    if (a.data === hojeStr) { cardClass = 'today'; statusMsg = '🔥 HOJE'; } 
+                    else if (a.data === amanhaStr) { cardClass = 'tomorrow'; statusMsg = `${getDiaDaSemana(a.data)} - AMANHÃ! ⚡`; } 
+                    else if (a.data < hojeStr) { cardClass = 'past'; statusMsg = `✅ ${getDiaDaSemana(a.data)}`; } 
+                    else { cardClass = 'next'; statusMsg = `⏳ ${getDiaDaSemana(a.data)}`; } 
                 } 
-                html += `<div class="card ${cardClass}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')"><div class="status">${statusMsg}</div><div class="date">${formatarDataBR(a.data)}</div><div class="details"><span style="font-weight:bold;">${a.uc}</span><br>Prof: ${a.docente}</div></div>`; 
+                html += `<div class="card ${cardClass}" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
+                            <div class="status">${statusMsg}</div>
+                            <div class="date">${formatarDataBR(a.data)}</div>
+                            <div class="details"><span style="font-weight:bold;">${a.uc}</span><br>Prof: ${a.docente}</div>
+                        </div>`; 
             }); 
             document.getElementById('painel-aulas').innerHTML = html; 
         }
@@ -862,8 +839,8 @@
                 else { countdownHTML = `<span class="evento-countdown">(Há ${Math.abs(diffDays)} dias)</span>`; extraClass = "past"; } 
                 html += `<div class="evento-card ${extraClass}">
                             <div class="evento-data"><span>📅 ${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}/${dt.ano}</span>${countdownHTML}</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #fff; margin: 8px 0 5px 0;">${ev.titulo}</div>
-                            <div style="color: #bbb; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap;">${ev.desc}</div>
+                            <div class="ev-titulo">${ev.titulo}</div>
+                            <div class="ev-desc">${ev.desc}</div>
                         </div>`; 
                 eventosExibidos++; 
             }); 
@@ -872,7 +849,7 @@
         }
 
         // ==========================================
-        // MÓDULO: AGENDA V4 (Datas de Interesse)
+        // MÓDULO: AGENDA V4 (Datas de Interesse com Período e Hierarquia)
         // ==========================================
         function processarDatas(tsv) { 
             const linhas = tratarTSV(tsv).slice(1); baseDatas = []; 
@@ -883,15 +860,17 @@
                     const dtInic = processarDataInteligente(colunas[0].trim());
                     if (!dtInic) return;
                     
-                    // Coluna B: Fim. Se não existir, a data de fim é igual ao Início
+                    // Coluna B: Data Fim (Se vazia, é igual a Data Início)
                     const dtFim = (colunas.length > 1 && colunas[1].trim() !== '') ? processarDataInteligente(colunas[1].trim()) : dtInic;
                     
+                    // Tratamento de hierarquia e posições
                     const categoria = colunas.length > 2 ? colunas[2].trim() : 'Evento';
                     const titulo = colunas.length > 3 ? colunas[3].trim() : 'Sem Título';
                     const local = colunas.length > 4 ? colunas[4].trim() : '';
                     const desc = colunas.length > 5 ? colunas[5].trim() : '';
                     let link = colunas.length > 6 ? colunas[6].trim() : '';
                     
+                    // Valida URL
                     if (link && !link.startsWith('http')) link = 'https://' + link;
 
                     baseDatas.push({ dtInic, dtFim, categoria, titulo, local, desc, link }); 
@@ -904,12 +883,19 @@
             const container = document.getElementById('lista-datas'); let html = ''; 
             if (baseDatas.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhuma data cadastrada na base.</p>"; return; } 
             
-            // Ordenação pelo início do evento
+            // Ordena pela data de início
             baseDatas.sort((a, b) => new Date(a.dtInic.iso).getTime() - new Date(b.dtInic.iso).getTime());
             
+            const hojeLocal = new Date(); 
+            hojeLocal.setHours(0,0,0,0);
+            const hojeISO = toISODate(hojeLocal);
+
             let datasExibidas = 0; 
             
             baseDatas.forEach(ev => { 
+                // Nova regra de esmaecimento: Só esmaece se a Data FINAL já tiver passado
+                const isPast = ev.dtFim ? (ev.dtFim.iso < hojeISO) : (ev.dtInic.iso < hojeISO);
+                
                 // Formatação do Período
                 let periodoHTML = "";
                 if (ev.dtFim && ev.dtFim.iso !== ev.dtInic.iso) {
@@ -918,9 +904,10 @@
                     periodoHTML = `${ev.dtInic.dia.toString().padStart(2,'0')}/${ev.dtInic.mes.toString().padStart(2,'0')}/${ev.dtInic.ano}`;
                 }
 
-                // ZERO ESMAECIMENTO PARA DATAS DE INTERESSE
+                let extraClass = isPast ? "past" : "";
+
                 html += `
-                    <div class="evento-card datas-int">
+                    <div class="evento-card datas-int ${extraClass}">
                         <span class="ev-tipo">${ev.categoria}</span>
                         <div class="ev-titulo">${ev.titulo}</div>
                         <div class="ev-periodo">📅 ${periodoHTML}</div>
@@ -932,15 +919,17 @@
                 datasExibidas++; 
             }); 
             
-            if (datasExibidas === 0) { html = "<p style='text-align:center; color:#888;'>Nenhuma data processada.</p>"; }
+            if (datasExibidas === 0) { html = "<p style='text-align:center; color:#888;'>Nenhuma data carregada.</p>"; }
             container.innerHTML = html; 
         }
 
         // ==========================================
-        // MÓDULO DA ENCICLOPÉDIA 
+        // MÓDULO DA ENCICLOPÉDIA (DICIONÁRIO)
         // ==========================================
         function processarDicio(tsv) {
-            const linhas = tratarTSV(tsv).slice(1); dicioArray = []; let categoriasSet = new Set();
+            const linhas = tratarTSV(tsv).slice(1); 
+            dicioArray = [];
+            let categoriasSet = new Set();
             if(linhas.length === 0) return;
             linhas.forEach(colunas => {
                 if (colunas.length >= 3 && colunas[0] && colunas[0].trim() !== '') {
@@ -960,29 +949,40 @@
 
         function toggleDicioMode() {
             const btn = document.getElementById('btn-toggle-dicio');
-            const areaSearch = document.getElementById('dicio-search-area'); const areaAlpha = document.getElementById('dicio-alpha-area');
+            const areaSearch = document.getElementById('dicio-search-area');
+            const areaAlpha = document.getElementById('dicio-alpha-area');
             if (dicioMode === 'search') {
-                dicioMode = 'index'; btn.innerText = "🔍 Voltar para Busca"; btn.style.backgroundColor = "var(--accent-dicio)"; btn.style.color = "#fff";
-                areaSearch.classList.add('hidden'); areaAlpha.classList.remove('hidden'); renderAlphabet(); renderDicioIndex(currentLetter);
+                dicioMode = 'index';
+                btn.innerText = "🔍 Voltar para Busca"; btn.style.backgroundColor = "var(--accent-dicio)"; btn.style.color = "#fff";
+                areaSearch.classList.add('hidden'); areaAlpha.classList.remove('hidden');
+                renderAlphabet(); renderDicioIndex(currentLetter);
             } else {
-                dicioMode = 'search'; btn.innerText = "🔤 Ver Índice A-Z"; btn.style.backgroundColor = "transparent"; btn.style.color = "var(--accent-dicio)";
-                areaSearch.classList.remove('hidden'); areaAlpha.classList.add('hidden'); document.getElementById('buscaDicio').value = ''; renderDicioSearch();
+                dicioMode = 'search';
+                btn.innerText = "🔤 Ver Índice A-Z"; btn.style.backgroundColor = "transparent"; btn.style.color = "var(--accent-dicio)";
+                areaSearch.classList.remove('hidden'); areaAlpha.classList.add('hidden');
+                document.getElementById('buscaDicio').value = ''; renderDicioSearch();
             }
         }
 
         function renderAlphabet() {
-            const cont = document.getElementById('dicio-alpha-area'); const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''); let html = '';
-            letters.forEach(l => { const activeClass = (l === currentLetter) ? 'active' : ''; html += `<div class="dicio-letter ${activeClass}" onclick="selectLetter('${l}')">${l}</div>`; });
+            const cont = document.getElementById('dicio-alpha-area');
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''); let html = '';
+            letters.forEach(l => {
+                const activeClass = (l === currentLetter) ? 'active' : '';
+                html += `<div class="dicio-letter ${activeClass}" onclick="selectLetter('${l}')">${l}</div>`;
+            });
             cont.innerHTML = html;
         }
 
         function selectLetter(l) { currentLetter = l; renderAlphabet(); renderDicioIndex(l); }
+
         function filtrarDicio() { if (dicioMode === 'search') renderDicioSearch(); }
 
         function renderDicioSearch() {
             const container = document.getElementById('lista-dicio');
             if (dicioArray.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum dado vinculado ainda.</p>"; return; }
-            const inputFiltro = document.getElementById('buscaDicio').value.toLowerCase(); const catFiltro = document.getElementById('filtroCategoriaDicio').value;
+            const inputFiltro = document.getElementById('buscaDicio').value.toLowerCase();
+            const catFiltro = document.getElementById('filtroCategoriaDicio').value;
             let html = "";
             const itensFiltrados = dicioArray.filter(item => {
                 const matchTexto = item.termo.toLowerCase().includes(inputFiltro) || item.definicao.toLowerCase().includes(inputFiltro);
@@ -991,25 +991,36 @@
             }).sort((a, b) => a.termo.localeCompare(b.termo));
             if (itensFiltrados.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhum termo encontrado.</p>"; return; }
             itensFiltrados.forEach(item => {
-                html += `<div class="dicio-card"><div class="dicio-term">${item.termo}</div><div class="dicio-cat">${item.categoria}</div><div class="dicio-def">${item.definicao}</div></div>`;
+                html += `<div class="dicio-card">
+                            <div class="dicio-term">${item.termo}</div>
+                            <div class="dicio-cat">${item.categoria}</div>
+                            <div class="dicio-def">${item.definicao}</div>
+                        </div>`;
             });
             container.innerHTML = html;
         }
 
         function renderDicioIndex(letter) {
-            const container = document.getElementById('lista-dicio'); if (dicioArray.length === 0) return;
+            const container = document.getElementById('lista-dicio');
+            if (dicioArray.length === 0) return;
             const itensFiltrados = dicioArray.filter(item => item.termo.toUpperCase().startsWith(letter)).sort((a, b) => a.termo.localeCompare(b.termo));
             if (itensFiltrados.length === 0) { container.innerHTML = `<p style='text-align:center; color:#888; margin-top:20px;'>Nenhum verbete com a letra <strong>${letter}</strong>.</p>`; return; }
             let html = '<div class="dicio-list-view">';
             itensFiltrados.forEach(item => {
-                const termoSafe = item.termo.replace(/'/g, "\\'").replace(/"/g, "&quot;"); const catSafe = item.categoria.replace(/'/g, "\\'").replace(/"/g, "&quot;"); const defSafe = item.definicao.replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, '\\n');
-                html += `<div class="dicio-list-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')"><div class="dicio-list-term">${item.termo}</div><div class="dicio-list-def-preview">${item.definicao}</div></div>`;
+                const termoSafe = item.termo.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const catSafe = item.categoria.replace(/'/g, "\\'").replace(/"/g, "&quot;");
+                const defSafe = item.definicao.replace(/'/g, "\\'").replace(/"/g, "&quot;").replace(/\n/g, '\\n');
+                html += `<div class="dicio-list-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
+                            <div class="dicio-list-term">${item.termo}</div>
+                            <div class="dicio-list-def-preview">${item.definicao}</div>
+                        </div>`;
             });
-            html += '</div>'; container.innerHTML = html;
+            html += '</div>';
+            container.innerHTML = html;
         }
 
         // ==========================================
-        // UTILIDADES DE NAVEGAÇÃO E MODAIS
+        // UTILIDADES E NAVEGAÇÃO
         // ==========================================
         function switchView(id) { 
             document.querySelectorAll('.view').forEach(v => v.classList.add('hidden')); 
@@ -1044,30 +1055,6 @@
         }
         function fecharModal(e) { if (e.target.id === 'modalConteudo') fecharModalBtn(); } 
         function fecharModalBtn() { document.getElementById('modalConteudo').style.display = 'none'; document.body.style.overflow = 'auto'; } 
-
-        function requireAuth(viewId) {
-            if (localStorage.getItem('auth_tpf43m') === 'true') {
-                switchView(viewId);
-            } else {
-                targetViewAfterAuth = viewId;
-                switchView('view-auth');
-            }
-        }
-
-        function validarSenha() {
-            const input = document.getElementById('input-senha').value.toUpperCase();
-            const errorDiv = document.getElementById('auth-error');
-            if (input === 'TPF43M') {
-                localStorage.setItem('auth_tpf43m', 'true');
-                errorDiv.style.display = 'none';
-                document.getElementById('input-senha').value = '';
-                switchView(targetViewAfterAuth);
-            } else {
-                errorDiv.style.display = 'block';
-            }
-        }
-
-        document.getElementById('input-senha').addEventListener('keypress', function(e) { if (e.key === 'Enter') validarSenha(); });
 
         // ==========================================
         // MÓDULO DE LUZ NATURAL E LUA
