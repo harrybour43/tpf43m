@@ -225,7 +225,7 @@
         .evento-countdown.urgente { color: var(--accent-warning); font-weight: bold; opacity: 1; }
         .evento-countdown.hoje { color: #ff4081; font-weight: bold; opacity: 1; }
 
-        /* Estilos específicos para Datas de Interesse (Agenda V4) */
+        /* Estilos específicos para Radar Cultural (Agenda V4) */
         .evento-card.datas-int { border-left-color: var(--accent-datas); opacity: 1 !important; filter: none !important; } 
         .ev-tipo { font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--accent-datas); margin-bottom: 5px; display: inline-block; background: rgba(0, 188, 212, 0.1); padding: 3px 8px; border-radius: 4px;}
         .evento-card:not(.datas-int) .ev-tipo { color: var(--accent-eventos); background: rgba(156, 39, 176, 0.1);}
@@ -314,11 +314,12 @@
                 <div class="menu-turma-badge">Central de Luz e Apoio ao Repertório de Artistas do Audiovisual</div>
             </div>
             
-            <button class="menu-btn btn-turma" onclick="requireAuth('view-turma-menu')"><span class="menu-icon">🔒</span> Área da Turma SCI-TPF43M</button>
-            <button class="menu-btn btn-datas" onclick="switchView('view-datas')"><span class="menu-icon">📅</span> Datas de Interesse</button>
+            <button class="menu-btn btn-datas" onclick="switchView('view-datas')"><span class="menu-icon">📅</span> Radar Cultural</button>
             <button class="menu-btn btn-dicio" onclick="switchView('view-dicio')"><span class="menu-icon">📖</span> Enciclopédia</button>
             <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Luz Natural</button>
             <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Mapa de Luz</button>
+                        <button class="menu-btn btn-turma" onclick="requireAuth('view-turma-menu')"><span class="menu-icon">🔒</span> Área da Turma SCI-TPF43M</button>
+
             
             <div class="clara-footer">CLARA v4.1.0 | Harry Bour</div>
         </div>
@@ -384,7 +385,7 @@
 
     <div id="view-datas" class="view page-container hidden">
         <button class="btn-voltar" onclick="switchView('view-menu')">⬅ Menu Principal</button>
-        <h1 class="page-title" style="border-bottom-color: var(--accent-datas);">Datas de Interesse</h1>
+        <h1 class="page-title" style="border-bottom-color: var(--accent-datas);">Radar Cultural</h1>
         
         <div class="disclaimer-box" style="border-left-color: var(--accent-datas);">
             <strong>Fique de olho:</strong> Exposições, editais, feiras e prazos externos relevantes para a área fotográfica.
@@ -754,7 +755,7 @@
         }
 
         // ==========================================
-        // MÓDULO: AGENDA V4 (Datas de Interesse)
+        // MÓDULO: AGENDA V4 (Radar Cultural)
         // ==========================================
         function processarDatas(tsv) { 
             const linhas = tratarTSV(tsv).slice(1); baseDatas = []; 
