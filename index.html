@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>🎓 CLARA</title>
+    <title>CLARA</title>
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#121212">
-    <meta name="apple-mobile-web-app-title" content="🎓 CLARA">
+    <meta name="apple-mobile-web-app-title" content="CLARA">
 
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
     <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🎓</text></svg>">
@@ -35,12 +35,12 @@
             --accent-warning: #ff9800; 
             --border-color: #333;
 
-            * Cores das Categorias Individuais V4.3.0 */
+            /* Cores das Categorias Individuais V4.3.4 */
             --cat-edital: #4caf50;       /* Verde */
             --cat-convocatoria: #2196f3; /* Azul Celeste */
             --cat-exposicao: #9c27b0;    /* Roxo */
             --cat-mostra: #673ab7;       /* Roxo Escuro */
-            --cat-cursos: #ffc107;        /* Amarelo Âmbar */
+            --cat-cursos: #ffc107;       /* Amarelo Âmbar */
             --cat-palestra: #009688;     /* Verde-azulado (Teal) */
             --cat-workshop: #3f51b5;     /* Azul Índigo */
             --cat-feira: #ff9800;        /* Laranja */
@@ -227,7 +227,7 @@
         .modal-header { border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px; }
 
         /* ==========================================
-           4. EVENTOS E AGENDA V4.2.3 (Filtros + Cores)
+           4. EVENTOS E AGENDA V4.3.4 (Filtros + Cores)
            ========================================== */
         /* Filtros Inteligentes (Chips) - Modificado para ter título normal */
         .filter-container { background-color: var(--bg-panel); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border-color); }
@@ -360,7 +360,7 @@
         <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">Sincronizando bancos de dados...</div>
         <button id="btn-entrar" class="btn-entrar hidden" onclick="dismissSplash()">ENTRAR NA CLARA</button>
 
-        <div class="splash-footer">Versão 4.2.3 | Desenvolvido por Harry Bour | 2026</div>
+        <div class="splash-footer">Versão 4.3.0 | Desenvolvido por Harry Bour | 2026</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -383,7 +383,7 @@
                         <button class="menu-btn btn-turma" onclick="requireAuth('view-turma-menu')"><span class="menu-icon">🔒</span> Área da Turma SCI-TPF43M</button>
 
             
-            <div class="clara-footer">CLARA Versão 4.2.3 | Desenvolvido por Harry Bour | 2026</div>
+            <div class="clara-footer">CLARA Versão 4.3.0 | Desenvolvido por Harry Bour | 2026</div>
         </div>
     </div>
 
@@ -521,7 +521,11 @@
 
     <div id="view-calc" class="view page-container hidden">
         <button class="btn-voltar" onclick="switchView('view-menu')">⬅ Menu Principal</button>
-        <h1 class="page-title" style="border-bottom-color: var(--accent-calc);">Luz de Estúdio</h1>
+        
+        <div style="position: relative;">
+            <h1 class="page-title" style="border-bottom-color: var(--accent-calc);">Luz de Estúdio</h1>
+            <button onclick="abrirModalGuiaLuz()" style="position: absolute; right: 0; top: 0; background: transparent; color: var(--accent-calc); border: 2px solid var(--accent-calc); border-radius: 50%; width: 32px; height: 32px; font-weight: bold; cursor: pointer; font-size: 1.1rem; display: flex; justify-content: center; align-items: center; padding: 0;" title="Orientações para uso da calculadora de Luz de Estúdio">?</button>
+        </div>
         
         <div class="calc-settings">
             <label for="cenarioFundo">Cenário de Fundo:</label>
@@ -544,7 +548,7 @@
                 <div id="modalUC" style="font-size: 1.2em; font-weight: bold; color: #fff;"></div>
                 <div id="modalProf" style="color: var(--accent-eventos); font-weight: bold;"></div>
             </div>
-            <div id="modalTexto" style="line-height: 1.6; white-space: pre-wrap; color: #e0e0e0;"></div>
+            <div id="modalTexto" style="line-height: 1.6; color: #e0e0e0;"></div>
         </div>
     </div>
 
@@ -566,7 +570,7 @@
         let currentLetter = 'A';
         let targetViewAfterAuth = '';
 
-        // Controles Filtros Agenda V4.2.3
+        // Controles Filtros Agenda V4.3.4
         let filtrosCatAtivos = new Set();
         let filtrosUFAtivos = new Set();
 
@@ -578,10 +582,10 @@
         };
 
         // ==========================================
-        // INICIALIZAÇÃO V4.2.3 (ONLINE ESTÁVEL)
+        // INICIALIZAÇÃO V4.3.4 (ONLINE ESTÁVEL)
         // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            const currentVersion = "4.2.1";
+            const currentVersion = "4.3.4";
             if (localStorage.getItem('clara_version') !== currentVersion) {
                 // Remove caches velhos. Mantém a senha do aluno intocada.
                 localStorage.removeItem('tpf43m_aulas');
@@ -825,10 +829,9 @@
         }
 
         // ==========================================
-        // MÓDULO: AGENDA V4.2.3 (Filtros e Cores)
+        // MÓDULO: AGENDA V4.3.4 (Filtros e Cores)
         // ==========================================
         
-        // Identificador Dinâmico de Classes CSS
         // Identificador Dinâmico de Classes CSS (Desmembrado para 10 Categorias)
         function getCategoriaClasse(categoriaReal) {
             if (!categoriaReal) return 'cat-default';
@@ -1097,8 +1100,62 @@
             document.getElementById('modalConteudo').style.display = 'flex'; 
             document.body.style.overflow = 'hidden'; 
         }
+        
+        // NOVA FUNÇÃO: MODAL DO GUIA DO LUZ DE ESTÚDIO
+        function abrirModalGuiaLuz() {
+            document.getElementById('modalData').innerText = "LUZ DE ESTÚDIO";
+            document.getElementById('modalData').style.color = "var(--accent-calc)"; 
+            document.getElementById('modalUC').innerText = "Orientações e Dicas de Uso desta Calculadora";
+            document.getElementById('modalProf').innerText = "A Lógica do Controle Total"; 
+            
+            // Usamos innerHTML aqui para permitir formatação rica
+            const htmlContent = `
+<p>Esta ferramenta não é apenas uma calculadora, mas um assistente para garantir que sua intenção criativa seja traduzida em números exatos. No estúdio, não "achamos" a luz; nós a construímos com precisão técnica.</p>
+
+<p><strong style="color:var(--accent-calc)">1. A Base: Configuração da Câmera</strong><br>
+Antes de medir as luzes, sua câmera deve estar "cega" para a luz ambiente do estúdio. Queremos registrar apenas o pulso das tochas:<br>
+• <strong>ISO 100 (ou o menor nativo):</strong> Buscamos a máxima nitidez e o menor ruído. Como temos controle total sobre a potência dos flashes, não há motivo para forçar o sensor.<br>
+• <strong>Velocidade 1/125s:</strong> É a velocidade de sincronia padrão. Rápida o suficiente para anular a luz das lâmpadas comuns da sala e lenta o suficiente para captar toda a explosão do flash com segurança.<br>
+• <strong>Abertura (f/):</strong> Esta é sua variável criativa. Ela será determinada pela potência da sua <strong>Luz Principal</strong>.</p>
+
+<p><strong style="color:var(--accent-calc)">2. O Equipamento Indispensável</strong><br>
+• <strong>Tochas/Flashes de Estúdio:</strong> Devem permitir o ajuste fino de potência.<br>
+• <strong>Fotômetro de Mão:</strong> É ele quem diz a verdade técnica. Meça sempre a <strong>luz incidente</strong> (posicione o fotômetro junto ao assunto e aponte a esfera branca para a fonte de luz que deseja ajustar).</p>
+
+<p><strong style="color:var(--accent-calc)">3. A Lógica da CLARA: Ratio (Proporção)</strong><br>
+O sistema trabalha comparando todas as luzes com a sua <strong>Âncora</strong>:<br>
+• <strong>Luz Principal:</strong> É o seu ponto zero. O valor medido nela define a exposição da foto.<br>
+• <strong>Preenchimento:</strong> Para sombras naturais, a regra é mantê-la <strong>-2.0 stops</strong> (2 pontos inteiros abaixo da principal).<br>
+• <strong>Recorte/Cabelo:</strong> Para tridimensionalidade, sugerimos <strong>+2.0 stops</strong> (2 pontos inteiros acima da principal).</p>
+
+<p><strong style="color:var(--accent-calc)">4. Estratégia de Ouro: Fotometria de Ponto Inteiro</strong><br>
+Focar no ajuste da luz principal para um ponto inteiro é a dica mais valiosa para quem busca agilidade e precisão no estúdio, pois simplifica todo o raciocínio matemático das outras luzes. Não aceite décimos na Luz Principal!<br>
+• <strong>A Dica:</strong> Se ao medir a luz principal o fotômetro indicar <strong>f/8.4</strong>, não tente calcular as outras luzes com base nesse quebrado. Ajuste a potência da sua tocha (subindo ou descendo alguns "clicks") até que o fotômetro leia <strong>f/8.0</strong> cravado. <br>
+• <strong>O Motivo:</strong> Ao fixar a principal em um ponto inteiro, o cálculo das outras luzes fica óbvio. Se a principal é <strong>f/8</strong>, o preenchimento (-2 pontos) será <strong>f/4</strong> e o recorte (+2 pontos) será <strong>f/16</strong>. Simples assim.</p>
+
+<p><strong style="color:var(--accent-calc)">5. Segredos da Memorização (F-Stops Inteiros)</strong><br>
+Para dominar o estúdio, você precisa conhecer a escada dos pontos inteiros. Decore apenas os dois primeiros: <strong>1.0</strong> e <strong>1.4</strong>. <br>
+A partir daí, o próximo número é sempre o <strong>dobro do número que veio antes do anterior</strong>:<br>
+• Depois de <strong>1.4</strong>, vem o dobro de 1.0 = <strong>2.0</strong><br>
+• Depois de <strong>2.0</strong>, vem o dobro de 1.4 = <strong>2.8</strong><br>
+• Depois de <strong>2.8</strong>, vem o dobro de 2.0 = <strong>4.0</strong><br>
+• Depois de <strong>4.0</strong>, vem o dobro de 2.8 = <strong>5.6</strong><br>
+• <em>E assim por diante: 8, 11 (arredondamento), 16, 22...</em></p>
+
+<p><strong style="color:var(--accent-warning)">Nota Didática:</strong> No Passo 1, a CLARA te ajuda a igualar a potência da tocha secundária com a Principal. Uma vez que as luzes estão niveladas, o Passo 2 te dá o comando final de "clicks" para atingir a intenção artística com perfeição.</p>`;
+            
+            document.getElementById('modalTexto').innerHTML = htmlContent;
+            document.getElementById('modalConteudo').style.display = 'flex'; 
+            document.body.style.overflow = 'hidden'; 
+        }
+
         function fecharModal(e) { if (e.target.id === 'modalConteudo') fecharModalBtn(); } 
-        function fecharModalBtn() { document.getElementById('modalConteudo').style.display = 'none'; document.body.style.overflow = 'auto'; } 
+        function fecharModalBtn() { 
+            document.getElementById('modalConteudo').style.display = 'none'; 
+            document.body.style.overflow = 'auto'; 
+            // Limpa o conteúdo para não conflitar com modais que usam innerText
+            document.getElementById('modalTexto').innerHTML = ''; 
+        } 
 
         function requireAuth(viewId) {
             if (localStorage.getItem('auth_tpf43m') === 'true') {
