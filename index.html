@@ -34,6 +34,18 @@
             --accent-dicio: #e91e63;
             --accent-warning: #ff9800; 
             --border-color: #333;
+
+            * Cores das Categorias Individuais V4.3.0 */
+            --cat-edital: #4caf50;       /* Verde */
+            --cat-convocatoria: #2196f3; /* Azul Celeste */
+            --cat-exposicao: #9c27b0;    /* Roxo */
+            --cat-mostra: #673ab7;       /* Roxo Escuro */
+            --cat-cursos: #ffc107;        /* Amarelo Âmbar */
+            --cat-palestra: #009688;     /* Verde-azulado (Teal) */
+            --cat-workshop: #3f51b5;     /* Azul Índigo */
+            --cat-feira: #ff9800;        /* Laranja */
+            --cat-festival: #e91e63;     /* Rosa Choque */
+            --cat-concurso: #f44336;     /* Vermelho */
         }
 
         body { 
@@ -215,8 +227,32 @@
         .modal-header { border-bottom: 1px solid #333; padding-bottom: 15px; margin-bottom: 15px; }
 
         /* ==========================================
-           4. EVENTOS E AGENDA V4
+           4. EVENTOS E AGENDA V4.2.3 (Filtros + Cores)
            ========================================== */
+        /* Filtros Inteligentes (Chips) - Modificado para ter título normal */
+        .filter-container { background-color: var(--bg-panel); padding: 15px; border-radius: 8px; margin-bottom: 20px; border: 1px solid var(--border-color); }
+        .filter-title { font-size: 0.8rem; color: #888; font-weight: normal; margin-bottom: 10px; display: block; }
+        .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .filter-row:last-child { margin-bottom: 0; }
+        
+        .filter-chip { background-color: #2c2c2c; border: 1px solid #444; color: #ccc; padding: 6px 14px; border-radius: 20px; font-size: 0.85rem; cursor: pointer; transition: 0.2s; font-weight: bold; user-select: none;}
+        .filter-chip:hover { background-color: #3a3a3a; }
+        
+        /* Correção das Classes Active para Categorias Individuais */
+        .chip-todas.active { background-color: #e0e0e0; color: #121212; border-color: #e0e0e0; }
+        .cat-edital.active { background-color: var(--cat-edital); color: #121212; border-color: var(--cat-edital); }
+        .cat-convocatoria.active { background-color: var(--cat-convocatoria); color: #121212; border-color: var(--cat-convocatoria); }
+        .cat-exposicao.active { background-color: var(--cat-exposicao); color: #fff; border-color: var(--cat-exposicao); }
+        .cat-mostra.active { background-color: var(--cat-mostra); color: #fff; border-color: var(--cat-mostra); }
+        .cat-cursos.active { background-color: var(--cat-cursos); color: #121212; border-color: var(--cat-cursos); }
+        .cat-palestra.active { background-color: var(--cat-palestra); color: #fff; border-color: var(--cat-palestra); }
+        .cat-workshop.active { background-color: var(--cat-workshop); color: #fff; border-color: var(--cat-workshop); }
+        .cat-feira.active { background-color: var(--cat-feira); color: #121212; border-color: var(--cat-feira); }
+        .cat-festival.active { background-color: var(--cat-festival); color: #fff; border-color: var(--cat-festival); }
+        .cat-concurso.active { background-color: var(--cat-concurso); color: #fff; border-color: var(--cat-concurso); }
+        .cat-default.active { background-color: var(--accent-datas); color: #121212; border-color: var(--accent-datas); }
+        .chip-uf.active { background-color: #607d8b; color: #fff; border-color: #607d8b; }
+
         /* Estilos base para aulas e turma */
         .evento-card { background-color: var(--bg-panel); border-left: 5px solid var(--accent-eventos); padding: 18px; border-radius: 8px; margin-bottom: 20px; box-shadow: 0 4px 10px rgba(0,0,0,0.2);}
         .evento-card.past { opacity: 0.5; border-left-color: #555; }
@@ -225,9 +261,34 @@
         .evento-countdown.urgente { color: var(--accent-warning); font-weight: bold; opacity: 1; }
         .evento-countdown.hoje { color: #ff4081; font-weight: bold; opacity: 1; }
 
-        /* Estilos específicos para Radar Cultural (Agenda V4) */
+        /* Estilos específicos para Datas de Interesse (Agenda) */
         .evento-card.datas-int { border-left-color: var(--accent-datas); opacity: 1 !important; filter: none !important; } 
+        
+       /* Dynamic Borders for Cards */
+        .evento-card.datas-int.cat-edital { border-left-color: var(--cat-edital); }
+        .evento-card.datas-int.cat-convocatoria { border-left-color: var(--cat-convocatoria); }
+        .evento-card.datas-int.cat-exposicao { border-left-color: var(--cat-exposicao); }
+        .evento-card.datas-int.cat-mostra { border-left-color: var(--cat-mostra); }
+        .evento-card.datas-int.cat-cursos { border-left-color: var(--cat-cursos); }
+        .evento-card.datas-int.cat-palestra { border-left-color: var(--cat-palestra); }
+        .evento-card.datas-int.cat-workshop { border-left-color: var(--cat-workshop); }
+        .evento-card.datas-int.cat-feira { border-left-color: var(--cat-feira); }
+        .evento-card.datas-int.cat-festival { border-left-color: var(--cat-festival); }
+        .evento-card.datas-int.cat-concurso { border-left-color: var(--cat-concurso); }
+
         .ev-tipo { font-size: 0.75rem; text-transform: uppercase; font-weight: 800; letter-spacing: 1px; color: var(--accent-datas); margin-bottom: 5px; display: inline-block; background: rgba(0, 188, 212, 0.1); padding: 3px 8px; border-radius: 4px;}
+        
+        /* Dynamic Tags */
+        .ev-tipo.cat-edital { color: var(--cat-edital); background: rgba(76, 175, 80, 0.1); }
+        .ev-tipo.cat-convocatoria { color: var(--cat-convocatoria); background: rgba(33, 150, 243, 0.1); }
+        .ev-tipo.cat-exposicao { color: var(--cat-exposicao); background: rgba(156, 39, 176, 0.1); }
+        .ev-tipo.cat-mostra { color: var(--cat-mostra); background: rgba(103, 58, 183, 0.1); }
+        .ev-tipo.cat-cursos { color: var(--cat-cursos); background: rgba(255, 193, 7, 0.1); }
+        .ev-tipo.cat-palestra { color: var(--cat-palestra); background: rgba(0, 150, 136, 0.1); }
+        .ev-tipo.cat-workshop { color: var(--cat-workshop); background: rgba(63, 81, 181, 0.1); }
+        .ev-tipo.cat-feira { color: var(--cat-feira); background: rgba(255, 152, 0, 0.1); }
+        .ev-tipo.cat-festival { color: var(--cat-festival); background: rgba(233, 30, 99, 0.1); }
+        .ev-tipo.cat-concurso { color: var(--cat-concurso); background: rgba(244, 67, 54, 0.1); }
         .evento-card:not(.datas-int) .ev-tipo { color: var(--accent-eventos); background: rgba(156, 39, 176, 0.1);}
         
         .ev-titulo { font-size: 1.3rem; font-weight: bold; color: #fff; margin: 8px 0 5px 0; line-height: 1.2; }
@@ -296,10 +357,10 @@
         <div class="clara-logo-text">CLARA</div>
         <div class="clara-tagline">Central de Luz e Apoio ao Repertório de Artistas do Audiovisual</div>
         
-        <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">Iniciando sistema online...</div>
+        <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">Sincronizando bancos de dados...</div>
         <button id="btn-entrar" class="btn-entrar hidden" onclick="dismissSplash()">ENTRAR NA CLARA</button>
 
-        <div class="splash-footer">Versão 4.1.0 | Desenvolvido por Harry Bour</div>
+        <div class="splash-footer">Versão 4.2.3 | Desenvolvido por Harry Bour | 2026</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -317,11 +378,12 @@
             <button class="menu-btn btn-datas" onclick="switchView('view-datas')"><span class="menu-icon">📅</span> Radar Cultural</button>
             <button class="menu-btn btn-dicio" onclick="switchView('view-dicio')"><span class="menu-icon">📖</span> Enciclopédia</button>
             <button class="menu-btn btn-sun" onclick="switchView('view-suncalc'); initSunCalc();"><span class="menu-icon">☀️</span>Luz Natural</button>
-            <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Mapa de Luz</button>
+            <button class="menu-btn btn-calc" onclick="switchView('view-calc')"><span class="menu-icon">🧮</span>Luz de Estúdio</button>
+
                         <button class="menu-btn btn-turma" onclick="requireAuth('view-turma-menu')"><span class="menu-icon">🔒</span> Área da Turma SCI-TPF43M</button>
 
             
-            <div class="clara-footer">CLARA v4.1.0 | Harry Bour</div>
+            <div class="clara-footer">CLARA Versão 4.2.3 | Desenvolvido por Harry Bour | 2026</div>
         </div>
     </div>
 
@@ -387,13 +449,17 @@
         <button class="btn-voltar" onclick="switchView('view-menu')">⬅ Menu Principal</button>
         <h1 class="page-title" style="border-bottom-color: var(--accent-datas);">Radar Cultural</h1>
         
-        <div class="disclaimer-box" style="border-left-color: var(--accent-datas);">
-            <strong>Fique de olho:</strong> Exposições, editais, feiras e prazos externos relevantes para a área fotográfica.
-        </div>
-        
         <button class="btn-contribuir" onclick="switchView('view-contribuir')">
             <span>➕</span> Está faltando alguma informação? Contribua com a CLARA!
         </button>
+
+        <div class="filter-container" id="painel-filtros" style="display: none;">
+            <span class="filter-title">Filtrar por Categoria</span>
+            <div class="filter-row" id="filtros-categoria"></div>
+            
+            <span class="filter-title" style="margin-top: 15px;">Filtrar por Estado</span>
+            <div class="filter-row" id="filtros-uf"></div>
+        </div>
 
         <div id="lista-datas">
             <p style="text-align:center; color:#888;">Nenhuma data carregada. Aguarde ou atualize.</p>
@@ -401,7 +467,7 @@
     </div>
 
     <div id="view-contribuir" class="view page-container hidden">
-        <button class="btn-voltar" onclick="switchView('view-datas')">⬅ Voltar para Datas</button>
+        <button class="btn-voltar" onclick="switchView('view-datas')">⬅ Voltar</button>
         <div class="form-wrapper">
             <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSeJIJG-CJE4uulWWJPDnExFqLrt1fl-5FAxh2DWfcizv2bb8A/viewform?embedded=true" width="100%" height="100%" frameborder="0">Carregando formulário...</iframe>
         </div>
@@ -455,7 +521,7 @@
 
     <div id="view-calc" class="view page-container hidden">
         <button class="btn-voltar" onclick="switchView('view-menu')">⬅ Menu Principal</button>
-        <h1 class="page-title" style="border-bottom-color: var(--accent-calc);">Mapa de Luz</h1>
+        <h1 class="page-title" style="border-bottom-color: var(--accent-calc);">Luz de Estúdio</h1>
         
         <div class="calc-settings">
             <label for="cenarioFundo">Cenário de Fundo:</label>
@@ -500,6 +566,10 @@
         let currentLetter = 'A';
         let targetViewAfterAuth = '';
 
+        // Controles Filtros Agenda V4.2.3
+        let filtrosCatAtivos = new Set();
+        let filtrosUFAtivos = new Set();
+
         const nomesUC = { 
             "UC1": "Captar imagens", "UC2": "Iluminar cenas", "UC3": "Revelação digital", "UC4": "Manipular imagens", 
             "UC5": "Finalizar imagens", "UC6": "Captar vídeos", "UC7": "Fotojornalismo", "UC8": "Social", 
@@ -508,12 +578,12 @@
         };
 
         // ==========================================
-        // INICIALIZAÇÃO V4.1.0 (ONLINE DIRETO)
+        // INICIALIZAÇÃO V4.2.3 (ONLINE ESTÁVEL)
         // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            const currentVersion = "4.1.0";
+            const currentVersion = "4.2.1";
             if (localStorage.getItem('clara_version') !== currentVersion) {
-                // Remove caches de planilhas antigas. Mantém a senha do aluno.
+                // Remove caches velhos. Mantém a senha do aluno intocada.
                 localStorage.removeItem('tpf43m_aulas');
                 localStorage.removeItem('tpf43m_eventos');
                 localStorage.removeItem('tpf43m_datas');
@@ -530,7 +600,7 @@
         });
 
         function initApp() {
-            // Carrega o cache existente para não mostrar tela em branco
+            // Carrega a memória de curto prazo (para não mostrar tela branca na navegação)
             const cacheAulas = localStorage.getItem('tpf43m_aulas'); 
             const cacheEventos = localStorage.getItem('tpf43m_eventos');
             const cacheDatas = localStorage.getItem('tpf43m_datas');
@@ -541,7 +611,7 @@
             if (cacheDatas) processarDatas(cacheDatas);
             if (cacheDicio) processarDicio(cacheDicio);
 
-            // Inicia o fetch imediato
+            // Inicia a requisição à internet
             fetchGoogleSheets();
         }
 
@@ -556,7 +626,7 @@
         }
 
         // ==========================================
-        // DADOS E INTEGRAÇÃO GOOGLE SHEETS
+        // MOTOR DE FETCH ONLINE BLINDADO (Sem Timeout Crítico)
         // ==========================================
         function forceSync() {
             const btn = document.getElementById('btn-force-sync');
@@ -570,44 +640,44 @@
         async function fetchGoogleSheets() {
             const noCacheStr = `&nocache=${Date.now()}`;
 
-            // Fetch de Aulas (Independente)
+            // Fetch Aulas
             fetch(LINK_PLANILHA_AULAS + noCacheStr).then(res => {
                 if(res.ok) return res.text(); throw new Error();
             }).then(tsv => {
                 if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_aulas', tsv); processarAulas(tsv); }
-            }).catch(e => console.warn("Aulas: Erro na rede."));
+            }).catch(e => console.warn("Aulas: Offline."));
 
-            // Fetch de Eventos (Independente)
+            // Fetch Eventos
             fetch(LINK_PLANILHA_EVENTOS + noCacheStr).then(res => {
                 if(res.ok) return res.text(); throw new Error();
             }).then(tsv => {
                 if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_eventos', tsv); processarEventos(tsv); }
-            }).catch(e => console.warn("Eventos: Erro na rede."));
+            }).catch(e => console.warn("Eventos: Offline."));
 
-            // Fetch de Datas/Agenda (Independente)
+            // Fetch Agenda
             fetch(LINK_PLANILHA_DATAS + noCacheStr).then(res => {
                 if(res.ok) return res.text(); throw new Error();
             }).then(tsv => {
                 if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_datas', tsv); processarDatas(tsv); }
-            }).catch(e => console.warn("Datas: Erro na rede."));
+            }).catch(e => console.warn("Agenda: Offline."));
 
-            // Fetch da Enciclopédia (Independente)
+            // Fetch Enciclopédia
             if (LINK_PLANILHA_DICIO.startsWith("http")) {
                 fetch(LINK_PLANILHA_DICIO + noCacheStr).then(res => {
                     if(res.ok) return res.text(); throw new Error();
                 }).then(tsv => {
                     if (tsv && !tsv.includes('<html')) { localStorage.setItem('tpf43m_dicio', tsv); processarDicio(tsv); }
-                }).catch(e => console.warn("Enciclopedia: Erro na rede."));
+                }).catch(e => console.warn("Enciclopedia: Offline."));
             }
 
-            // Libera a entrada após 2 segundos independente do resultado das promessas
+            // O botão do Splash aparece após 1.5s obrigatoriamente, com ou sem internet.
             setTimeout(() => {
-                liberarEntrada("Pronto!");
-            }, 2000);
+                liberarEntrada("Acesso Liberado!");
+            }, 1500);
         }
 
         // ==========================================
-        // PARSERS GERAIS DE DATA E TEXTO
+        // PARSERS DE DATA E TEXTO
         // ==========================================
         function processarDataInteligente(dataRaw) {
             if (!dataRaw) return null;
@@ -755,8 +825,28 @@
         }
 
         // ==========================================
-        // MÓDULO: AGENDA V4 (Radar Cultural)
+        // MÓDULO: AGENDA V4.2.3 (Filtros e Cores)
         // ==========================================
+        
+        // Identificador Dinâmico de Classes CSS
+        // Identificador Dinâmico de Classes CSS (Desmembrado para 10 Categorias)
+        function getCategoriaClasse(categoriaReal) {
+            if (!categoriaReal) return 'cat-default';
+            const str = categoriaReal.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
+            
+            if (str.includes('edital') || str.includes('editais')) return 'cat-edital';
+            if (str.includes('convocatoria')) return 'cat-convocatoria';
+            if (str.includes('exposi')) return 'cat-exposicao';
+            if (str.includes('mostra')) return 'cat-mostra';
+            if (str.includes('cursos')) return 'cat-cursos';
+            if (str.includes('palestra')) return 'cat-palestra';
+            if (str.includes('workshop')) return 'cat-workshop';
+            if (str.includes('feira')) return 'cat-feira';
+            if (str.includes('festival')) return 'cat-festival';
+            if (str.includes('concurso') || str.includes('premio')) return 'cat-concurso';
+            
+            return 'cat-default';
+        }
         function processarDatas(tsv) { 
             const linhas = tratarTSV(tsv).slice(1); baseDatas = []; 
             if(linhas.length === 0) return;
@@ -766,34 +856,108 @@
                     const dtInic = processarDataInteligente(colunas[0].trim());
                     if (!dtInic) return;
                     
-                    // Coluna B: Fim. Se não existir, a data de fim é igual ao Início
                     const dtFim = (colunas.length > 1 && colunas[1].trim() !== '') ? processarDataInteligente(colunas[1].trim()) : dtInic;
                     
-                    const categoria = colunas.length > 2 ? colunas[2].trim() : 'Evento';
+                    const categoriaRaw = colunas.length > 2 && colunas[2].trim() !== '' ? colunas[2].trim() : 'Evento';
+                    
+                    // NOVO: Separa as categorias por ";" e limpa os espaços
+                    const categoriasArray = categoriaRaw.split(';').map(cat => {
+                        const nome = cat.trim();
+                        return { nome: nome, classe: getCategoriaClasse(nome) };
+                    });
+
                     const titulo = colunas.length > 3 ? colunas[3].trim() : 'Sem Título';
                     const local = colunas.length > 4 ? colunas[4].trim() : '';
                     const desc = colunas.length > 5 ? colunas[5].trim() : '';
                     let link = colunas.length > 6 ? colunas[6].trim() : '';
-                    
                     if (link && !link.startsWith('http')) link = 'https://' + link;
 
-                    baseDatas.push({ dtInic, dtFim, categoria, titulo, local, desc, link }); 
+                    let uf = "";
+                    if (local) {
+                        const ufMatch = local.match(/-\s*([a-zA-Z]{2})$/);
+                        if (ufMatch) uf = ufMatch[1].toUpperCase();
+                    }
+
+                    baseDatas.push({ dtInic, dtFim, categorias: categoriasArray, titulo, local, desc, link, uf }); 
                 }
             }); 
+            
+            renderFiltrosAgenda();
             initDatas(); 
+        }
+
+        function renderFiltrosAgenda() {
+            const painelFiltros = document.getElementById('painel-filtros');
+            const boxCat = document.getElementById('filtros-categoria');
+            const boxUF = document.getElementById('filtros-uf');
+            
+            if (baseDatas.length === 0) {
+                painelFiltros.style.display = 'none';
+                return;
+            }
+            painelFiltros.style.display = 'block';
+
+            let setCat = new Set();
+            let setUF = new Set();
+            baseDatas.forEach(d => {
+                // NOVO: Adiciona cada categoria individualmente aos botões de filtro
+                d.categorias.forEach(catObj => setCat.add(catObj.nome));
+                if(d.uf) setUF.add(d.uf);
+            });
+
+            let htmlCat = `<div class="filter-chip chip-todas ${filtrosCatAtivos.size === 0 ? 'active' : ''}" onclick="toggleFiltroCategoria('TODAS')">Todas</div>`;
+            Array.from(setCat).sort().forEach(c => {
+                const isActive = filtrosCatAtivos.has(c) ? 'active' : '';
+                const classeCor = getCategoriaClasse(c);
+                htmlCat += `<div class="filter-chip ${classeCor} ${isActive}" onclick="toggleFiltroCategoria('${c.replace(/'/g, "\\'")}')">${c}</div>`;
+            });
+            boxCat.innerHTML = htmlCat;
+
+            let htmlUF = `<div class="filter-chip chip-todas ${filtrosUFAtivos.size === 0 ? 'active' : ''}" onclick="toggleFiltroUF('TODOS')">Brasil (Todos)</div>`;
+            Array.from(setUF).sort().forEach(u => {
+                const isActive = filtrosUFAtivos.has(u) ? 'active' : '';
+                htmlUF += `<div class="filter-chip chip-uf ${isActive}" onclick="toggleFiltroUF('${u}')">${u}</div>`;
+            });
+            boxUF.innerHTML = htmlUF;
+        }
+
+        function toggleFiltroCategoria(cat) {
+            if (cat === 'TODAS') {
+                filtrosCatAtivos.clear();
+            } else {
+                if (filtrosCatAtivos.has(cat)) filtrosCatAtivos.delete(cat);
+                else filtrosCatAtivos.add(cat);
+            }
+            renderFiltrosAgenda();
+            initDatas();
+        }
+
+        function toggleFiltroUF(uf) {
+            if (uf === 'TODOS') {
+                filtrosUFAtivos.clear();
+            } else {
+                if (filtrosUFAtivos.has(uf)) filtrosUFAtivos.delete(uf);
+                else filtrosUFAtivos.add(uf);
+            }
+            renderFiltrosAgenda();
+            initDatas();
         }
 
         function initDatas() { 
             const container = document.getElementById('lista-datas'); let html = ''; 
             if (baseDatas.length === 0) { container.innerHTML = "<p style='text-align:center; color:#888;'>Nenhuma data cadastrada na base.</p>"; return; } 
             
-            // Ordenação pelo início do evento
             baseDatas.sort((a, b) => new Date(a.dtInic.iso).getTime() - new Date(b.dtInic.iso).getTime());
             
             let datasExibidas = 0; 
             
             baseDatas.forEach(ev => { 
-                // Formatação do Período
+                // NOVO: Verifica se pelo menos UMA das tags do evento está marcada no filtro
+                const temCategoriaAtiva = filtrosCatAtivos.size === 0 || ev.categorias.some(cat => filtrosCatAtivos.has(cat.nome));
+                if (!temCategoriaAtiva) return;
+                
+                if (filtrosUFAtivos.size > 0 && (!ev.uf || !filtrosUFAtivos.has(ev.uf))) return;
+
                 let periodoHTML = "";
                 if (ev.dtFim && ev.dtFim.iso !== ev.dtInic.iso) {
                     periodoHTML = `De ${ev.dtInic.dia.toString().padStart(2,'0')}/${ev.dtInic.mes.toString().padStart(2,'0')}/${ev.dtInic.ano} a ${ev.dtFim.dia.toString().padStart(2,'0')}/${ev.dtFim.mes.toString().padStart(2,'0')}/${ev.dtFim.ano}`;
@@ -801,10 +965,18 @@
                     periodoHTML = `${ev.dtInic.dia.toString().padStart(2,'0')}/${ev.dtInic.mes.toString().padStart(2,'0')}/${ev.dtInic.ano}`;
                 }
 
-                // ZERO ESMAECIMENTO
+                // NOVO: Desenha múltiplas etiquetas lado a lado
+                let tagsHTML = "";
+                ev.categorias.forEach(cat => {
+                    tagsHTML += `<span class="ev-tipo ${cat.classe}">${cat.nome}</span> `;
+                });
+                
+                // Define a cor da borda lateral do card baseada na primeira categoria da lista
+                const classeBordaPrincipal = ev.categorias.length > 0 ? ev.categorias[0].classe : 'cat-default';
+
                 html += `
-                    <div class="evento-card datas-int">
-                        <span class="ev-tipo">${ev.categoria}</span>
+                    <div class="evento-card datas-int ${classeBordaPrincipal}">
+                        <div style="margin-bottom: 5px;">${tagsHTML}</div>
                         <div class="ev-titulo">${ev.titulo}</div>
                         <div class="ev-periodo">📅 ${periodoHTML}</div>
                         ${ev.local ? `<div class="ev-local">📍 ${ev.local}</div>` : ''}
@@ -815,7 +987,7 @@
                 datasExibidas++; 
             }); 
             
-            if (datasExibidas === 0) { html = "<p style='text-align:center; color:#888;'>Nenhuma data processada.</p>"; }
+            if (datasExibidas === 0) { html = "<p style='text-align:center; color:#888;'>Nenhum evento encontrado com os filtros selecionados.</p>"; }
             container.innerHTML = html; 
         }
 
@@ -1035,11 +1207,15 @@
             else if (code >= 1 && code <= 3) { icon = '☁️'; condicao = 'Nublado / Parcial'; dica = 'Luz suave (softbox natural). Cores fiéis e baixo contraste.'; }
             else if (code === 45 || code === 48) { icon = '🌫️'; condicao = 'Neblina'; dica = 'Aproveite a profundidade atmosférica e silhuetas.'; }
             else if (code >= 51 && code <= 67) { icon = '🌧️'; condicao = 'Chuva'; dica = 'Cores saturadas, mas proteja bem o equipamento.'; }
-            else if (code >= 80 && code <= 99) { icon = '⛈️'; condicao = 'Tempestade'; dica = 'Luz dramática, mas risco ao equipamento.'; }
+            else if (code >= 80 && code <= 99) { icon = '⛈️'; condicao = 'Instabilidade / Risco de Chuva'; dica = 'Luz dramática, mas risco ao equipamento.'; }
+            
+            const avisoPrudencia = `<div style="font-size: 0.8em; color: #ff9800; border-top: 1px dashed #444; padding-top: 8px; margin-top: 8px; line-height: 1.4;">⚠️ <strong>Aviso C.L.A.R.A:</strong> Ferramentas de previsão são baseadas em modelos matemáticos. Antes de sair para fotografar, abra a janela e confira o céu real.</div>`;
+
             weatherDiv.innerHTML = `
                 <div style="display:flex; flex-direction:column; gap:5px; width: 100%;">
                     <div style="display:flex; justify-content:space-between; align-items:center; font-weight:bold; color:#fff; font-size: 1.1em;"><span>${icon} Clima Agora (${weather.temperature}°C)</span><span>${condicao}</span></div>
-                    <div style="font-size:0.85em; color:#ccc; border-top:1px dashed #444; padding-top:8px; margin-top:5px; line-height: 1.4;">📸 <strong>Dica CLARA:</strong> ${dica}</div>
+                    <div style="font-size:0.85em; color:#ccc; border-top:1px dashed #444; padding-top:8px; margin-top:5px; line-height: 1.4;">📸 <strong>Dica:</strong> ${dica}</div>
+                    ${avisoPrudencia}
                 </div>
             `;
         }
