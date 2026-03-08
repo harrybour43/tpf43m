@@ -360,7 +360,7 @@
         <div id="loading-text" style="color: var(--accent-snc); font-weight: bold; margin-top: 30px;">Sincronizando bancos de dados...</div>
         <button id="btn-entrar" class="btn-entrar hidden" onclick="dismissSplash()">ENTRAR NA CLARA</button>
 
-        <div class="splash-footer">Versão 4.3.0 | Desenvolvido por Harry Bour | 2026</div>
+        <div class="splash-footer">Versão 4.4.0 | Desenvolvido por Harry Bour | 2026</div>
     </div>
 
     <div id="view-menu" class="view hidden">
@@ -1252,19 +1252,58 @@ A partir daí, o próximo número é sempre o <strong>dobro do número que veio 
             } catch (e) { return null; }
         }
 
-        async function updateWeatherUI(targetDate) {
+       async function updateWeatherUI(targetDate) {
             const weatherDiv = document.getElementById('weather-results');
             const hojeStr = toISODate(new Date()); const targetStr = toISODate(targetDate);
             if (targetStr !== hojeStr) { weatherDiv.innerHTML = ''; weatherDiv.classList.add('hidden'); return; }
             weatherDiv.innerHTML = '<span style="color:#aaa;">🌤️ Consultando meteorologia...</span>'; weatherDiv.classList.remove('hidden');
+            
             const weather = await fetchWeather(locLat, locLng);
             if (!weather) { weatherDiv.innerHTML = '<span style="color:#aaa;">⚠️ Clima indisponível no modo offline.</span>'; return; }
-            const code = weather.weathercode; let icon = '🌤️'; let condicao = 'Misto'; let dica = '';
-            if (code === 0) { icon = '☀️'; condicao = 'Céu Limpo'; dica = 'Luz dura e sombras fortes. Use difusores para retratos.'; }
-            else if (code >= 1 && code <= 3) { icon = '☁️'; condicao = 'Nublado / Parcial'; dica = 'Luz suave (softbox natural). Cores fiéis e baixo contraste.'; }
-            else if (code === 45 || code === 48) { icon = '🌫️'; condicao = 'Neblina'; dica = 'Aproveite a profundidade atmosférica e silhuetas.'; }
-            else if (code >= 51 && code <= 67) { icon = '🌧️'; condicao = 'Chuva'; dica = 'Cores saturadas, mas proteja bem o equipamento.'; }
-            else if (code >= 80 && code <= 99) { icon = '⛈️'; condicao = 'Instabilidade / Risco de Chuva'; dica = 'Luz dramática, mas risco ao equipamento.'; }
+            
+            const code = weather.weathercode; 
+            const isDay = weather.is_day === 1; // A API devolve 1 se for dia e 0 se for noite
+            
+            let icon = isDay ? '🌤️' : '🌙'; 
+            let condicao = 'Misto'; 
+            let dica = '';
+
+            // Lógica ramificada para Dia vs Noite
+            if (code === 0) { 
+                icon = isDay ? '☀️' : '🌑'; 
+                condicao = 'Céu Limpo'; 
+                dica = isDay 
+                    ? 'Luz dura e sombras fortes. Use difusores para retratos.' 
+                    : 'Noite limpa. Excelente para astrofotografia, exposições longas e light painting longe da cidade.'; 
+            }
+            else if (code >= 1 && code <= 3) { 
+                icon = '☁️'; 
+                condicao = 'Nublado / Parcial'; 
+                dica = isDay 
+                    ? 'Luz suave (softbox natural). Cores fiéis e baixo contraste.' 
+                    : 'Noite nublada. As nuvens refletem a poluição luminosa da cidade, criando um brilho alaranjado. Use tripé.'; 
+            }
+            else if (code === 45 || code === 48) { 
+                icon = '🌫️'; 
+                condicao = 'Neblina'; 
+                dica = isDay 
+                    ? 'Aproveite a profundidade atmosférica e silhuetas.' 
+                    : 'Clima misterioso/noir. As luzes da rua criam halos incríveis. O foco manual da lente é recomendado.'; 
+            }
+            else if (code >= 51 && code <= 67) { 
+                icon = '🌧️'; 
+                condicao = 'Chuva'; 
+                dica = isDay 
+                    ? 'Cores saturadas, mas proteja bem o equipamento.' 
+                    : 'Aproveite os reflexos dramáticos das luzes no asfalto molhado. Proteja bem o equipamento.'; 
+            }
+            else if (code >= 80 && code <= 99) { 
+                icon = '⛈️'; 
+                condicao = 'Instabilidade / Risco de Chuva'; 
+                dica = isDay 
+                    ? 'Luz dramática, mas risco ao equipamento.' 
+                    : 'Luzes dramáticas e risco de raios. Evite áreas abertas e use o tripé num local abrigado.'; 
+            }
             
             const avisoPrudencia = `<div style="font-size: 0.8em; color: #ff9800; border-top: 1px dashed #444; padding-top: 8px; margin-top: 8px; line-height: 1.4;">⚠️ <strong>Aviso C.L.A.R.A:</strong> Ferramentas de previsão são baseadas em modelos matemáticos. Antes de sair para fotografar, abra a janela e confira o céu real.</div>`;
 
