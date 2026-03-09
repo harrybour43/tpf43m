@@ -614,7 +614,7 @@
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">V5.3.0 • Harry Bour • 2026</div>
+        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">V5.4.0 • Harry Bour • 2026</div>
     </div>
 
     <header class="app-header">
@@ -1816,7 +1816,8 @@
                 const defSafe = item.definicao.replace(/'/g, "\\'").replace(/\n/g, '\\n');
                 
                 htmlHTML += `<div class="card dicio-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
-                            <div class="term">${item.termo}</div>
+                            <div class="term" style="margin-bottom: 2px;">${item.termo}</div>
+                            <div style="font-size: 0.75rem; color: var(--accent-dicio); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px;">${item.categoria}</div>
                             <div class="preview">${item.definicao}</div>
                          </div>`;
             });
@@ -1846,7 +1847,8 @@
                 const defSafe = item.definicao.replace(/'/g, "\\'").replace(/\n/g, '\\n');
                 
                 htmlHTML += `<div class="card dicio-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
-                            <div class="term">${item.termo}</div>
+                            <div class="term" style="margin-bottom: 2px;">${item.termo}</div>
+                            <div style="font-size: 0.75rem; color: var(--accent-dicio); text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; margin-bottom: 8px;">${item.categoria}</div>
                             <div class="preview">${item.definicao}</div>
                          </div>`;
             });
