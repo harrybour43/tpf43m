@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>CLARA v5.4.0</title>
+    <title>CLARA v5.6.0</title>
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0c0c0c">
-    <meta name="apple-mobile-web-app-title" content="CLARA v5.4.0">
+    <meta name="apple-mobile-web-app-title" content="CLARA v5.6.0">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f4f4f5'%3E%3Cpath d='M4 6C2.9 6 2 6.9 2 8V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H16.83L15 4H9L7.17 6H4ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z'/%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f4f4f5'%3E%3Cpath d='M4 6C2.9 6 2 6.9 2 8V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H16.83L15 4H9L7.17 6H4ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z'/%3E%3C/svg%3E">
@@ -614,7 +614,7 @@
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">V5.4.0 • Harry Bour • 2026</div>
+        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">v5.6.0 • Harry Bour • 2026</div>
     </div>
 
     <header class="app-header">
@@ -639,8 +639,12 @@
             <div class="filter-container" id="painel-filtros" style="display: none;">
                 <span class="filter-title">Categorias</span>
                 <div class="filter-row" id="filtros-categoria"></div>
+                
                 <span class="filter-title" style="margin-top: 16px;">Estado (UF)</span>
                 <div class="filter-row" id="filtros-uf"></div>
+                
+                <span class="filter-title" id="titulo-filtro-urgencia" style="margin-top: 16px; display: none; color: var(--accent-warning);">Urgência</span>
+                <div class="filter-row" id="filtros-urgencia" style="display: none;"></div>
             </div>
 
             <div id="lista-datas">
@@ -868,6 +872,7 @@
         
         let filtrosCatAtivos = new Set(); 
         let filtrosUFAtivos = new Set();
+        let filtroUltimosDiasAtivo = false; // NOVO: Controla o filtro de urgência
 
         const nomesUC = { 
             "UC1": "Captar imagens", 
@@ -1570,6 +1575,8 @@
             const painelFiltros = document.getElementById('painel-filtros');
             const boxCat = document.getElementById('filtros-categoria');
             const boxUF = document.getElementById('filtros-uf');
+            const boxUrgencia = document.getElementById('filtros-urgencia');
+            const tituloUrgencia = document.getElementById('titulo-filtro-urgencia');
             
             if (baseDatas.length === 0) { 
                 painelFiltros.style.display = 'none'; 
@@ -1580,13 +1587,26 @@
 
             let setCat = new Set(); 
             let setUF = new Set(); 
+            let temUltimosDias = false; // Rastreador de urgência
             
+            const hojeObj = new Date();
+            hojeObj.setHours(0,0,0,0);
+
             baseDatas.forEach(function(d) { 
                 d.categorias.forEach(function(catObj) { 
                     setCat.add(catObj.nome); 
                 }); 
                 if(d.uf) {
                     setUF.add(d.uf); 
+                }
+                
+                // Verifica se o evento está a 7 dias ou menos de acabar
+                const dtFimObj = new Date(d.dtFim.ano, d.dtFim.mes - 1, d.dtFim.dia);
+                const diffTime = dtFimObj.getTime() - hojeObj.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                
+                if (diffDays >= 0 && diffDays <= 7) {
+                    temUltimosDias = true;
                 }
             });
 
@@ -1598,7 +1618,6 @@
                 const cor = getCategoriaClasse(c);
                 htmlCat += `<div class="filter-chip ${cor} ${isActive}" onclick="toggleFiltroCategoria('${c.replace(/'/g, "\\'")}')">${c}</div>`;
             });
-            
             boxCat.innerHTML = htmlCat;
 
             let classTodasUF = filtrosUFAtivos.size === 0 ? 'active' : '';
@@ -1608,8 +1627,24 @@
                 const isActive = filtrosUFAtivos.has(u) ? 'active' : '';
                 htmlUF += `<div class="filter-chip chip-uf ${isActive}" onclick="toggleFiltroUF('${u}')">${u}</div>`;
             });
-            
             boxUF.innerHTML = htmlUF;
+
+            // Renderiza o Botão de Últimos Dias (Se houver eventos válidos)
+            if (boxUrgencia && tituloUrgencia) {
+                if (temUltimosDias) {
+                    tituloUrgencia.style.display = 'block';
+                    boxUrgencia.style.display = 'flex';
+                    let classAtivo = filtroUltimosDiasAtivo ? 'active' : '';
+                    let estiloExtra = filtroUltimosDiasAtivo 
+                        ? 'border-color: var(--accent-warning); background: var(--accent-warning); color: #000;' 
+                        : 'border-color: var(--accent-warning); color: var(--accent-warning); background: transparent;';
+                    boxUrgencia.innerHTML = `<div class="filter-chip ${classAtivo}" style="${estiloExtra}" onclick="toggleFiltroUltimosDias()">🚨 ÚLTIMOS DIAS</div>`;
+                } else {
+                    tituloUrgencia.style.display = 'none';
+                    boxUrgencia.style.display = 'none';
+                    filtroUltimosDiasAtivo = false;
+                }
+            }
         }
 
         function toggleFiltroCategoria(cat) {
@@ -1640,6 +1675,12 @@
             initDatas();
         }
 
+        function toggleFiltroUltimosDias() {
+            filtroUltimosDiasAtivo = !filtroUltimosDiasAtivo;
+            renderFiltrosAgenda();
+            initDatas();
+        }
+
         function initDatas() { 
             const container = document.getElementById('lista-datas'); 
             let htmlHTML = ''; 
@@ -1654,24 +1695,32 @@
             });
             
             const hojeISO = toISODate(new Date()); 
+            const hojeObj = new Date();
+            hojeObj.setHours(0,0,0,0);
+            
             let datasExibidas = 0; 
             
             baseDatas.forEach(function(ev) { 
-                // Filtro Cruzado
+                // Filtro Cruzado de Categorias
                 const temCategoriaAtiva = filtrosCatAtivos.size === 0 || ev.categorias.some(function(cat) {
                     return filtrosCatAtivos.has(cat.nome);
                 });
                 
-                if (!temCategoriaAtiva) {
-                    return;
-                }
+                if (!temCategoriaAtiva) return;
                 
-                if (filtrosUFAtivos.size > 0 && (!ev.uf || !filtrosUFAtivos.has(ev.uf))) {
+                if (filtrosUFAtivos.size > 0 && (!ev.uf || !filtrosUFAtivos.has(ev.uf))) return;
+
+                // Cálculo de Urgência
+                const dtFimObj = new Date(ev.dtFim.ano, ev.dtFim.mes - 1, ev.dtFim.dia);
+                const diffTime = dtFimObj.getTime() - hojeObj.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                const isUltimosDias = diffDays >= 0 && diffDays <= 7;
+
+                // Bloqueia a renderização se o filtro de urgência estiver ativo e o evento não for urgente
+                if (filtroUltimosDiasAtivo && !isUltimosDias) {
                     return;
                 }
 
-                const isPast = ev.dtFim ? (ev.dtFim.iso < hojeISO) : (ev.dtInic.iso < hojeISO);
-                
                 let periodoHTML = "";
                 if (ev.dtFim && ev.dtFim.iso !== ev.dtInic.iso) {
                     periodoHTML = `De ${formatarDataBR(ev.dtInic.iso)} a ${formatarDataBR(ev.dtFim.iso)}/${ev.dtFim.ano}`;
@@ -1684,6 +1733,12 @@
                     tagsHTML += `<span class="ev-tipo ${cat.classe}">${cat.nome}</span> `; 
                 });
                 
+                // Distintivo Visual (Badge) inserido direto no Título
+                let badgeUltimosDiasHTML = "";
+                if (isUltimosDias) {
+                    badgeUltimosDiasHTML = `<span style="background: var(--accent-warning); color: #000; font-size: 0.6rem; font-family: 'DM Sans', sans-serif; font-weight: 800; padding: 4px 8px; border-radius: 6px; letter-spacing: 1px; margin-left: 12px; vertical-align: middle;">🚨 ÚLTIMOS DIAS</span>`;
+                }
+
                 const classeBordaPrincipal = ev.categorias.length > 0 ? ev.categorias[0].classe : 'cat-default';
 
                 // GOOGLE CALENDAR
@@ -1701,20 +1756,115 @@
                 const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${urlTitulo}&dates=${dateStart}/${dateEnd}&details=${urlDetalhe}&location=${urlLocal}`;
 
                 htmlHTML += `
-                        <div class="card datas-int ${classeBordaPrincipal}">
+                    <div class="card datas-int ${classeBordaPrincipal}">
                         <div style="margin-bottom: 12px;">${tagsHTML}</div>
-                        <div class="ev-titulo">${ev.titulo}</div>
+                        <div class="ev-titulo">${ev.titulo} ${badgeUltimosDiasHTML}</div>
                         <div class="ev-periodo">📅 ${periodoHTML}</div>
                         ${ev.local ? `<div class="ev-local">📍 ${ev.local}</div>` : ''}
                         ${ev.desc ? `<div class="ev-desc">${ev.desc}</div>` : ''}
                         
                         <div style="display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap;">
-                            ${ev.link ? `<a href="${ev.link}" target="_blank" class="btn btn-outline" style="font-size:0.8rem; padding:10px;">SAIBA MAIS (Link Externo)</a>` : ''}
-                            <a href="${googleCalUrl}" target="_blank" class="btn btn-outline" style="border-color:#3b82f6; color:#3b82f6; font-size:0.8rem; padding:10px;">+ AGENDA GOOGLE</a>
+                            ${ev.link ? `<a href="${ev.link}" target="_blank" class="btn btn-outline" style="font-size:0.8rem; padding:10px;">SAIBA MAIS</a>` : ''}
+                            <a href="${googleCalUrl}" target="_blank" class="btn btn-outline" style="border-color:#3b82f6; color:#3b82f6; font-size:0.8rem; padding:10px;">+ AGENDA</a>
+                        </div>
+                    </div>
+                `; 
+                datasExibidas++; function initDatas() { 
+            const container = document.getElementById('lista-datas'); 
+            let htmlHTML = ''; 
+            
+            if (baseDatas.length === 0) { 
+                container.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Nenhuma data cadastrada na base.</p>"; 
+                return; 
+            } 
+            
+            baseDatas.sort(function(a, b) { 
+                return new Date(a.dtInic.iso).getTime() - new Date(b.dtInic.iso).getTime(); 
+            });
+            
+            const hojeISO = toISODate(new Date()); 
+            const hojeObj = new Date();
+            hojeObj.setHours(0,0,0,0);
+            
+            let datasExibidas = 0; 
+            
+            baseDatas.forEach(function(ev) { 
+                // Filtro Cruzado de Categorias
+                const temCategoriaAtiva = filtrosCatAtivos.size === 0 || ev.categorias.some(function(cat) {
+                    return filtrosCatAtivos.has(cat.nome);
+                });
+                
+                if (!temCategoriaAtiva) return;
+                
+                if (filtrosUFAtivos.size > 0 && (!ev.uf || !filtrosUFAtivos.has(ev.uf))) return;
+
+                // Cálculo de Urgência
+                const dtFimObj = new Date(ev.dtFim.ano, ev.dtFim.mes - 1, ev.dtFim.dia);
+                const diffTime = dtFimObj.getTime() - hojeObj.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24));
+                const isUltimosDias = diffDays >= 0 && diffDays <= 7;
+
+                // Bloqueia a renderização se o filtro de urgência estiver ativo e o evento não for urgente
+                if (filtroUltimosDiasAtivo && !isUltimosDias) {
+                    return;
+                }
+
+                let periodoHTML = "";
+                if (ev.dtFim && ev.dtFim.iso !== ev.dtInic.iso) {
+                    periodoHTML = `De ${formatarDataBR(ev.dtInic.iso)} a ${formatarDataBR(ev.dtFim.iso)}/${ev.dtFim.ano}`;
+                } else {
+                    periodoHTML = `${formatarDataBR(ev.dtInic.iso)}/${ev.dtInic.ano}`;
+                }
+
+                let tagsHTML = ""; 
+                ev.categorias.forEach(function(cat) { 
+                    tagsHTML += `<span class="ev-tipo ${cat.classe}">${cat.nome}</span> `; 
+                });
+                
+                // Distintivo Visual (Badge) inserido direto no Título
+                let badgeUltimosDiasHTML = "";
+                if (isUltimosDias) {
+                    badgeUltimosDiasHTML = `<span style="background: var(--accent-warning); color: #000; font-size: 0.6rem; font-family: 'DM Sans', sans-serif; font-weight: 800; padding: 4px 8px; border-radius: 6px; letter-spacing: 1px; margin-left: 12px; vertical-align: middle;">🚨 ÚLTIMOS DIAS</span>`;
+                }
+
+                const classeBordaPrincipal = ev.categorias.length > 0 ? ev.categorias[0].classe : 'cat-default';
+
+                // GOOGLE CALENDAR
+                const dateStart = ev.dtInic.iso.replace(/-/g, '');
+                
+                let dateEndStr = ev.dtFim ? ev.dtFim.iso : ev.dtInic.iso;
+                let dateEndObj = new Date(dateEndStr);
+                dateEndObj.setDate(dateEndObj.getDate() + 1); 
+                const dateEnd = toISODate(dateEndObj).replace(/-/g, '');
+                
+                const urlTitulo = encodeURIComponent(ev.titulo);
+                const urlDetalhe = encodeURIComponent(`Link: ${ev.link}\n\n${ev.desc}`);
+                const urlLocal = encodeURIComponent(ev.local);
+                
+                const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${urlTitulo}&dates=${dateStart}/${dateEnd}&details=${urlDetalhe}&location=${urlLocal}`;
+
+                htmlHTML += `
+                    <div class="card datas-int ${classeBordaPrincipal}">
+                        <div style="margin-bottom: 12px;">${tagsHTML}</div>
+                        <div class="ev-titulo">${ev.titulo} ${badgeUltimosDiasHTML}</div>
+                        <div class="ev-periodo">📅 ${periodoHTML}</div>
+                        ${ev.local ? `<div class="ev-local">📍 ${ev.local}</div>` : ''}
+                        ${ev.desc ? `<div class="ev-desc">${ev.desc}</div>` : ''}
+                        
+                        <div style="display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap;">
+                            ${ev.link ? `<a href="${ev.link}" target="_blank" class="btn btn-outline" style="font-size:0.8rem; padding:10px;">SAIBA MAIS</a>` : ''}
+                            <a href="${googleCalUrl}" target="_blank" class="btn btn-outline" style="border-color:#3b82f6; color:#3b82f6; font-size:0.8rem; padding:10px;">+ AGENDA</a>
                         </div>
                     </div>
                 `; 
                 datasExibidas++; 
+            });
+            
+            if (datasExibidas === 0) { 
+                htmlHTML = "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento encontrado com os filtros selecionados.</p>"; 
+            }
+            container.innerHTML = htmlHTML; 
+        }
             });
             
             if (datasExibidas === 0) { 
