@@ -1008,9 +1008,113 @@
             document.getElementById('sheet-backdrop').classList.add('active');
             document.getElementById('bottom-sheet').classList.add('active');
         } 
+
+        // ==========================================
+        // MOTOR TMDB (Busca Lançamentos Recentes/Futuros)
+        // ==========================================
+        async function buscarNoTMDB(nomePersonagem) {
+            const container = document.getElementById('tmdb-container');
+            if (!container) return;
+
+            const apiKey = 'd6ce91a10a7e7316c5077ce081e2925e';
+            const urlSearch = `https://api.themoviedb.org/3/search/person?query=${encodeURIComponent(nomePersonagem)}&language=pt-BR&api_key=${apiKey}`;
+
+            try {
+                const resSearch = await fetch(urlSearch);
+                const dataSearch = await resSearch.json();
+
+                // Verifica se a pessoa existe no banco do TMDB
+                if (dataSearch.results && dataSearch.results.length > 0) {
+                    const person = dataSearch.results[0];
+                    
+                    // Busca todos os créditos da pessoa
+                    const urlCredits = `https://api.themoviedb.org/3/person/${person.id}/combined_credits?language=pt-BR&api_key=${apiKey}`;
+                    const resCredits = await fetch(urlCredits);
+                    const dataCredits = await resCredits.json();
+
+                    // Junta trabalhos no elenco e na equipe técnica
+                    let obras = [];
+                    if (dataCredits.cast) obras = obras.concat(dataCredits.cast);
+                    if (dataCredits.crew) obras = obras.concat(dataCredits.crew);
+
+                    // Remove obras duplicadas (Ex: A pessoa escreveu e dirigiu o mesmo filme)
+                    const obrasUnicasMap = new Map();
+                    obras.forEach(function(obra) {
+                        if (!obrasUnicasMap.has(obra.id)) {
+                            obrasUnicasMap.set(obra.id, obra);
+                        }
+                    });
+                    const obrasUnicas = Array.from(obrasUnicasMap.values());
+
+                    // Aplica o filtro de tempo (-30 dias a +90 dias no futuro)
+                    const hojeTime = new Date().getTime();
+                    const limitePassado = hojeTime - (30 * 24 * 60 * 60 * 1000); 
+                    const limiteFuturo = hojeTime + (90 * 24 * 60 * 60 * 1000); 
+
+                    const obrasFiltradas = obrasUnicas.filter(function(obra) {
+                        const dataLancamento = obra.release_date || obra.first_air_date;
+                        if (!dataLancamento) return false;
+                        const dataObj = new Date(dataLancamento).getTime();
+                        return dataObj >= limitePassado && dataObj <= limiteFuturo;
+                    }).sort(function(a, b) {
+                        // Ordena para que os lançamentos fiquem cronológicos
+                        const dataA = new Date(a.release_date || a.first_air_date).getTime();
+                        const dataB = new Date(b.release_date || b.first_air_date).getTime();
+                        return dataA - dataB; 
+                    }).slice(0, 3); // Exibe no máximo as 3 obras mais relevantes
+
+                    // Se encontrou lançamentos, desenha os cards de cinema!
+                    if (obrasFiltradas.length > 0) {
+                        let html = '<div style="margin-top: 32px; padding-top: 16px; border-top: 1px dashed var(--border-color);">';
+                        html += '<div style="font-size: 0.75rem; color: #10b981; text-transform: uppercase; letter-spacing: 1px; font-weight: 800; margin-bottom: 16px; display: flex; align-items: center; gap: 6px;">🎬 No TMDB (Próximos Lançamentos)</div>';
+
+                        obrasFiltradas.forEach(function(obra) {
+                            const titulo = obra.title || obra.name;
+                            const dataRaw = obra.release_date || obra.first_air_date;
+                            const ano = dataRaw ? dataRaw.split('-')[0] : '';
+                            const cargo = obra.job || obra.character || 'Elenco/Equipe';
+                            const poster = obra.poster_path ? `https://image.tmdb.org/t/p/w92${obra.poster_path}` : '';
+
+                            html += `
+                                <div style="display: flex; gap: 16px; background: rgba(16, 185, 129, 0.05); border-left: 3px solid #10b981; padding: 12px; border-radius: 8px; margin-bottom: 12px; align-items: center;">
+                                    ${poster ? `<img src="${poster}" style="width: 40px; height: 60px; object-fit: cover; border-radius: 4px; box-shadow: 0 4px 10px rgba(0,0,0,0.3);">` : `<div style="width: 40px; height: 60px; background: var(--bg-elevated); border-radius: 4px; display:flex; align-items:center; justify-content:center; font-size:0.6rem; color:#555;">S/ Img</div>`}
+                                    <div style="display: flex; flex-direction: column; justify-content: center;">
+                                        <div style="font-family: 'Cormorant Garamond', serif; font-size: 1.2rem; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.1;">${titulo} (${ano})</div>
+                                        <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">👤 ${cargo}</div>
+                                    </div>
+                                </div>
+                            `;
+                        });
+
+                        html += '</div>';
+                        container.innerHTML = html; // Injeta magicamente na tela
+                    }
+                }
+            } catch (e) {
+                // Silencioso: Se não tiver internet, apenas ignora.
+            }
+        }
+
+
         
         function abrirVerbeteModal(termo, categoria, definicao) { 
             openBottomSheet(categoria, termo, definicao, 'var(--accent-dicio)'); 
+
+        cardsHTML += '</div>';
+                conteudoFinal += cardsHTML;
+            }
+
+            // NOVO: Adiciona a "caixa vazia" onde o TMDB vai injetar as respostas
+            conteudoFinal += '<div id="tmdb-container"></div>';
+
+            document.getElementById('sheet-body').innerHTML = conteudoFinal;
+            
+            document.getElementById('sheet-backdrop').classList.add('active');
+            document.getElementById('bottom-sheet').classList.add('active');
+            
+            // NOVO: Dispara o gatilho da busca em segundo plano após o modal abrir!
+            buscarNoTMDB(termo);
+        }
         }
         
         function abrirGuiaLuz() { 
