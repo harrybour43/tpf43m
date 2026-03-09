@@ -25,15 +25,13 @@
            1. DESIGN SYSTEM & VARIÁVEIS
            ========================================== */
         :root {
-            /* Palette V5 - Mais refinada e profunda */
             --bg-color: #0c0c0c;
             --bg-panel: #161616;
             --bg-elevated: #222222;
             --text-main: #f4f4f5;
             --text-muted: #a1a1aa;
             
-            /* Acentos */
-            --accent-snc: #ff7b00; /* Laranja mais vibrante */
+            --accent-snc: #ff7b00; 
             --accent-calc: #3b82f6;
             --accent-aulas: #10b981;
             --accent-eventos: #d946ef;
@@ -44,7 +42,6 @@
             --accent-danger: #ef4444;
             --border-color: #27272a;
 
-            /* Categorias do Radar */
             --cat-edital: #10b981;       
             --cat-convocatoria: #3b82f6; 
             --cat-exposicao: #d946ef;    
@@ -56,7 +53,6 @@
             --cat-festival: #f43f5e;     
             --cat-concurso: #ef4444;     
 
-            /* Safe Areas iOS */
             --sat: env(safe-area-inset-top, 0px);
             --sab: env(safe-area-inset-bottom, 0px);
         }
@@ -67,7 +63,7 @@
             font-family: 'Plus Jakarta Sans', sans-serif; 
             background-color: var(--bg-color); 
             color: var(--text-main); 
-            overflow: hidden; /* Trava o scroll global, gerencia por aba */
+            overflow: hidden; 
             height: 100dvh; 
             display: flex;
             flex-direction: column;
@@ -81,7 +77,6 @@
            2. LAYOUT APP NATIVO (Header, Viewport, TabBar)
            ========================================== */
         
-        /* Top Bar */
         .app-header {
             position: fixed; top: 0; left: 0; width: 100%;
             height: calc(60px + var(--sat)); padding-top: var(--sat);
@@ -90,31 +85,28 @@
             display: flex; align-items: center; justify-content: space-between;
             padding-inline: 20px; z-index: 1000; border-bottom: 1px solid var(--border-color);
         }
+        
         .header-title { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 800; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+        
         .sync-btn { background: var(--bg-elevated); border: 1px solid var(--border-color); color: var(--text-main); width: 38px; height: 38px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.1rem; cursor: pointer; }
         .sync-btn:active { transform: scale(0.9); }
-        .sync-btn.spinning { animation: spin 1s linear inf; opacity: 0.5; }
+        .sync-btn.spinning { animation: spin 1s linear infinite; opacity: 0.5; }
 
-        /* Títulos Grandes de Secão */
         .page-title { font-size: 2.2rem; margin-bottom: 24px; padding-bottom: 12px; }
 
-        /* Viewport das Abas */
         .app-viewport {
             flex: 1; position: relative; width: 100%;
             margin-top: calc(60px + var(--sat));
         }
 
-        /* Cada aba rola independente mantendo memória */
         .view-tab {
             position: absolute; top: 0; left: 0; right: 0; bottom: calc(65px + var(--sab));
             overflow-y: auto; overflow-x: hidden; -webkit-overflow-scrolling: touch;
             padding: 24px 20px; padding-bottom: 40px;
-            /* Lógica de memória de scroll em vez de display none */
             visibility: hidden; opacity: 0; z-index: 0; pointer-events: none; transition: opacity 0.2s;
         }
         .view-tab.active { visibility: visible; opacity: 1; z-index: 10; pointer-events: auto; }
 
-        /* Tab Bar Inferior */
         .tab-bar {
             position: fixed; bottom: 0; left: 0; width: 100%;
             height: calc(65px + var(--sab)); padding-bottom: var(--sab);
@@ -122,6 +114,7 @@
             backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
             display: flex; justify-content: space-between; align-items: center; z-index: 1000;
         }
+        
         .tab-item {
             flex: 1; height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center;
             color: var(--text-muted); font-size: 0.65rem; font-weight: 700; gap: 4px; cursor: pointer; transition: color 0.2s; position: relative;
@@ -172,7 +165,7 @@
             display: flex; align-items: center; padding-inline: 16px;
         }
         .btn-back { background: transparent; border: none; color: var(--accent-snc); font-size: 1rem; font-weight: 700; font-family: inherit; display: flex; align-items: center; gap: 4px; cursor: pointer; padding: 8px;}
-        .push-title { flex: 1; text-align: center; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; transform: translateX(-35px); } /* compensa o botão voltar */
+        .push-title { flex: 1; text-align: center; font-family: 'Syne', sans-serif; font-weight: 700; font-size: 1.1rem; transform: translateX(-35px); }
         .push-content { flex: 1; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 24px 20px; padding-bottom: calc(20px + var(--sab)); }
 
         /* ==========================================
@@ -194,7 +187,6 @@
         .sheet-handle { width: 48px; height: 5px; background: #444; border-radius: 10px; margin: 12px auto 20px auto; }
         .sheet-content { padding: 0 24px 32px 24px; overflow-y: auto; -webkit-overflow-scrolling: touch; padding-bottom: calc(32px + var(--sab));}
         
-        /* Sheet Textos */
         .sheet-kicker { font-size: 0.8rem; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 8px;}
         .sheet-title { font-family: 'Syne', sans-serif; font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 8px; color: #fff;}
         .sheet-subtitle { color: var(--text-muted); font-weight: 600; margin-bottom: 20px; font-size: 0.95rem;}
@@ -212,7 +204,7 @@
             width: 100px; height: 100px; background: var(--bg-panel); border-radius: 24px;
             display: flex; justify-content: center; align-items: center; font-size: 3.5rem;
             box-shadow: 0 16px 40px rgba(255, 123, 0, 0.15); margin-bottom: 24px;
-            animation: pulse-glow 2s inf; border: 1px solid var(--border-color);
+            animation: pulse-glow 2s infinite; border: 1px solid var(--border-color);
         }
         @keyframes pulse-glow { 0% { box-shadow: 0 0 0 0 rgba(255, 123, 0, 0.4); } 70% { box-shadow: 0 0 0 20px rgba(255, 123, 0, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 123, 0, 0); } }
 
@@ -220,7 +212,6 @@
            7. MÓDULOS ESPECÍFICOS E CHIPS
            ========================================== */
         
-        /* Filtros e Chips */
         .filter-container { background: var(--bg-panel); padding: 16px; border-radius: 16px; margin-bottom: 24px; border: 1px solid var(--border-color); }
         .filter-title { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; display: block; text-transform: uppercase; letter-spacing: 0.5px;}
         .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
@@ -266,6 +257,7 @@
         .ev-tipo.cat-feira { color: var(--cat-feira); background: rgba(249, 115, 22, 0.1); }
         .ev-tipo.cat-festival { color: var(--cat-festival); background: rgba(244, 63, 94, 0.1); }
         .ev-tipo.cat-concurso { color: var(--cat-concurso); background: rgba(239, 68, 68, 0.1); }
+        .card:not(.datas-int) .ev-tipo { color: var(--accent-eventos); background: rgba(156, 39, 176, 0.1);}
         
         .ev-titulo { font-size: 1.3rem; font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; margin: 12px 0 8px 0; line-height: 1.2; }
         .ev-periodo { font-size: 0.9rem; color: #fff; font-weight: 700; margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
@@ -278,9 +270,18 @@
         .dicio-item .term { font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; font-size: 1.15rem; margin-bottom: 6px;}
         .dicio-item .preview { font-size: 0.85rem; color: var(--text-muted); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; line-height: 1.4;}
 
-        /* Luz de Estúdio Redesign (Conforme Imagem Anexada) */
+        /* Luz Natural */
+        .sun-card { display: flex; flex-direction: column; gap: 4px; border-left-width: 4px; border-left-color: #555;}
+        .sun-card.golden { border-left-color: var(--accent-sun); background: rgba(255, 179, 0, 0.05); }
+        .sun-card.blue { border-left-color: #2196f3; background: rgba(33, 150, 243, 0.05); }
+        .sun-card .row { display: flex; justify-content: space-between; width: 100%; align-items: center;}
+        .sun-card .time { font-size: 1.1rem; font-family: 'Syne', sans-serif; font-weight: 700; color: #fff; }
+        .sun-card .label { color: var(--text-muted); font-size: 0.85rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px;}
+        .sun-card .info { font-size: 0.8rem; color: #888; border-top: 1px dashed var(--border-color); padding-top: 8px; margin-top: 4px; line-height: 1.4;}
+
+        /* Luz de Estúdio Redesign */
         .light-card { background: var(--bg-panel); border-radius: 12px; border: 1px solid var(--border-color); padding: 16px; margin-bottom: 16px; display: flex; flex-direction: column; gap: 12px;}
-        .light-card.principal { border-color: #4caf50; } /* Borda verde pro principal */
+        .light-card.principal { border-color: #4caf50; } 
         
         .light-controls-row { display: flex; flex-direction: column; gap: 12px; }
         .light-controls-row select { width: 100%; padding: 12px; border-radius: 8px; border: 1px solid var(--border-color); background: var(--bg-color); color: #fff; font-size: 1rem; font-weight: 600; font-family: inherit; appearance: none;}
@@ -302,16 +303,16 @@
     <div id="splash-screen">
         <div class="app-icon-container">🎓</div>
         <div class="brand-font" style="font-size: 2.5rem; margin-bottom: 8px;">CLARA</div>
-        <div style="color: var(--accent-snc); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px;">V5.0 ENTERPRISE</div>
-        <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando...</div>
+        <div style="color: var(--accent-snc); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px;">Central de Luz e Apoio ao Repertório de Artistas do Audiovisual</div>
+        <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">Harry Bour • 2026</div>
+        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">V5.0.0 • Harry Bour • 2026</div>
     </div>
 
     <header class="app-header">
         <div class="header-title">🎓 CLARA</div>
-        <button id="btn-force-sync" class="sync-btn" onclick="forceSync()">🔄</button>
+        <button id="btn-force-sync" class="sync-btn" onclick="forceSync()" title="Forçar Atualização">🔄</button>
     </header>
 
     <main class="app-viewport">
@@ -326,7 +327,7 @@
             <div class="filter-container" id="painel-filtros" style="display: none;">
                 <span class="filter-title">Categorias</span>
                 <div class="filter-row" id="filtros-categoria"></div>
-                <span class="filter-title" style="margin-top: 16px;">Estado</span>
+                <span class="filter-title" style="margin-top: 16px;">Estado (UF)</span>
                 <div class="filter-row" id="filtros-uf"></div>
             </div>
 
@@ -342,7 +343,7 @@
             </div>
             
             <div id="dicio-search-area" style="display: flex; flex-direction: column; gap: 12px; margin-bottom: 24px;">
-                <input type="text" id="buscaDicio" class="input-box" placeholder="Buscar termo..." onkeyup="filtrarDicio()">
+                <input type="text" id="buscaDicio" class="input-box" placeholder="Buscar termo ou palavra-chave..." onkeyup="filtrarDicio()">
                 <select id="filtroCategoriaDicio" class="input-box" onchange="filtrarDicio()">
                     <option value="">Todas as Categorias</option>
                 </select>
@@ -350,7 +351,9 @@
 
             <div id="dicio-alpha-area" class="hidden" style="display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 24px;"></div>
             
-            <div id="lista-dicio" class="dicio-grid"></div>
+            <div id="lista-dicio" class="dicio-grid">
+                <p style="text-align:center; color:var(--text-muted); grid-column: 1/-1;">Nenhum dado vinculado ainda.</p>
+            </div>
         </section>
 
         <section id="view-suncalc" class="view-tab">
@@ -514,38 +517,65 @@
         </div>
     </template>
 
+    <div id="visitor-counter" style="color: var(--bg-color); position: fixed; bottom: 0; left: 0; font-size: 0.1rem; user-select: all; opacity: 0; pointer-events: none;">0</div>
+
     <script>
-        // Configurações Base
+        // ==========================================
+        // VARIÁVEIS GLOBAIS E LINKS DAS PLANILHAS
+        // ==========================================
         const LINK_PLANILHA_AULAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=0&single=true&output=tsv";
         const LINK_PLANILHA_EVENTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv";
         const LINK_PLANILHA_DATAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=2069138341&single=true&output=tsv";
         const LINK_PLANILHA_DICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1758081988&single=true&output=tsv"; 
         
-        let aulasArray = []; let baseEventos = []; let baseDatas = []; let dicioArray = [];
-        let dicioMode = 'search'; let currentLetter = 'A';
-        let filtrosCatAtivos = new Set(); let filtrosUFAtivos = new Set();
+        let aulasArray = []; 
+        let baseEventos = []; 
+        let baseDatas = []; 
+        let dicioArray = [];
+        
+        let dicioMode = 'search'; 
+        let currentLetter = 'A';
+        
+        let filtrosCatAtivos = new Set(); 
+        let filtrosUFAtivos = new Set();
 
         const nomesUC = { 
             "UC1": "Captar imagens", "UC2": "Iluminar cenas", "UC3": "Revelação digital", "UC4": "Manipular imagens", 
             "UC5": "Finalizar imagens", "UC6": "Captar vídeos", "UC7": "Fotojornalismo", "UC8": "Social", 
-            "UC9": "Moda e Editoriais", "UC10": "Propaganda e Publi", "UC11": "Paisagem e Arq", "UC12": "Ensaios fotográficos", "UC13": "Portfólio", "UC14": "Projeto Integrador" 
+            "UC9": "Moda e Editoriais", "UC10": "Propaganda e Publi", "UC11": "Paisagem e Arq", "UC12": "Ensaios fotográficos", 
+            "UC13": "Portfólio", "UC14": "Projeto Integrador" 
         };
 
-        // --- SISTEMA NATIVO (TABS, PUSH, BOTTOM SHEET) ---
+        // ==========================================
+        // MOTOR DE NAVEGAÇÃO 5.0 (TABS E SHEETS)
+        // ==========================================
         function switchTab(viewId, elementTab) {
-            document.querySelectorAll('.view-tab').forEach(v => v.classList.remove('active'));
-            document.querySelectorAll('.tab-item').forEach(t => t.classList.remove('active'));
+            // Remove a classe ativa de todas as abas e botões
+            document.querySelectorAll('.view-tab').forEach(function(v) {
+                v.classList.remove('active');
+            });
+            document.querySelectorAll('.tab-item').forEach(function(t) {
+                t.classList.remove('active');
+            });
             
+            // Ativa a aba alvo
             const targetView = document.getElementById(viewId);
             targetView.classList.add('active');
-            if(elementTab) elementTab.classList.add('active');
+            if(elementTab) {
+                elementTab.classList.add('active');
+            }
             
-            // Retorna a rolagem para o topo suavemente se clicar na mesma aba
+            // Retorna o scroll para o topo se o usuário clicar na aba que já está aberta
             targetView.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        function openPush(id) { document.getElementById(id).classList.add('active'); }
-        function closePush(id) { document.getElementById(id).classList.remove('active'); }
+        function openPush(id) { 
+            document.getElementById(id).classList.add('active'); 
+        }
+        
+        function closePush(id) { 
+            document.getElementById(id).classList.remove('active'); 
+        }
 
         function openBottomSheet(kicker, title, body, colorHex) {
             document.getElementById('sheet-kicker').innerText = kicker;
@@ -563,352 +593,1328 @@
             document.getElementById('bottom-sheet').classList.remove('active');
         }
 
-        // Funções de Modal convertidas para o novo Bottom Sheet
         function abrirModal(dataISO, ucNome, profNome, numAula) { 
             document.getElementById('sheet-kicker').innerText = `${getDiaDaSemana(dataISO)}, ${formatarDataBR(dataISO)}`;
             document.getElementById('sheet-kicker').style.color = "var(--text-muted)";
             document.getElementById('sheet-title').innerText = `${ucNome}`;
             document.getElementById('sheet-subtitle').innerText = `Aula ${numAula} • Prof. ${profNome}`;
-            document.getElementById('sheet-body').innerHTML = "<em>Nenhum material extra cadastrado.</em>";
+            document.getElementById('sheet-body').innerHTML = "<em>Nenhum material extra cadastrado na base de dados.</em>";
             
             document.getElementById('sheet-backdrop').classList.add('active');
             document.getElementById('bottom-sheet').classList.add('active');
         } 
-        function abrirVerbeteModal(termo, categoria, definicao) { openBottomSheet(categoria, termo, definicao, 'var(--accent-dicio)'); }
-        function abrirGuiaLuz() { openBottomSheet('LUZ DE ESTÚDIO', 'A Lógica do Estúdio', document.getElementById('guia-luz-content').innerHTML, 'var(--accent-calc)'); }
-
-        function requireAuth(tabElement) {
-            if (localStorage.getItem('auth_tpf43m') === 'true') { switchTab('view-turma-menu', tabElement); } 
-            else { openPush('push-auth'); }
+        
+        function abrirVerbeteModal(termo, categoria, definicao) { 
+            openBottomSheet(categoria, termo, definicao, 'var(--accent-dicio)'); 
         }
+        
+        function abrirGuiaLuz() { 
+            openBottomSheet('LUZ DE ESTÚDIO', 'A Lógica do Estúdio', document.getElementById('guia-luz-content').innerHTML, 'var(--accent-calc)'); 
+        }
+
+        // ==========================================
+        // AUTENTICAÇÃO E ACESSO DA TURMA
+        // ==========================================
+        function requireAuth(tabElement) {
+            if (localStorage.getItem('auth_tpf43m') === 'true') { 
+                switchTab('view-turma-menu', tabElement); 
+            } else { 
+                openPush('push-auth'); 
+            }
+        }
+        
         function validarSenha() {
-            if (document.getElementById('input-senha').value.toUpperCase() === 'TPF43M') {
+            const input = document.getElementById('input-senha').value.toUpperCase();
+            if (input === 'TPF43M') {
                 localStorage.setItem('auth_tpf43m', 'true');
-                document.getElementById('auth-error').style.display = 'none'; document.getElementById('input-senha').value = '';
+                document.getElementById('auth-error').style.display = 'none'; 
+                document.getElementById('input-senha').value = '';
                 closePush('push-auth');
-                // Ativa a aba Turma visualmente
+                
+                // Ativa a aba da Turma visualmente após a senha
                 const tabTurma = document.querySelectorAll('.tab-item')[4];
                 switchTab('view-turma-menu', tabTurma);
-            } else { document.getElementById('auth-error').style.display = 'block'; }
+            } else { 
+                document.getElementById('auth-error').style.display = 'block'; 
+            }
         }
 
-        // --- INICIALIZAÇÃO E FETCH V5 ---
+        document.getElementById('input-senha').addEventListener('keypress', function(e) { 
+            if (e.key === 'Enter') validarSenha(); 
+        });
+
+        // ==========================================
+        // INICIALIZAÇÃO BLINDADA DO APLICATIVO
+        // ==========================================
         document.addEventListener('DOMContentLoaded', () => {
-            if (localStorage.getItem('clara_version') !== "5.0.0") {
-                localStorage.removeItem('tpf43m_aulas'); localStorage.removeItem('tpf43m_eventos'); localStorage.removeItem('tpf43m_datas'); localStorage.removeItem('tpf43m_dicio');
-                localStorage.setItem('clara_version', "5.0.0");
+            const currentVersion = "5.0.1";
+            if (localStorage.getItem('clara_version') !== currentVersion) {
+                localStorage.removeItem('tpf43m_aulas'); 
+                localStorage.removeItem('tpf43m_eventos'); 
+                localStorage.removeItem('tpf43m_datas'); 
+                localStorage.removeItem('tpf43m_dicio');
+                localStorage.setItem('clara_version', currentVersion);
             }
+            
+            // Carrega do Cache primeiro para velocidade
             if (localStorage.getItem('tpf43m_aulas')) processarAulas(localStorage.getItem('tpf43m_aulas'));
             if (localStorage.getItem('tpf43m_eventos')) processarEventos(localStorage.getItem('tpf43m_eventos'));
             if (localStorage.getItem('tpf43m_datas')) processarDatas(localStorage.getItem('tpf43m_datas'));
             if (localStorage.getItem('tpf43m_dicio')) processarDicio(localStorage.getItem('tpf43m_dicio'));
 
-            if (lights.length === 0) { addLight('Principal', 6, 0); addLight('Preenchimento', 4, 0); }
-            initSunCalc(); fetchGoogleSheets();
+            if (lights.length === 0) { 
+                addLight('Principal', 6, 0); 
+                addLight('Preenchimento', 4, 0); 
+            }
+            
+            initSunCalc(); 
+            fetchGoogleSheets();
+            atualizarContador();
         });
 
         function dismissSplash() {
             document.getElementById('splash-screen').style.opacity = '0';
-            setTimeout(() => { document.getElementById('splash-screen').style.display = 'none'; }, 500);
+            setTimeout(() => { 
+                document.getElementById('splash-screen').style.display = 'none'; 
+            }, 500);
         }
 
         function forceSync() {
             document.getElementById('btn-force-sync').classList.add('spinning');
-            fetchGoogleSheets().finally(() => { setTimeout(() => { document.getElementById('btn-force-sync').classList.remove('spinning'); }, 1000); });
+            fetchGoogleSheets();
         }
 
+        // FETCH BLINDADO: Não importa o que aconteça, o botão de Entrar vai aparecer
         async function fetchGoogleSheets() {
             const noCacheStr = `&nocache=${Date.now()}`;
-            const p1 = fetch(LINK_PLANILHA_AULAS + noCacheStr).then(r=>r.text()).then(t=>{if(!t.includes('<html')){localStorage.setItem('tpf43m_aulas',t);processarAulas(t);} return true;}).catch(()=>false);
-            const p2 = fetch(LINK_PLANILHA_EVENTOS + noCacheStr).then(r=>r.text()).then(t=>{if(!t.includes('<html')){localStorage.setItem('tpf43m_eventos',t);processarEventos(t);} return true;}).catch(()=>false);
-            const p3 = fetch(LINK_PLANILHA_DATAS + noCacheStr).then(r=>r.text()).then(t=>{if(!t.includes('<html')){localStorage.setItem('tpf43m_datas',t);processarDatas(t);} return true;}).catch(()=>false);
-            const p4 = fetch(LINK_PLANILHA_DICIO + noCacheStr).then(r=>r.text()).then(t=>{if(!t.includes('<html')){localStorage.setItem('tpf43m_dicio',t);processarDicio(t);} return true;}).catch(()=>false);
-
-            setTimeout(async () => {
-                await Promise.all([p1, p2, p3, p4]);
-                const btnEntrar = document.getElementById('btn-entrar');
-                if(btnEntrar.classList.contains('hidden')) {
-                    document.getElementById('loading-text').innerText = "Sincronização concluída!";
-                    document.getElementById('loading-text').style.animation = "none";
-                    btnEntrar.classList.remove('hidden');
+            
+            async function tryFetch(url, storageKey, processFunc) {
+                try {
+                    const response = await fetch(url);
+                    if (response.ok) {
+                        const text = await response.text();
+                        if (!text.includes('<html')) {
+                            localStorage.setItem(storageKey, text);
+                            processFunc(text);
+                        }
+                    }
+                } catch (error) {
+                    console.warn(`Aviso: Não foi possível sincronizar ${storageKey} no modo offline.`);
                 }
-            }, 1200);
+            }
+
+            // Inicia todas as buscas ao mesmo tempo
+            Promise.all([
+                tryFetch(LINK_PLANILHA_AULAS + noCacheStr, 'tpf43m_aulas', processarAulas),
+                tryFetch(LINK_PLANILHA_EVENTOS + noCacheStr, 'tpf43m_eventos', processarEventos),
+                tryFetch(LINK_PLANILHA_DATAS + noCacheStr, 'tpf43m_datas', processarDatas),
+                tryFetch(LINK_PLANILHA_DICIO + noCacheStr, 'tpf43m_dicio', processarDicio)
+            ]).finally(() => {
+                // Esse bloco "finally" é a blindagem. Ele roda mesmo se tudo der erro.
+                setTimeout(() => {
+                    const btnEntrar = document.getElementById('btn-entrar');
+                    const textLoading = document.getElementById('loading-text');
+                    const btnSync = document.getElementById('btn-force-sync');
+                    
+                    if (btnSync) btnSync.classList.remove('spinning');
+                    
+                    if (btnEntrar && btnEntrar.classList.contains('hidden')) {
+                        textLoading.innerText = "Sincronização finalizada!";
+                        textLoading.style.animation = "none";
+                        btnEntrar.classList.remove('hidden');
+                    }
+                }, 1000);
+            });
         }
 
-        // --- UTILIDADES ---
+        // ==========================================
+        // PARSERS E TRATAMENTO DE TEXTO
+        // ==========================================
         function processarDataInteligente(dataRaw) {
-            if (!dataRaw) return null; let dia, mes, ano;
-            if (dataRaw.includes('/')) { [dia, mes, ano] = dataRaw.split('/'); } else if (dataRaw.includes('-')) { [ano, mes, dia] = dataRaw.split('-'); } else { return null; }
-            if (!ano || !mes || !dia) return null; if (ano.length === 2) ano = "20" + ano;
-            return { ano: parseInt(ano), mes: parseInt(mes), dia: parseInt(dia), iso: `${ano}-${mes.toString().padStart(2,'0')}-${dia.toString().padStart(2,'0')}` };
+            if (!dataRaw) return null; 
+            let dia, mes, ano;
+            
+            if (dataRaw.includes('/')) { 
+                [dia, mes, ano] = dataRaw.split('/'); 
+            } else if (dataRaw.includes('-')) { 
+                [ano, mes, dia] = dataRaw.split('-'); 
+            } else { 
+                return null; 
+            }
+            
+            if (!ano || !mes || !dia) return null; 
+            if (ano.length === 2) ano = "20" + ano;
+            
+            return { 
+                ano: parseInt(ano), 
+                mes: parseInt(mes), 
+                dia: parseInt(dia), 
+                iso: `${ano}-${mes.toString().padStart(2,'0')}-${dia.toString().padStart(2,'0')}` 
+            };
         }
+        
         function tratarTSV(tsv) {
             if (tsv.includes('<html') || tsv.includes('<!DOCTYPE')) return [];
-            let linhas = []; let celulaAtual = ""; let linhaAtual = []; let dentroDeAspas = false;
+            let linhas = []; 
+            let celulaAtual = ""; 
+            let linhaAtual = []; 
+            let dentroDeAspas = false;
+            
             for (let i = 0; i < tsv.length; i++) {
                 let char = tsv[i];
-                if (char === '"') { if (dentroDeAspas && tsv[i + 1] === '"') { celulaAtual += '"'; i++; } else { dentroDeAspas = !dentroDeAspas; }
-                } else if (char === '\t' && !dentroDeAspas) { linhaAtual.push(celulaAtual); celulaAtual = "";
-                } else if (char === '\n' && !dentroDeAspas) { linhaAtual.push(celulaAtual.replace(/\r$/, '')); linhas.push(linhaAtual); linhaAtual = []; celulaAtual = "";
-                } else { celulaAtual += char; }
+                if (char === '"') { 
+                    if (dentroDeAspas && tsv[i + 1] === '"') { 
+                        celulaAtual += '"'; i++; 
+                    } else { 
+                        dentroDeAspas = !dentroDeAspas; 
+                    }
+                } else if (char === '\t' && !dentroDeAspas) { 
+                    linhaAtual.push(celulaAtual); 
+                    celulaAtual = "";
+                } else if (char === '\n' && !dentroDeAspas) { 
+                    linhaAtual.push(celulaAtual.replace(/\r$/, '')); 
+                    linhas.push(linhaAtual); 
+                    linhaAtual = []; 
+                    celulaAtual = "";
+                } else { 
+                    celulaAtual += char; 
+                }
             }
-            if (celulaAtual || linhaAtual.length > 0) { linhaAtual.push(celulaAtual.replace(/\r$/, '')); linhas.push(linhaAtual); }
+            
+            if (celulaAtual || linhaAtual.length > 0) { 
+                linhaAtual.push(celulaAtual.replace(/\r$/, '')); 
+                linhas.push(linhaAtual); 
+            }
             return linhas;
         }
-        function toISODate(d) { return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; } 
-        function formatarDataBR(iso) { const [a, m, d] = iso.split('-'); return `${d}/${m}`; } 
-        function getDiaDaSemana(iso) { const d = new Date(iso.split('-')[0], iso.split('-')[1] - 1, iso.split('-')[2], 12, 0, 0); return ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'][d.getDay()]; } 
 
-        // --- TURMA & AULAS ---
+        function toISODate(d) { 
+            return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`; 
+        } 
+        
+        function formatarDataBR(iso) { 
+            const [a, m, d] = iso.split('-'); 
+            return `${d}/${m}`; 
+        } 
+        
+        function getDiaDaSemana(iso) { 
+            const d = new Date(iso.split('-')[0], iso.split('-')[1] - 1, iso.split('-')[2], 12, 0, 0); 
+            return ['Domingo', 'Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'][d.getDay()]; 
+        } 
+
+        // ==========================================
+        // MÓDULO: AULAS E EVENTOS DA TURMA
+        // ==========================================
         function processarAulas(tsv) { 
-            const linhas = tratarTSV(tsv).slice(1); aulasArray = []; 
-            linhas.forEach(c => { if (c.length >= 4 && c[0] && c[1]) { const dt = processarDataInteligente(c[0].trim()); if (dt) aulasArray.push({ data: dt.iso, codigoUC: c[1].trim(), uc: `${c[1].trim()} - ${nomesUC[c[1].trim()] || ''}`, docente: c[2].trim(), aula: c[3].trim() }); } }); 
-            const sel = document.getElementById('filtroUC'); sel.innerHTML = '<option value="">-- Ver Todas --</option>'; 
-            for (const [cod, nome] of Object.entries(nomesUC)) { const opt = document.createElement('option'); opt.value = cod; opt.textContent = `${cod} - ${nome}`; sel.appendChild(opt); } 
-            mudarSemana(0); 
-        }
-        function processarEventos(tsv) { 
-            const linhas = tratarTSV(tsv).slice(1); baseEventos = []; 
-            linhas.forEach(c => { if (c.length >= 2 && c[0]) baseEventos.push({ data: c[0].trim(), titulo: c[1] ? c[1].trim() : '', desc: c[2] ? c[2].trim() : '' }); }); 
-            const container = document.getElementById('lista-eventos'); let html = ''; 
-            if (baseEventos.length === 0) { container.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento.</p>"; return; } 
+            const linhas = tratarTSV(tsv).slice(1); 
+            aulasArray = []; 
             
-            // CORREÇÃO: Trava de segurança que impede a quebra se a data for inválida
-            baseEventos.sort((a, b) => {
+            linhas.forEach(function(colunas) { 
+                if (colunas.length >= 4 && colunas[0] && colunas[1]) { 
+                    const dt = processarDataInteligente(colunas[0].trim()); 
+                    if (dt) {
+                        aulasArray.push({ 
+                            data: dt.iso, 
+                            codigoUC: colunas[1].trim(), 
+                            uc: `${colunas[1].trim()} - ${nomesUC[colunas[1].trim()] || ''}`, 
+                            docente: colunas[2].trim(), 
+                            aula: colunas[3].trim() 
+                        }); 
+                    }
+                } 
+            }); 
+            initAulas(); 
+        }
+
+        function initAulas() { 
+            const select = document.getElementById('filtroUC'); 
+            select.innerHTML = '<option value="">-- Ver Todas as Aulas --</option>'; 
+            for (const [codigo, nome] of Object.entries(nomesUC)) { 
+                const opt = document.createElement('option'); 
+                opt.value = codigo; 
+                opt.textContent = `${codigo} - ${nome}`; 
+                select.appendChild(opt); 
+            } 
+            mudarSemana(0); 
+        } 
+
+        document.getElementById('filtroUC').addEventListener('change', function(e) { 
+            const ucSelec = e.target.value;
+            if (!ucSelec) {
+                return window.limparBusca(); 
+            }
+            
+            document.getElementById('painel-aulas').style.display = 'none'; 
+            document.getElementById('resultado-pesquisa').style.display = 'flex'; 
+            
+            const dUC = aulasArray.filter(a => a.codigoUC === ucSelec); 
+            const hojeStr = toISODate(new Date()); 
+            const todasEncerradas = dUC.length > 0 && dUC.every(a => a.data < hojeStr); 
+            
+            let h = `<div class="card" style="border-top-width:4px; border-top-color:#f59e0b;">
+                        <button onclick="window.limparBusca()" class="btn btn-outline" style="border-color:#f59e0b; color:#f59e0b; padding:8px; margin-bottom:16px;">Limpar Busca</button>
+                        <h3 style="color:#f59e0b; margin-bottom:16px;">${nomesUC[ucSelec]}</h3>`; 
+            
+            if (todasEncerradas) {
+                h += `<div style="background:rgba(16,185,129,0.1); color:#10b981; padding:12px; border-radius:8px; font-weight:700; margin-bottom:16px;">✅ UC Encerrada</div>`; 
+            }
+            
+            if (dUC.length === 0) {
+                h += `<p style="color:var(--text-muted);">Nenhuma aula agendada para esta UC na base.</p>`;
+            }
+            
+            dUC.forEach(function(a) { 
+                const isPast = a.data < hojeStr; 
+                const rowStyle = isPast 
+                    ? "padding:12px 0; border-bottom:1px solid var(--border-color); color:var(--text-muted); opacity:0.6;" 
+                    : "padding:12px 0; border-bottom:1px solid var(--border-color);"; 
+                
+                h += `<div style="${rowStyle}" onclick="abrirModal('${a.data}','${a.uc}','${a.docente}','${a.aula}')">
+                        <strong style="color:#fff;">${formatarDataBR(a.data)}</strong> - Prof. ${a.docente} 
+                        <span style="display:block; font-size:0.85em; color:var(--text-muted);">Aula ${a.aula}</span>
+                      </div>`; 
+            }); 
+            
+            document.getElementById('resultado-pesquisa').innerHTML = h + `</div>`; 
+        }); 
+
+        window.limparBusca = function() { 
+            document.getElementById('filtroUC').value = ""; 
+            document.getElementById('resultado-pesquisa').style.display = 'none'; 
+            document.getElementById('painel-aulas').style.display = 'flex'; 
+        }
+
+        function mudarSemana(offset) { 
+            // Atualiza o estado visual dos botões
+            document.getElementById('btn-passada').classList.toggle('btn-primary', offset === -1); 
+            document.getElementById('btn-passada').classList.toggle('btn-outline', offset !== -1);
+            document.getElementById('btn-atual').classList.toggle('btn-primary', offset === 0); 
+            document.getElementById('btn-atual').classList.toggle('btn-outline', offset !== 0);
+            document.getElementById('btn-que-vem').classList.toggle('btn-primary', offset === 1); 
+            document.getElementById('btn-que-vem').classList.toggle('btn-outline', offset !== 1);
+            
+            const hoje = new Date(); 
+            const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12, 0, 0); 
+            const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12, 0, 0); 
+            
+            const hojeStr = toISODate(hoje); 
+            const amanha = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() + 1); 
+            const amanhaStr = toISODate(amanha); 
+            
+            const aSemana = aulasArray.filter(a => a.data >= toISODate(seg) && a.data <= toISODate(sex)); 
+            
+            let html = `<h3 style="margin-bottom:16px; text-align:center; color:var(--text-muted);">Cronograma</h3>`; 
+            
+            if (aSemana.length === 0) { 
+                html += `<div class="card"><div style="text-align:center; color:var(--text-muted);">Sem aulas programadas para esta semana.</div></div>`; 
+            } 
+            
+            aSemana.forEach(function(a) { 
+                const isCancelled = a.aula.toLowerCase().includes('cancelada'); 
+                let statusMsg = ''; 
+                let colorHex = 'var(--accent-aulas)';
+
+                if (isCancelled) { 
+                    statusMsg = `❌ CANCELADA`; 
+                    colorHex = 'var(--accent-danger)';
+                } else if (a.data === hojeStr) { 
+                    statusMsg = '🔥 HOJE'; 
+                    colorHex = '#e91e63';
+                } else if (a.data === amanhaStr) { 
+                    statusMsg = `AMANHÃ! ⚡`; 
+                    colorHex = 'var(--accent-warning)';
+                } else if (a.data < hojeStr) { 
+                    statusMsg = `✅ PASSADA`; 
+                } else { 
+                    statusMsg = `⏳ PREVISTA`; 
+                } 
+                
+                html += `<div class="card" style="border-top-width:4px; border-top-color:${colorHex};" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
+                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;">
+                                <span>${getDiaDaSemana(a.data)}</span>
+                                <span style="color:${colorHex}">${statusMsg}</span>
+                            </div>
+                            <div style="font-size:1.6rem; font-family:'Syne'; font-weight:800; margin-bottom:8px; color:#fff;">${formatarDataBR(a.data)}</div>
+                            <div style="color:var(--text-muted); font-size:0.95rem; line-height:1.4;">
+                                <strong style="color:#fff;">${a.uc}</strong><br>Prof: ${a.docente}
+                            </div>
+                        </div>`; 
+            }); 
+            
+            document.getElementById('painel-aulas').innerHTML = html; 
+        }
+
+        // ==========================================
+        // MÓDULO: EVENTOS DA TURMA
+        // ==========================================
+        function processarEventos(tsv) { 
+            const linhas = tratarTSV(tsv).slice(1); 
+            baseEventos = []; 
+            
+            linhas.forEach(function(colunas) { 
+                if (colunas.length >= 2 && colunas[0]) {
+                    baseEventos.push({ 
+                        data: colunas[0].trim(), 
+                        titulo: colunas[1] ? colunas[1].trim() : '', 
+                        desc: colunas[2] ? colunas[2].trim() : '' 
+                    }); 
+                }
+            }); 
+            
+            initEventos(); 
+        }
+
+        function initEventos() { 
+            const container = document.getElementById('lista-eventos'); 
+            let html = ''; 
+            
+            if (baseEventos.length === 0) { 
+                container.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento programado.</p>"; 
+                return; 
+            } 
+            
+            // Trava de Segurança na Ordenação de Data
+            baseEventos.sort(function(a, b) {
                 const dtA = processarDataInteligente(a.data); 
                 const dtB = processarDataInteligente(b.data);
                 if (!dtA || !dtB) return 0;
                 return new Date(dtA.iso).getTime() - new Date(dtB.iso).getTime();
             });
-
-            const hojeLocal = new Date(); hojeLocal.setHours(0,0,0,0); let eventosExibidos = 0;
-            baseEventos.forEach(ev => { 
-                const dt = processarDataInteligente(ev.data); if (!dt) return; 
-                const diffDays = Math.round((new Date(dt.ano, dt.mes - 1, dt.dia).getTime() - hojeLocal.getTime()) / (1000 * 60 * 60 * 24)); 
-                if (diffDays < -10) return; 
-                let cdHTML = diffDays > 1 ? `Faltam ${diffDays} dias` : diffDays === 1 ? `<span style="color:var(--accent-warning);">É amanhã!</span>` : diffDays === 0 ? `<span style="color:#e91e63;">É hoje!</span>` : `<span style="opacity:0.5">Passou</span>`;
+            
+            const hojeLocal = new Date(); 
+            hojeLocal.setHours(0,0,0,0); 
+            let eventosExibidos = 0; 
+            
+            baseEventos.forEach(function(ev) { 
+                const dt = processarDataInteligente(ev.data); 
+                if (!dt) return; 
+                
+                const dataEvento = new Date(dt.ano, dt.mes - 1, dt.dia);
+                const diffTime = dataEvento.getTime() - hojeLocal.getTime();
+                const diffDays = Math.round(diffTime / (1000 * 60 * 60 * 24)); 
+                
+                if (diffDays < -10) return; // Oculta eventos muito antigos
+                
+                let countdownHTML = ""; 
+                
+                if (diffDays > 1) { 
+                    countdownHTML = `<span style="font-weight:normal; opacity:0.8;">Faltam ${diffDays} dias</span>`; 
+                } else if (diffDays === 1) { 
+                    countdownHTML = `<span style="color:var(--accent-warning);">É amanhã!</span>`; 
+                } else if (diffDays === 0) { 
+                    countdownHTML = `<span style="color:#e91e63;">É hoje!</span>`; 
+                } else { 
+                    countdownHTML = `<span style="font-weight:normal; opacity:0.5;">Passou</span>`; 
+                } 
+                
                 html += `<div class="card" style="border-top-width:4px; border-top-color:var(--accent-eventos);">
-                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px;"><span>${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}</span>${cdHTML}</div>
-                            <div class="ev-titulo">${ev.titulo}</div><div class="ev-desc" style="margin-bottom:0;">${ev.desc}</div>
+                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:700; color:var(--text-muted); margin-bottom:8px;">
+                                <span>${dt.dia.toString().padStart(2,'0')}/${dt.mes.toString().padStart(2,'0')}</span>
+                                ${countdownHTML}
+                            </div>
+                            <div class="ev-titulo">${ev.titulo}</div>
+                            <div class="ev-desc" style="margin-bottom:0;">${ev.desc}</div>
                         </div>`; 
                 eventosExibidos++;
             }); 
             
-            if (eventosExibidos === 0) { html = "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento recente ou futuro.</p>"; }
+            if (eventosExibidos === 0) { 
+                html = "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento recente ou futuro.</p>"; 
+            }
             container.innerHTML = html; 
         }
-        document.getElementById('filtroUC').addEventListener('change', function(e) { 
-            if (!e.target.value) return window.limparBusca(); 
-            document.getElementById('painel-aulas').style.display = 'none'; document.getElementById('resultado-pesquisa').style.display = 'flex'; 
-            const dUC = aulasArray.filter(a => a.codigoUC === e.target.value); 
-            let h = `<div class="card" style="border-top-width:4px; border-top-color:#f59e0b;"><button onclick="window.limparBusca()" class="btn btn-outline" style="border-color:#f59e0b; color:#f59e0b; padding:8px; margin-bottom:16px;">Limpar Busca</button><h3 style="color:#f59e0b; margin-bottom:16px;">${nomesUC[e.target.value]}</h3>`; 
-            if (dUC.length > 0 && dUC.every(a => a.data < toISODate(new Date()))) h += `<div style="background:rgba(16,185,129,0.1); color:#10b981; padding:12px; border-radius:8px; font-weight:700; margin-bottom:16px;">✅ UC Encerrada</div>`; 
-            dUC.forEach(a => { h += `<div style="padding:12px 0; border-bottom:1px solid var(--border-color); ${a.data < toISODate(new Date()) ? 'opacity:0.5;':''}" onclick="abrirModal('${a.data}','${a.uc}','${a.docente}','${a.aula}')"><strong style="color:#fff;">${formatarDataBR(a.data)}</strong> - Prof. ${a.docente} <span style="display:block; font-size:0.85em; color:var(--text-muted);">Aula ${a.aula}</span></div>`; }); 
-            document.getElementById('resultado-pesquisa').innerHTML = h + `</div>`; 
-        }); 
-        window.limparBusca = function() { document.getElementById('filtroUC').value = ""; document.getElementById('resultado-pesquisa').style.display = 'none'; document.getElementById('painel-aulas').style.display = 'flex'; }
-        function mudarSemana(offset) { 
-            const hoje = new Date(); const seg = new Date(hoje.getFullYear(), hoje.getMonth(), hoje.getDate() - hoje.getDay() + 1 + (offset * 7), 12); const sex = new Date(seg.getFullYear(), seg.getMonth(), seg.getDate() + 4, 12); 
-            const aSemana = aulasArray.filter(a => a.data >= toISODate(seg) && a.data <= toISODate(sex)); let html = `<h3 style="margin-bottom:16px; text-align:center; color:var(--text-muted);">Cronograma</h3>`; 
-            if (aSemana.length === 0) { html += `<div class="card"><div style="text-align:center; color:var(--text-muted);">Sem aulas programadas.</div></div>`; } 
-            aSemana.forEach(a => { 
-                const isC = a.aula.toLowerCase().includes('cancelada'); 
-                const color = isC ? 'var(--accent-danger)' : a.data === toISODate(new Date()) ? '#e91e63' : 'var(--accent-aulas)';
-                html += `<div class="card" style="border-top-width:4px; border-top-color:${color};" onclick="abrirModal('${a.data}', '${a.uc}', '${a.docente}', '${a.aula}')">
-                            <div style="display:flex; justify-content:space-between; font-size:0.8rem; font-weight:800; color:var(--text-muted); margin-bottom:8px; text-transform:uppercase;"><span>${getDiaDaSemana(a.data)}</span><span style="color:${color}">${isC ? 'CANCELADA' : a.data === toISODate(new Date()) ? 'HOJE' : ''}</span></div>
-                            <div style="font-size:1.6rem; font-family:'Syne'; font-weight:800; margin-bottom:8px; color:#fff;">${formatarDataBR(a.data)}</div>
-                            <div style="color:var(--text-muted); font-size:0.95rem; line-height:1.4;"><strong style="color:#fff;">${a.uc}</strong><br>Prof: ${a.docente}</div>
-                        </div>`; 
-            }); document.getElementById('painel-aulas').innerHTML = html; 
-        }
 
-        // --- AGENDA RADAR V5 ---
+        // ==========================================
+        // MÓDULO: AGENDA E RADAR CULTURAL V5
+        // ==========================================
         function getCategoriaClasse(categoriaReal) {
+            if (!categoriaReal) return 'cat-default';
             const str = categoriaReal.normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
-            if (str.includes('edital') || str.includes('editais')) return 'cat-edital'; if (str.includes('convocatoria')) return 'cat-convocatoria';
-            if (str.includes('exposi')) return 'cat-exposicao'; if (str.includes('mostra')) return 'cat-mostra';
-            if (str.includes('cursos')) return 'cat-cursos'; if (str.includes('palestra')) return 'cat-palestra';
-            if (str.includes('workshop')) return 'cat-workshop'; if (str.includes('feira')) return 'cat-feira';
-            if (str.includes('festival')) return 'cat-festival'; if (str.includes('concurso') || str.includes('premio')) return 'cat-concurso';
+            
+            if (str.includes('concurso') || str.includes('premio')) return 'cat-concurso';
+            if (str.includes('edital') || str.includes('editais')) return 'cat-edital';
+            if (str.includes('convocatoria')) return 'cat-convocatoria';
+            if (str.includes('exposi')) return 'cat-exposicao';
+            if (str.includes('mostra')) return 'cat-mostra';
+            if (str.includes('curso')) return 'cat-cursos';
+            if (str.includes('palestra')) return 'cat-palestra';
+            if (str.includes('workshop')) return 'cat-workshop';
+            if (str.includes('feira')) return 'cat-feira';
+            if (str.includes('festival')) return 'cat-festival';
+            
             return 'cat-default';
         }
+
         function processarDatas(tsv) { 
-            const linhas = tratarTSV(tsv).slice(1); baseDatas = []; 
-            linhas.forEach(c => { 
-                if (c.length >= 1 && c[0] && c[0].trim() !== '') {
-                    const dtI = processarDataInteligente(c[0].trim()); if (!dtI) return;
-                    const catRaw = c.length > 2 && c[2].trim() !== '' ? c[2].trim() : 'Evento';
-                    const catArr = catRaw.split(';').map(cat => ({ nome: cat.trim(), classe: getCategoriaClasse(cat.trim()) }));
-                    let link = c.length > 6 ? c[6].trim() : ''; if (link && !link.startsWith('http')) link = 'https://' + link;
-                    let uf = ""; if (c.length > 4) { const ufMatch = c[4].match(/-\s*([a-zA-Z]{2})$/); if (ufMatch) uf = ufMatch[1].toUpperCase(); }
-                    baseDatas.push({ dtInic: dtI, dtFim: (c.length > 1 && c[1].trim() !== '') ? processarDataInteligente(c[1].trim()) : dtI, categorias: catArr, titulo: c.length > 3 ? c[3].trim() : 'Sem Título', local: c.length > 4 ? c[4].trim() : '', desc: c.length > 5 ? c[5].trim() : '', link: link, uf: uf }); 
+            const linhas = tratarTSV(tsv).slice(1); 
+            baseDatas = []; 
+            if(linhas.length === 0) return;
+            
+            linhas.forEach(function(colunas) { 
+                if (colunas.length >= 1 && colunas[0] && colunas[0].trim() !== '') {
+                    const dtInic = processarDataInteligente(colunas[0].trim());
+                    if (!dtInic) return;
+                    
+                    const dtFim = (colunas.length > 1 && colunas[1].trim() !== '') ? processarDataInteligente(colunas[1].trim()) : dtInic;
+                    const categoriaRaw = colunas.length > 2 && colunas[2].trim() !== '' ? colunas[2].trim() : 'Evento';
+                    
+                    // Separa múltiplas categorias pelo ponto e vírgula
+                    const categoriasArray = categoriaRaw.split(';').map(function(cat) { 
+                        const nome = cat.trim(); 
+                        return { nome: nome, classe: getCategoriaClasse(nome) }; 
+                    });
+                    
+                    const titulo = colunas.length > 3 ? colunas[3].trim() : 'Sem Título';
+                    const local = colunas.length > 4 ? colunas[4].trim() : '';
+                    const desc = colunas.length > 5 ? colunas[5].trim() : '';
+                    
+                    let link = colunas.length > 6 ? colunas[6].trim() : '';
+                    if (link && !link.startsWith('http')) link = 'https://' + link;
+                    
+                    let uf = ""; 
+                    if (local) { 
+                        const ufMatch = local.match(/-\s*([a-zA-Z]{2})$/); 
+                        if (ufMatch) uf = ufMatch[1].toUpperCase(); 
+                    }
+                    
+                    baseDatas.push({ 
+                        dtInic: dtInic, 
+                        dtFim: dtFim, 
+                        categorias: categoriasArray, 
+                        titulo: titulo, 
+                        local: local, 
+                        desc: desc, 
+                        link: link, 
+                        uf: uf 
+                    }); 
                 }
-            }); renderFiltrosAgenda(); initDatas(); 
+            }); 
+            
+            renderFiltrosAgenda(); 
+            initDatas(); 
         }
+
         function renderFiltrosAgenda() {
-            const p = document.getElementById('painel-filtros'); const bCat = document.getElementById('filtros-categoria'); const bUF = document.getElementById('filtros-uf');
-            if (baseDatas.length === 0) { p.style.display = 'none'; return; } p.style.display = 'block';
-            let setCat = new Set(); let setUF = new Set(); baseDatas.forEach(d => { d.categorias.forEach(c => setCat.add(c.nome)); if(d.uf) setUF.add(d.uf); });
-            let hCat = `<div class="filter-chip chip-todas ${filtrosCatAtivos.size === 0 ? 'active' : ''}" onclick="toggleFiltroCategoria('TODAS')">Todas</div>`;
-            Array.from(setCat).sort().forEach(c => { hCat += `<div class="filter-chip ${getCategoriaClasse(c)} ${filtrosCatAtivos.has(c) ? 'active' : ''}" onclick="toggleFiltroCategoria('${c.replace(/'/g, "\\'")}')">${c}</div>`; }); bCat.innerHTML = hCat;
-            let hUF = `<div class="filter-chip chip-todas ${filtrosUFAtivos.size === 0 ? 'active' : ''}" onclick="toggleFiltroUF('TODOS')">Brasil</div>`;
-            Array.from(setUF).sort().forEach(u => { hUF += `<div class="filter-chip chip-uf ${filtrosUFAtivos.has(u) ? 'active' : ''}" onclick="toggleFiltroUF('${u}')">${u}</div>`; }); bUF.innerHTML = hUF;
+            const painelFiltros = document.getElementById('painel-filtros');
+            const boxCat = document.getElementById('filtros-categoria');
+            const boxUF = document.getElementById('filtros-uf');
+            
+            if (baseDatas.length === 0) { 
+                painelFiltros.style.display = 'none'; 
+                return; 
+            } 
+            
+            painelFiltros.style.display = 'block';
+
+            let setCat = new Set(); 
+            let setUF = new Set(); 
+            
+            baseDatas.forEach(function(d) { 
+                d.categorias.forEach(function(catObj) { setCat.add(catObj.nome); }); 
+                if(d.uf) setUF.add(d.uf); 
+            });
+
+            let htmlCat = `<div class="filter-chip chip-todas ${filtrosCatAtivos.size === 0 ? 'active' : ''}" onclick="toggleFiltroCategoria('TODAS')">Todas</div>`;
+            Array.from(setCat).sort().forEach(function(c) {
+                const isActive = filtrosCatAtivos.has(c) ? 'active' : '';
+                htmlCat += `<div class="filter-chip ${getCategoriaClasse(c)} ${isActive}" onclick="toggleFiltroCategoria('${c.replace(/'/g, "\\'")}')">${c}</div>`;
+            });
+            boxCat.innerHTML = htmlCat;
+
+            let htmlUF = `<div class="filter-chip chip-todas ${filtrosUFAtivos.size === 0 ? 'active' : ''}" onclick="toggleFiltroUF('TODOS')">Brasil</div>`;
+            Array.from(setUF).sort().forEach(function(u) {
+                const isActive = filtrosUFAtivos.has(u) ? 'active' : '';
+                htmlUF += `<div class="filter-chip chip-uf ${isActive}" onclick="toggleFiltroUF('${u}')">${u}</div>`;
+            });
+            boxUF.innerHTML = htmlUF;
         }
-        function toggleFiltroCategoria(c) { if (c === 'TODAS') filtrosCatAtivos.clear(); else { if (filtrosCatAtivos.has(c)) filtrosCatAtivos.delete(c); else filtrosCatAtivos.add(c); } renderFiltrosAgenda(); initDatas(); }
-        function toggleFiltroUF(u) { if (u === 'TODOS') filtrosUFAtivos.clear(); else { if (filtrosUFAtivos.has(u)) filtrosUFAtivos.delete(u); else filtrosUFAtivos.add(u); } renderFiltrosAgenda(); initDatas(); }
+
+        function toggleFiltroCategoria(cat) {
+            if (cat === 'TODAS') { 
+                filtrosCatAtivos.clear(); 
+            } else { 
+                if (filtrosCatAtivos.has(cat)) filtrosCatAtivos.delete(cat); 
+                else filtrosCatAtivos.add(cat); 
+            }
+            renderFiltrosAgenda(); 
+            initDatas();
+        }
+
+        function toggleFiltroUF(uf) {
+            if (uf === 'TODOS') { 
+                filtrosUFAtivos.clear(); 
+            } else { 
+                if (filtrosUFAtivos.has(uf)) filtrosUFAtivos.delete(uf); 
+                else filtrosUFAtivos.add(uf); 
+            }
+            renderFiltrosAgenda(); 
+            initDatas();
+        }
+
         function initDatas() { 
-            const c = document.getElementById('lista-datas'); let h = ''; if (baseDatas.length === 0) return; 
-            baseDatas.sort((a, b) => new Date(a.dtInic.iso).getTime() - new Date(b.dtInic.iso).getTime());
-            let dEx = 0; 
-            baseDatas.forEach(ev => { 
-                if (filtrosCatAtivos.size > 0 && !ev.categorias.some(cat => filtrosCatAtivos.has(cat.nome))) return;
+            const container = document.getElementById('lista-datas'); 
+            let html = ''; 
+            
+            if (baseDatas.length === 0) { 
+                container.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Nenhuma data cadastrada na base.</p>"; 
+                return; 
+            } 
+            
+            baseDatas.sort(function(a, b) { 
+                return new Date(a.dtInic.iso).getTime() - new Date(b.dtInic.iso).getTime() 
+            });
+            
+            const hojeISO = toISODate(new Date()); 
+            let datasExibidas = 0; 
+            
+            baseDatas.forEach(function(ev) { 
+                // Filtro Cruzado
+                const temCategoriaAtiva = filtrosCatAtivos.size === 0 || ev.categorias.some(cat => filtrosCatAtivos.has(cat.nome));
+                if (!temCategoriaAtiva) return;
                 if (filtrosUFAtivos.size > 0 && (!ev.uf || !filtrosUFAtivos.has(ev.uf))) return;
-                const dS = ev.dtInic.iso.replace(/-/g, ''); let dEo = new Date(ev.dtFim ? ev.dtFim.iso : ev.dtInic.iso); dEo.setDate(dEo.getDate() + 1); const dE = toISODate(dEo).replace(/-/g, '');
-                const gCal = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.titulo)}&dates=${dS}/${dE}&details=${encodeURIComponent(`Link: ${ev.link}\n\n${ev.desc}`)}&location=${encodeURIComponent(ev.local)}`;
-                let tH = ""; ev.categorias.forEach(cat => { tH += `<span class="ev-tipo ${cat.classe}">${cat.nome}</span> `; });
-                h += `<div class="card datas-int ${ev.categorias.length > 0 ? ev.categorias[0].classe : 'cat-default'}">
-                        <div style="margin-bottom:12px;">${tH}</div>
+
+                const isPast = ev.dtFim ? (ev.dtFim.iso < hojeISO) : (ev.dtInic.iso < hojeISO);
+                let periodoHTML = ev.dtFim && ev.dtFim.iso !== ev.dtInic.iso 
+                    ? `De ${formatarDataBR(ev.dtInic.iso)} a ${formatarDataBR(ev.dtFim.iso)}/${ev.dtFim.ano}` 
+                    : `${formatarDataBR(ev.dtInic.iso)}/${ev.dtInic.ano}`;
+
+                let tagsHTML = ""; 
+                ev.categorias.forEach(function(cat) { 
+                    tagsHTML += `<span class="ev-tipo ${cat.classe}">${cat.nome}</span> `; 
+                });
+                
+                const classeBordaPrincipal = ev.categorias.length > 0 ? ev.categorias[0].classe : 'cat-default';
+
+                // GOOGLE CALENDAR
+                const dateStart = ev.dtInic.iso.replace(/-/g, '');
+                let dateEndObj = new Date(ev.dtFim ? ev.dtFim.iso : ev.dtInic.iso);
+                dateEndObj.setDate(dateEndObj.getDate() + 1); 
+                const dateEnd = toISODate(dateEndObj).replace(/-/g, '');
+                const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(ev.titulo)}&dates=${dateStart}/${dateEnd}&details=${encodeURIComponent(`Link: ${ev.link}\n\n${ev.desc}`)}&location=${encodeURIComponent(ev.local)}`;
+
+                html += `
+                    <div class="card datas-int ${classeBordaPrincipal}" ${isPast ? 'style="opacity:0.5;"' : ''}>
+                        <div style="margin-bottom: 12px;">${tagsHTML}</div>
                         <div class="ev-titulo">${ev.titulo}</div>
-                        <div class="ev-periodo">📅 ${ev.dtFim && ev.dtFim.iso !== ev.dtInic.iso ? `De ${formatarDataBR(ev.dtInic.iso)} a ${formatarDataBR(ev.dtFim.iso)}` : formatarDataBR(ev.dtInic.iso)}</div>
+                        <div class="ev-periodo">📅 ${periodoHTML}</div>
                         ${ev.local ? `<div class="ev-local">📍 ${ev.local}</div>` : ''}
                         ${ev.desc ? `<div class="ev-desc">${ev.desc}</div>` : ''}
-                        <div style="display:flex; gap:8px; margin-top:24px;">
-                            ${ev.link ? `<a href="${ev.link}" target="_blank" class="btn btn-outline" style="font-size:0.8rem; padding:10px;">Link Externo</a>` : ''}
-                            <a href="${gCal}" target="_blank" class="btn btn-outline" style="border-color:#3b82f6; color:#3b82f6; font-size:0.8rem; padding:10px;">+ Agenda</a>
+                        
+                        <div style="display: flex; gap: 8px; margin-top: 24px; flex-wrap: wrap;">
+                            ${ev.link ? `<a href="${ev.link}" target="_blank" class="btn btn-outline" style="font-size:0.8rem; padding:10px;">SAIBA MAIS</a>` : ''}
+                            <a href="${googleCalUrl}" target="_blank" class="btn btn-outline" style="border-color:#3b82f6; color:#3b82f6; font-size:0.8rem; padding:10px;">+ AGENDA</a>
                         </div>
-                    </div>`; dEx++; 
-            }); c.innerHTML = dEx === 0 ? "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento com estes filtros.</p>" : h; 
+                    </div>
+                `; 
+                datasExibidas++; 
+            });
+            
+            if (datasExibidas === 0) { 
+                html = "<p style='text-align:center; color:var(--text-muted);'>Nenhum evento encontrado com os filtros selecionados.</p>"; 
+            }
+            container.innerHTML = html; 
         }
 
-        // --- DICIONÁRIO ---
+        // ==========================================
+        // MÓDULO DA ENCICLOPÉDIA 
+        // ==========================================
         function processarDicio(tsv) {
-            const linhas = tratarTSV(tsv).slice(1); dicioArray = []; let catSet = new Set();
-            linhas.forEach(c => { if (c.length >= 3 && c[0]) { dicioArray.push({ termo: c[0].trim(), categoria: c[1]?c[1].trim():'Geral', definicao: c[2]?c[2].trim():'' }); catSet.add(c[1]?c[1].trim():'Geral'); } });
-            const sel = document.getElementById('filtroCategoriaDicio'); sel.innerHTML = '<option value="">Todas as Categorias</option>';
-            Array.from(catSet).sort().forEach(c => sel.innerHTML += `<option value="${c}">${c}</option>`);
+            const linhas = tratarTSV(tsv).slice(1); 
+            dicioArray = []; 
+            let catSet = new Set();
+            
+            linhas.forEach(function(colunas) {
+                if (colunas.length >= 3 && colunas[0] && colunas[0].trim() !== '') {
+                    let cat = colunas[1] ? colunas[1].trim() : 'Geral';
+                    dicioArray.push({ 
+                        termo: colunas[0].trim(), 
+                        categoria: cat, 
+                        definicao: colunas[2] ? colunas[2].trim() : '' 
+                    });
+                    catSet.add(cat);
+                }
+            });
+            
+            const selectCat = document.getElementById('filtroCategoriaDicio');
+            if (selectCat) {
+                let optionsHtml = '<option value="">Todas as Categorias</option>';
+                Array.from(catSet).sort().forEach(function(c) { 
+                    optionsHtml += `<option value="${c}">${c}</option>`; 
+                });
+                selectCat.innerHTML = optionsHtml;
+            }
+            
             if (dicioMode === 'search') renderDicioSearch();
         }
+
         function toggleDicioMode() {
-            const b = document.getElementById('btn-toggle-dicio'); const sA = document.getElementById('dicio-search-area'); const aA = document.getElementById('dicio-alpha-area');
-            if (dicioMode === 'search') { dicioMode = 'index'; b.innerText = "🔍 Buscar"; sA.classList.add('hidden'); aA.classList.remove('hidden'); renderAlphabet(); renderDicioIndex(currentLetter); } 
-            else { dicioMode = 'search'; b.innerText = "🔤 Índice A-Z"; sA.classList.remove('hidden'); aA.classList.add('hidden'); document.getElementById('buscaDicio').value = ''; renderDicioSearch(); }
+            const btn = document.getElementById('btn-toggle-dicio');
+            const areaSearch = document.getElementById('dicio-search-area'); 
+            const areaAlpha = document.getElementById('dicio-alpha-area');
+            
+            if (dicioMode === 'search') {
+                dicioMode = 'index'; 
+                btn.innerText = "🔍 Buscar"; 
+                btn.style.backgroundColor = "var(--accent-dicio)"; 
+                btn.style.color = "#fff";
+                areaSearch.classList.add('hidden'); 
+                areaAlpha.classList.remove('hidden'); 
+                renderAlphabet(); 
+                renderDicioIndex(currentLetter);
+            } else {
+                dicioMode = 'search'; 
+                btn.innerText = "🔤 Índice A-Z"; 
+                btn.style.backgroundColor = "transparent"; 
+                btn.style.color = "var(--accent-dicio)";
+                areaSearch.classList.remove('hidden'); 
+                areaAlpha.classList.add('hidden'); 
+                document.getElementById('buscaDicio').value = ''; 
+                renderDicioSearch();
+            }
         }
+
         function renderAlphabet() {
-            const l = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''); let h = '';
-            l.forEach(x => { h += `<div class="filter-chip ${x === currentLetter ? 'active chip-todas' : ''}" style="border-radius:8px; padding:8px 14px;" onclick="currentLetter='${x}';renderAlphabet();renderDicioIndex('${x}')">${x}</div>`; });
-            document.getElementById('dicio-alpha-area').innerHTML = h;
+            const cont = document.getElementById('dicio-alpha-area'); 
+            const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''); 
+            let html = '';
+            
+            letters.forEach(function(l) { 
+                const activeClass = (l === currentLetter) ? 'active chip-todas' : ''; 
+                html += `<div class="filter-chip ${activeClass}" style="border-radius:8px; padding:8px 14px;" onclick="selectLetter('${l}')">${l}</div>`; 
+            });
+            cont.innerHTML = html;
         }
-        function filtrarDicio() { if (dicioMode === 'search') renderDicioSearch(); }
+
+        function selectLetter(l) { 
+            currentLetter = l; 
+            renderAlphabet(); 
+            renderDicioIndex(l); 
+        }
+
+        function filtrarDicio() { 
+            if (dicioMode === 'search') renderDicioSearch(); 
+        }
+
         function renderDicioSearch() {
-            const c = document.getElementById('lista-dicio'); const t = document.getElementById('buscaDicio').value.toLowerCase(); const f = document.getElementById('filtroCategoriaDicio').value;
-            const filt = dicioArray.filter(i => (i.termo.toLowerCase().includes(t) || i.definicao.toLowerCase().includes(t)) && (f === "" || i.categoria === f)).sort((a,b)=>a.termo.localeCompare(b.termo));
-            let h = ''; filt.forEach(i => { h += `<div class="card dicio-item" onclick="abrirVerbeteModal('${i.termo.replace(/'/g, "\\'")}', '${i.categoria.replace(/'/g, "\\'")}', '${i.definicao.replace(/'/g, "\\'").replace(/\n/g, '\\n')}')"><div class="term">${i.termo}</div><div class="preview">${i.definicao}</div></div>`; });
-            c.innerHTML = filt.length ? h : "<p style='text-align:center; grid-column:1/-1; color:var(--text-muted);'>Nada encontrado.</p>";
-        }
-        function renderDicioIndex(letra) {
-            const filt = dicioArray.filter(i => i.termo.toUpperCase().startsWith(letra)).sort((a,b)=>a.termo.localeCompare(b.termo));
-            let h = ''; filt.forEach(i => { h += `<div class="card dicio-item" onclick="abrirVerbeteModal('${i.termo.replace(/'/g, "\\'")}', '${i.categoria.replace(/'/g, "\\'")}', '${i.definicao.replace(/'/g, "\\'").replace(/\n/g, '\\n')}')"><div class="term">${i.termo}</div><div class="preview">${i.definicao}</div></div>`; });
-            document.getElementById('lista-dicio').innerHTML = filt.length ? h : `<p style='text-align:center; grid-column:1/-1; color:var(--text-muted);'>Vazio em <strong>${letra}</strong>.</p>`;
+            const container = document.getElementById('lista-dicio');
+            if (dicioArray.length === 0) { 
+                container.innerHTML = "<p style='text-align:center; color:var(--text-muted); grid-column: 1/-1;'>Nenhum dado vinculado ainda.</p>"; 
+                return; 
+            }
+            
+            const inputFiltro = document.getElementById('buscaDicio').value.toLowerCase(); 
+            const catFiltro = document.getElementById('filtroCategoriaDicio').value;
+            
+            const itensFiltrados = dicioArray.filter(function(item) {
+                const matchTexto = item.termo.toLowerCase().includes(inputFiltro) || item.definicao.toLowerCase().includes(inputFiltro);
+                const matchCat = catFiltro === "" || item.categoria === catFiltro;
+                return matchTexto && matchCat;
+            }).sort((a, b) => a.termo.localeCompare(b.termo));
+            
+            if (itensFiltrados.length === 0) { 
+                container.innerHTML = "<p style='text-align:center; color:var(--text-muted); grid-column: 1/-1;'>Nenhum termo encontrado.</p>"; 
+                return; 
+            }
+            
+            let html = "";
+            itensFiltrados.forEach(function(item) {
+                const termoSafe = item.termo.replace(/'/g, "\\'");
+                const catSafe = item.categoria.replace(/'/g, "\\'");
+                const defSafe = item.definicao.replace(/'/g, "\\'").replace(/\n/g, '\\n');
+                
+                html += `<div class="card dicio-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
+                            <div class="term">${item.termo}</div>
+                            <div class="preview">${item.definicao}</div>
+                         </div>`;
+            });
+            container.innerHTML = html;
         }
 
-        // --- SOL / GPS ---
-        function formatTime(d) { return isNaN(d.getTime()) ? "--:--" : d.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); }
+        function renderDicioIndex(letter) {
+            const container = document.getElementById('lista-dicio'); 
+            if (dicioArray.length === 0) return;
+            
+            const itensFiltrados = dicioArray.filter(function(item) { 
+                return item.termo.toUpperCase().startsWith(letter);
+            }).sort((a, b) => a.termo.localeCompare(b.termo));
+            
+            if (itensFiltrados.length === 0) { 
+                container.innerHTML = `<p style='text-align:center; color:var(--text-muted); margin-top:20px; grid-column: 1/-1;'>Nenhum verbete com a letra <strong>${letter}</strong>.</p>`; 
+                return; 
+            }
+            
+            let html = '';
+            itensFiltrados.forEach(function(item) {
+                const termoSafe = item.termo.replace(/'/g, "\\'");
+                const catSafe = item.categoria.replace(/'/g, "\\'");
+                const defSafe = item.definicao.replace(/'/g, "\\'").replace(/\n/g, '\\n');
+                
+                html += `<div class="card dicio-item" onclick="abrirVerbeteModal('${termoSafe}', '${catSafe}', '${defSafe}')">
+                            <div class="term">${item.termo}</div>
+                            <div class="preview">${item.definicao}</div>
+                         </div>`;
+            });
+            container.innerHTML = html;
+        }
+
+        // ==========================================
+        // MÓDULO DE LUZ NATURAL E LUA
+        // ==========================================
+        let locLat = -23.5266; 
+        let locLng = -46.6963; 
+        let locName = "SNC Lapa Scipião (SP)";
+        
+        function formatTime(date) { 
+            if (isNaN(date.getTime())) return "--:--"; 
+            return date.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' }); 
+        }
+
         function getEducativeInfo(time, lat, lng) {
-            if (isNaN(time.getTime())) return ""; const pos = SunCalc.getPosition(time, lat, lng); let alt = pos.altitude * 180 / Math.PI; let azi = (pos.azimuth * 180 / Math.PI) + 180;
-            let aT = alt < 0 ? "Abaixo do horizonte (Indireta)" : alt < 15 ? "Muito baixo (Sombras longas)" : alt < 45 ? "Baixo (Sombras médias)" : alt < 75 ? "Alto (Sombras curtas)" : "A pino (Sombras duras)";
-            let dir = azi >= 337.5 || azi < 22.5 ? "N" : azi < 67.5 ? "NE" : azi < 112.5 ? "L" : azi < 157.5 ? "SE" : azi < 202.5 ? "S" : azi < 247.5 ? "SO" : azi < 292.5 ? "O" : "NO";
-            return `<div class="info">📐 Altura: ${Math.round(alt)}° (${aT})<br>🧭 Direção: Vem do ${dir}</div>`;
+            if (isNaN(time.getTime())) return "";
+            const pos = SunCalc.getPosition(time, lat, lng);
+            let altDeg = pos.altitude * 180 / Math.PI;
+            let aziDeg = (pos.azimuth * 180 / Math.PI) + 180;
+            
+            let altText = "";
+            if (altDeg < 0) altText = "Abaixo do horizonte (Luz indireta)";
+            else if (altDeg < 15) altText = "Muito baixo (Sombras longas)";
+            else if (altDeg < 45) altText = "Baixo (Sombras médias, modeladora)";
+            else if (altDeg < 75) altText = "Alto (Sombras curtas)";
+            else altText = "A pino (Sombras duras)";
+
+            let dir = "";
+            if (aziDeg >= 337.5 || aziDeg < 22.5) dir = "Norte (N)";
+            else if (aziDeg < 67.5) dir = "Nordeste (NE)";
+            else if (aziDeg < 112.5) dir = "Leste (L)";
+            else if (aziDeg < 157.5) dir = "Sudeste (SE)";
+            else if (aziDeg < 202.5) dir = "Sul (S)";
+            else if (aziDeg < 247.5) dir = "Sudoeste (SO)";
+            else if (aziDeg < 292.5) dir = "Oeste (O)";
+            else dir = "Noroeste (NO)";
+
+            return `<div class="info">📐 <strong>Altura (${Math.round(altDeg)}°):</strong> ${altText}<br>🧭 <strong>Direção:</strong> A luz vem do ${dir}</div>`;
         }
-        function getMoonInfo(d) {
-            const m = SunCalc.getMoonIllumination(d); let n = "", e = "", w = "";
-            if (m.phase < 0.03 || m.phase > 0.97) { n = "Nova"; e = "🌑"; w = "Paraíso das astrofotografias."; } else if (m.phase < 0.25) { n = "Crescente"; e = "🌒"; w = "Rende luz suave."; } else if (m.phase < 0.28) { n = "Quarto Crescente"; e = "🌓"; w = "Luz lateral dramática."; } else if (m.phase < 0.47) { n = "Gibosa"; e = "🌔"; w = "Quase cheia."; } else if (m.phase < 0.53) { n = "Cheia"; e = "🌕"; w = "Um rebatedor gigante no céu."; } else if (m.phase < 0.72) { n = "Gibosa Ming."; e = "🌖"; w = "A iluminação diminui."; } else if (m.phase < 0.78) { n = "Quarto Ming."; e = "🌗"; w = "Ideal para nascer da lua."; } else { n = "Minguante"; e = "🌘"; w = "Brilho sumindo."; }
-            return `<div class="card sun-card"><div class="row"><span class="label">Fase da Lua (${Math.round(m.fraction*100)}%)</span><span class="time">${e} ${n}</span></div><div class="info">🔭 <strong>Dica:</strong> ${w}</div></div>`;
-        }
-        async function updateWeatherUI(d) {
-            const wDiv = document.getElementById('weather-results'); if (toISODate(d) !== toISODate(new Date())) { wDiv.classList.add('hidden'); return; }
-            wDiv.classList.remove('hidden'); wDiv.innerHTML = '<span style="color:var(--text-muted);">Consultando...</span>';
-            try {
-                const w = (await (await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${locLat}&longitude=${locLng}&current_weather=true`)).json()).current_weather;
-                wDiv.innerHTML = `<div style="display:flex; justify-content:space-between; font-weight:800; font-family:'Syne'; color:#fff; font-size:1.2rem;"><span>${w.is_day?'🌤️':'🌙'} ${w.temperature}°C</span></div><div style="font-size:0.85rem; color:var(--text-muted); margin-top:8px;">⚠️ Condição ao vivo baseada em satélite. Olhe o céu real antes de sair.</div>`;
-            } catch (e) { wDiv.innerHTML = 'Offline'; }
-        }
-        function renderSunCalc(d) { 
-            const t = SunCalc.getTimes(d, locLat, locLng); 
-            document.getElementById('suncalc-results').innerHTML = `<div style="margin-bottom:16px; color:var(--text-muted); font-size:0.8rem; font-weight:700; text-align:center;">📍 REF: <strong>${locName.toUpperCase()}</strong></div>
-                <div class="card sun-card"><div class="row"><span class="label">🌅 Nascer</span><span class="time">${formatTime(t.sunrise)}</span></div>${getEducativeInfo(t.sunrise, locLat, locLng)}</div>
-                <div class="card sun-card golden"><div class="row"><span class="label">✨ Golden (M)</span><span class="time">${formatTime(t.sunriseEnd)} - ${formatTime(t.goldenHourEnd)}</span></div>${getEducativeInfo(t.sunriseEnd, locLat, locLng)}</div>
-                <div class="card sun-card golden"><div class="row"><span class="label">✨ Golden (T)</span><span class="time">${formatTime(t.goldenHour)} - ${formatTime(t.sunsetStart)}</span></div>${getEducativeInfo(t.goldenHour, locLat, locLng)}</div>
-                <div class="card sun-card"><div class="row"><span class="label">🌇 Pôr do Sol</span><span class="time">${formatTime(t.sunset)}</span></div>${getEducativeInfo(t.sunset, locLat, locLng)}</div>`; 
-            document.getElementById('moon-results').innerHTML = getMoonInfo(d); updateWeatherUI(d);
-        }
-        function initSunCalc() { const h = new Date(); const i = document.getElementById('dataSunCalc'); if(!i.value) i.value = toISODate(h); renderSunCalc(h); }
-        function atualizarDataSunCalc() { const v = document.getElementById('dataSunCalc').value; if(v) { const [a,m,d]=v.split('-'); renderSunCalc(new Date(a,m-1,d,12)); } }
-        async function buscarLocalidadeSunCalc() {
-            const q = document.getElementById('buscaLocalSunCalc').value; if (!q) return;
-            const b = document.getElementById('btn-buscar-local'); b.innerText = "...";
-            try { const data = await (await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(q)}`)).json(); if (data.length) { locLat = parseFloat(data[0].lat); locLng = parseFloat(data[0].lon); locName = data[0].display_name.split(',')[0]; atualizarDataSunCalc(); } else alert("Não encontrada."); } catch(e) {} finally { b.innerText = "Buscar"; }
-        }
-        function getMyLocation() { 
-            const b = document.getElementById('btn-gps'); b.innerText = "Buscando..."; 
-            if ("geolocation" in navigator) navigator.geolocation.getCurrentPosition(p => { locLat = p.coords.latitude; locLng = p.coords.longitude; locName = "Meu GPS"; atualizarDataSunCalc(); b.innerText = "📍 Atualizado!"; setTimeout(()=>b.innerText="📍 Usar meu GPS atual",3000); }, e => { b.innerText="📍 Usar meu GPS atual"; }, {timeout:10000}); 
+        
+        function getMoonInfo(targetDate) {
+            const moonIllum = SunCalc.getMoonIllumination(targetDate);
+            const phase = moonIllum.phase; 
+            const fraction = moonIllum.fraction; 
+            const distance = moonIllum.distance; 
+            
+            let phaseName = ""; let emoji = ""; let witticism = "";
+
+            if (phase < 0.03 || phase > 0.97) { phaseName = "Nova"; emoji = "🌑"; witticism = "Zero luz! Paraíso das astrofotografias."; } 
+            else if (phase < 0.25) { phaseName = "Crescente"; emoji = "🌒"; witticism = "Rende fotos com luz suave noturna."; } 
+            else if (phase < 0.28) { phaseName = "Quarto Crescente"; emoji = "🌓"; witticism = "Luz lateral dramática, ótima para crateras."; } 
+            else if (phase < 0.47) { phaseName = "Gibosa Crescente"; emoji = "🌔"; witticism = "Quase cheia! A luz já ofusca estrelas."; } 
+            else if (phase < 0.53) { phaseName = "Cheia"; emoji = "🌕"; witticism = "Um rebatedor gigante no céu. Luz dura."; } 
+            else if (phase < 0.72) { phaseName = "Gibosa Minguante"; emoji = "🌖"; witticism = "A iluminação começa a diminuir."; } 
+            else if (phase < 0.78) { phaseName = "Quarto Minguante"; emoji = "🌗"; witticism = "Ideal para captar o nascer da lua de madrugada."; } 
+            else { phaseName = "Minguante"; emoji = "🌘"; witticism = "Brilho sumindo, como a bateria da câmera."; }
+
+            let supermoonTag = "";
+            if (distance < 365000 && (phase > 0.45 && phase < 0.55)) { supermoonTag = "<br><br>🌕 <strong>SUPER LUA:</strong> Perigeu. Prepare a teleobjetiva!"; } 
+            else if (distance > 400000 && (phase < 0.05 || phase > 0.95)) { supermoonTag = "<br><br>🌑 <strong>Micro Lua:</strong> Apogeu."; }
+            
+            let eclipseText = (phase < 0.03 || phase > 0.97 || (phase > 0.47 && phase < 0.53)) ? " (Risco de eclipses!)." : "";
+
+            return `
+                <div class="card sun-card moon-card">
+                    <div class="row">
+                        <span class="label">Fase da Lua (${Math.round(fraction * 100)}%)</span>
+                        <span class="time">${emoji} ${phaseName}</span>
+                    </div>
+                    <div class="info">🔭 <strong>Dica:</strong> ${witticism} ${eclipseText} ${supermoonTag}</div>
+                </div>
+            `;
         }
 
-        // --- CALCULADORA DE ESTÚDIO (GRID DESIGN) ---
+        async function fetchWeather(lat, lng) {
+            try {
+                const response = await fetch(`https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lng}&current_weather=true`);
+                const data = await response.json(); 
+                return data.current_weather;
+            } catch (e) { 
+                return null; 
+            }
+        }
+
+        async function updateWeatherUI(targetDate) {
+            const weatherDiv = document.getElementById('weather-results');
+            const hojeStr = toISODate(new Date()); 
+            const targetStr = toISODate(targetDate);
+            
+            if (targetStr !== hojeStr) { 
+                weatherDiv.innerHTML = ''; 
+                weatherDiv.classList.add('hidden'); 
+                return; 
+            }
+            
+            weatherDiv.innerHTML = '<span style="color:var(--text-muted);">🌤️ Consultando meteorologia...</span>'; 
+            weatherDiv.classList.remove('hidden');
+            
+            const weather = await fetchWeather(locLat, locLng);
+            
+            if (!weather) { 
+                weatherDiv.innerHTML = '<span style="color:var(--text-muted);">⚠️ Clima indisponível no modo offline.</span>'; 
+                return; 
+            }
+            
+            const code = weather.weathercode; 
+            const isDay = weather.is_day === 1; 
+            
+            let icon = isDay ? '🌤️' : '🌙'; 
+            let condicao = 'Misto'; 
+            let dica = '';
+
+            if (code === 0) { 
+                icon = isDay ? '☀️' : '🌑'; 
+                condicao = 'Céu Limpo'; 
+                dica = isDay 
+                    ? 'Luz dura e sombras fortes. Use difusores para retratos.' 
+                    : 'Noite limpa. Excelente para astrofotografia e exposições longas.'; 
+            }
+            else if (code >= 1 && code <= 3) { 
+                icon = '☁️'; 
+                condicao = 'Nublado / Parcial'; 
+                dica = isDay 
+                    ? 'Luz suave (softbox natural). Cores fiéis e baixo contraste.' 
+                    : 'Noite nublada. As nuvens refletem a poluição luminosa da cidade.'; 
+            }
+            else if (code === 45 || code === 48) { 
+                icon = '🌫️'; 
+                condicao = 'Neblina'; 
+                dica = isDay 
+                    ? 'Aproveite a profundidade atmosférica e silhuetas.' 
+                    : 'Clima noir. As luzes da rua criam halos incríveis. Foco manual recomendado.'; 
+            }
+            else if (code >= 51 && code <= 67) { 
+                icon = '🌧️'; 
+                condicao = 'Chuva'; 
+                dica = isDay 
+                    ? 'Cores saturadas, mas proteja bem o equipamento.' 
+                    : 'Aproveite os reflexos dramáticos no asfalto molhado. Proteja a câmera.'; 
+            }
+            else if (code >= 80 && code <= 99) { 
+                icon = '⛈️'; 
+                condicao = 'Instabilidade / Risco de Chuva'; 
+                dica = isDay 
+                    ? 'Luz dramática, mas risco ao equipamento.' 
+                    : 'Luzes dramáticas e risco de raios. Evite áreas abertas.'; 
+            }
+            
+            const avisoPrudencia = `<div style="font-size: 0.8rem; color: var(--accent-warning); margin-top: 12px;">⚠️ <strong>Aviso C.L.A.R.A:</strong> Ferramentas de previsão baseiam-se em modelos. Antes de sair, abra a janela e confira o céu real.</div>`;
+
+            weatherDiv.innerHTML = `
+                <div style="display:flex; flex-direction:column; width: 100%;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; font-family:'Syne', sans-serif; font-weight:800; color:#fff; font-size: 1.2rem;">
+                        <span>${icon} Clima Agora (${weather.temperature}°C)</span>
+                        <span>${condicao}</span>
+                    </div>
+                    <div style="font-size:0.9rem; color:var(--text-muted); border-top:1px dashed var(--border-color); padding-top:12px; margin-top:12px; line-height: 1.4;">
+                        📸 <strong>Dica:</strong> ${dica}
+                    </div>
+                    ${avisoPrudencia}
+                </div>
+            `;
+        }
+
+        function renderSunCalc(targetDate) { 
+            const times = SunCalc.getTimes(targetDate, locLat, locLng); 
+            
+            let html = `<div style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.85rem; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;">📍 Referência: <strong>${locName}</strong></div>`; 
+            
+            html += `
+                <div class="card sun-card">
+                    <div class="row">
+                        <span class="label">🌅 Nascer do Sol</span>
+                        <span class="time">${formatTime(times.sunrise)}</span>
+                    </div>
+                    ${getEducativeInfo(times.sunrise, locLat, locLng)}
+                </div>
+                
+                <div class="card sun-card golden">
+                    <div class="row">
+                        <span class="label">✨ Hora Dourada (Manhã)</span>
+                        <span class="time">${formatTime(times.sunriseEnd)} - ${formatTime(times.goldenHourEnd)}</span>
+                    </div>
+                    ${getEducativeInfo(times.sunriseEnd, locLat, locLng)}
+                </div>
+                
+                <div class="card sun-card golden">
+                    <div class="row">
+                        <span class="label">✨ Hora Dourada (Tarde)</span>
+                        <span class="time">${formatTime(times.goldenHour)} - ${formatTime(times.sunsetStart)}</span>
+                    </div>
+                    ${getEducativeInfo(times.goldenHour, locLat, locLng)}
+                </div>
+                
+                <div class="card sun-card">
+                    <div class="row">
+                        <span class="label">🌇 Pôr do Sol</span>
+                        <span class="time">${formatTime(times.sunset)}</span>
+                    </div>
+                    ${getEducativeInfo(times.sunset, locLat, locLng)}
+                </div>
+                
+                <div class="card sun-card blue">
+                    <div class="row">
+                        <span class="label">🌃 Hora Azul</span>
+                        <span class="time">${formatTime(times.sunset)} - ${formatTime(times.dusk)}</span>
+                    </div>
+                    ${getEducativeInfo(times.dusk, locLat, locLng)}
+                </div>
+            `; 
+            
+            document.getElementById('suncalc-results').innerHTML = html; 
+            document.getElementById('moon-results').innerHTML = getMoonInfo(targetDate);
+            updateWeatherUI(targetDate);
+        }
+        
+        function initSunCalc() { 
+            const hoje = new Date(); 
+            const dataInput = document.getElementById('dataSunCalc'); 
+            if(!dataInput.value) { 
+                dataInput.value = toISODate(hoje); 
+            } 
+            renderSunCalc(hoje); 
+        }
+        
+        function atualizarDataSunCalc() { 
+            const dataString = document.getElementById('dataSunCalc').value; 
+            if(!dataString) return; 
+            const [ano, mes, dia] = dataString.split('-'); 
+            const targetDate = new Date(ano, mes - 1, dia, 12, 0, 0); 
+            renderSunCalc(targetDate); 
+        }
+
+        async function buscarLocalidadeSunCalc() {
+            const query = document.getElementById('buscaLocalSunCalc').value; 
+            if (!query) return;
+            
+            const btn = document.getElementById('btn-buscar-local'); 
+            const originalText = btn.innerText; 
+            btn.innerText = "..."; 
+            btn.disabled = true;
+            
+            try {
+                const res = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(query)}`);
+                const data = await res.json();
+                if (data && data.length > 0) {
+                    locLat = parseFloat(data[0].lat); 
+                    locLng = parseFloat(data[0].lon); 
+                    locName = data[0].display_name.split(',')[0] + " (Busca)"; 
+                    atualizarDataSunCalc(); 
+                } else { 
+                    alert("Localidade não encontrada."); 
+                }
+            } catch(e) { 
+                alert("Erro de conexão ao buscar localidade."); 
+            } finally { 
+                btn.innerText = originalText; 
+                btn.disabled = false; 
+            }
+        }
+        
+        function getMyLocation() { 
+            const btn = document.getElementById('btn-gps'); 
+            const btnOriginalText = btn.innerText; 
+            btn.innerText = "Buscando satélites..."; 
+            btn.disabled = true; 
+            
+            if ("geolocation" in navigator) { 
+                navigator.geolocation.getCurrentPosition(
+                    function(position) { 
+                        locLat = position.coords.latitude; 
+                        locLng = position.coords.longitude; 
+                        locName = "Meu GPS Atual";
+                        
+                        const dataString = document.getElementById('dataSunCalc').value; 
+                        let targetDate = new Date();
+                        if (dataString) { 
+                            const [ano, mes, dia] = dataString.split('-'); 
+                            targetDate = new Date(ano, mes - 1, dia, 12, 0, 0); 
+                        }
+                        
+                        renderSunCalc(targetDate); 
+                        
+                        btn.innerText = "📍 Localização Atualizada!"; 
+                        btn.style.borderColor = "var(--accent-aulas)"; 
+                        btn.style.color = "var(--accent-aulas)"; 
+                        
+                        setTimeout(function() { 
+                            btn.innerText = btnOriginalText; 
+                            btn.style.borderColor = "var(--accent-sun)"; 
+                            btn.style.color = "var(--accent-sun)"; 
+                            btn.disabled = false; 
+                        }, 3000); 
+                    }, 
+                    function(error) { 
+                        alert("Erro ao obter GPS. Verifique as permissões de localização do seu navegador."); 
+                        btn.innerText = btnOriginalText; 
+                        btn.disabled = false; 
+                    }, 
+                    { timeout: 10000 }
+                ); 
+            } else { 
+                alert("Seu navegador não suporta geolocalização."); 
+                btn.innerText = btnOriginalText; 
+                btn.disabled = false; 
+            } 
+        }
+
+        // ==========================================
+        // MÓDULO CALCULADORA DE ESTÚDIO (Grid Design)
+        // ==========================================
+        const fStopsFull = [ 'f/1.0', 'f/1.4', 'f/2.0', 'f/2.8', 'f/4.0', 'f/5.6', 'f/8.0', 'f/11', 'f/16', 'f/22', 'f/32', 'f/45', 'f/64' ];
+        
         const fStopsData = [ 
-            { f: '1.0', t1: '1.1', t2: '1.2', next: '1.4' }, { f: '1.4', t1: '1.6', t2: '1.8', next: '2.0' }, { f: '2.0', t1: '2.2', t2: '2.5', next: '2.8' }, 
-            { f: '2.8', t1: '3.2', t2: '3.5', next: '4.0' }, { f: '4.0', t1: '4.5', t2: '5.0', next: '5.6' }, { f: '5.6', t1: '6.3', t2: '7.1', next: '8.0' }, 
-            { f: '8.0', t1: '9.0', t2: '10', next: '11' }, { f: '11', t1: '13', t2: '14', next: '16' }, { f: '16', t1: '18', t2: '20', next: '22' }, 
-            { f: '22', t1: '25', t2: '29', next: '32' }, { f: '32', t1: '36', t2: '40', next: '45' }, { f: '45', t1: '51', t2: '57', next: '64' }, { f: '64', t1: '72', t2: '81', next: '90' } 
+            { f: '1.0', t1: '1.1', t2: '1.2', next: '1.4' }, 
+            { f: '1.4', t1: '1.6', t2: '1.8', next: '2.0' }, 
+            { f: '2.0', t1: '2.2', t2: '2.5', next: '2.8' }, 
+            { f: '2.8', t1: '3.2', t2: '3.5', next: '4.0' }, 
+            { f: '4.0', t1: '4.5', t2: '5.0', next: '5.6' }, 
+            { f: '5.6', t1: '6.3', t2: '7.1', next: '8.0' }, 
+            { f: '8.0', t1: '9.0', t2: '10', next: '11' }, 
+            { f: '11', t1: '13', t2: '14', next: '16' }, 
+            { f: '16', t1: '18', t2: '20', next: '22' }, 
+            { f: '22', t1: '25', t2: '29', next: '32' }, 
+            { f: '32', t1: '36', t2: '40', next: '45' }, 
+            { f: '45', t1: '51', t2: '57', next: '64' }, 
+            { f: '64', t1: '72', t2: '81', next: '90' } 
         ];
-        function addLight(r='Preenchimento', s=6, t=0) { if (lights.length<6) { lights.push({id: lightIdCounter++, role:r, baseStop:s, tenths:t}); renderLights(); } }
-        function removeLight(id) { lights = lights.filter(l => l.id !== id); renderLights(); }
-        function updateLight(id, f, v) { const l = lights.find(l => l.id === id); if(l){ l[f]=v; if(f==='role'&&v==='Principal') lights.forEach(x=>{if(x.id!==id&&x.role==='Principal')x.role='Preenchimento'}); renderLights(); } }
-        function nudgeLight(id, v) { const l = lights.find(l => l.id === id); if(!l)return; let n = (l.baseStop*10)+l.tenths+v; if(n<0)n=0; if(n>120)n=120; l.baseStop=Math.floor(n/10); l.tenths=n%10; renderLights(); }
+        
+        let lights = []; 
+        let lightIdCounter = 0; 
+        
+        function getAbsoluteValue(stopIndex, tenths) { 
+            return (stopIndex * 10) + tenths; 
+        }
+        
+        function addLight(role = 'Preenchimento', baseStop = 6, tenths = 0) { 
+            if (lights.length >= 6) { 
+                return alert("Capacidade máxima do estúdio atingida: 1 Principal + 5 Secundárias."); 
+            }
+            lights.push({ id: lightIdCounter++, role: role, baseStop: baseStop, tenths: tenths }); 
+            renderLights(); 
+        }
+        
+        function removeLight(id) { 
+            lights = lights.filter(l => l.id !== id); 
+            renderLights(); 
+        }
+        
+        function updateLight(id, field, value) { 
+            const light = lights.find(l => l.id === id); 
+            if (light) { 
+                light[field] = value; 
+                // Se definiu esta luz como Principal, rebaixa as outras
+                if (field === 'role' && value === 'Principal') { 
+                    lights.forEach(function(l_other) { 
+                        if (l_other.id !== id && l_other.role === 'Principal') {
+                            l_other.role = 'Preenchimento'; 
+                        }
+                    }); 
+                }
+                renderLights(); 
+            } 
+        }
+        
+        function nudgeLight(id, tenthsToAdd) { 
+            const light = lights.find(l => l.id === id); 
+            if (!light) return; 
+            
+            let newAbs = getAbsoluteValue(light.baseStop, light.tenths) + tenthsToAdd; 
+            if (newAbs < 0) newAbs = 0; 
+            if (newAbs > 120) newAbs = 120; 
+            
+            light.baseStop = Math.floor(newAbs / 10); 
+            light.tenths = newAbs % 10; 
+            renderLights(); 
+        }
+        
+        function getCameraAdvice(stopIndex, tenths) { 
+            const stopData = fStopsData[stopIndex]; 
+            let message = ""; 
+            let isWarning = false; 
+            
+            switch(tenths) { 
+                case 0: 
+                case 1: 
+                    message = `📸 Config. Câmera: Use <strong>f/${stopData.f}</strong> (Ponto inteiro)`; 
+                    break; 
+                case 2: 
+                    message = `⚠️ NA TOCHA PRINCIPAL: Reduza -2/10 para <strong>f/${stopData.f}</strong> ou Aumente +1/10 para <strong>f/${stopData.t1}</strong>`; 
+                    isWarning = true; 
+                    break; 
+                case 3: 
+                case 4: 
+                    message = `📸 Config. Câmera: Use <strong>f/${stopData.t1}</strong> (1º Terço)`; 
+                    break; 
+                case 5: 
+                    message = `⚠️ NA TOCHA PRINCIPAL: Mude 1/2 ponto para <strong>f/${stopData.f}</strong> ou <strong>f/${stopData.next}</strong> para evitar décimos chatos.`; 
+                    isWarning = true; 
+                    break; 
+                case 6: 
+                case 7: 
+                    message = `📸 Config. Câmera: Use <strong>f/${stopData.t2}</strong> (2º Terço)`; 
+                    break; 
+                case 8: 
+                    message = `⚠️ NA TOCHA PRINCIPAL: Reduza -1/10 para <strong>f/${stopData.t2}</strong> ou Aumente +2/10 para <strong>f/${stopData.next}</strong>`; 
+                    isWarning = true; 
+                    break; 
+                case 9: 
+                    message = `📸 Config. Câmera: Use <strong>f/${stopData.next}</strong> (Ponto Inteiro do próximo)`; 
+                    break; 
+            } 
+            return { message: message, isWarning: isWarning }; 
+        }
         
         function renderLights() { 
-            const c = document.getElementById('lightsContainer'); if (!c) return; c.innerHTML = ''; 
-            const cenario = document.getElementById('cenarioFundo').value; const p = lights.find(l => l.role === 'Principal'); 
-            lights.forEach(l => { 
-                const isP = l.role === 'Principal'; const r = document.createElement('div'); r.className = `light-card ${isP ? 'principal' : ''}`; 
-                r.innerHTML = `
-                    <div class="light-controls-row">
-                        <select onchange="updateLight(${l.id}, 'role', this.value)">
-                            <option ${l.role === 'Principal'?'selected':''}>Principal</option><option ${l.role === 'Preenchimento'?'selected':''}>Preenchimento</option>
-                            <option ${l.role === 'Recorte'?'selected':''}>Recorte</option><option ${l.role === 'Cabelo'?'selected':''}>Cabelo</option>
-                            <option ${l.role === 'Fundo'?'selected':''}>Fundo</option><option ${l.role === 'Retorno'?'selected':''}>Retorno</option>
-                        </select>
-                        <select onchange="updateLight(${l.id}, 'baseStop', parseInt(this.value))">
-                            ${fStopsData.map((d,i)=>`<option value="${i}" ${l.baseStop===i?'selected':''}>f/${d.f}</option>`).join('')}
-                        </select>
-                        <select onchange="updateLight(${l.id}, 'tenths', parseInt(this.value))">
-                            ${[0,1,2,3,4,5,6,7,8,9].map(t=>`<option value="${t}" ${l.tenths===t?'selected':''}>${t}/10</option>`).join('')}
-                        </select>
-                    </div>
-                    <div class="light-actions-row" style="margin-top: 4px;">
-                        <button class="btn-luz-math" onclick="nudgeLight(${l.id}, -5)">-½</button>
-                        <button class="btn-luz-math" onclick="nudgeLight(${l.id}, -1)">-⅒</button>
-                        <button class="btn-luz-math" onclick="nudgeLight(${l.id}, 1)">+⅒</button>
-                        <button class="btn-luz-math" onclick="nudgeLight(${l.id}, 5)">+½</button>
-                        ${isP ? '' : `<button class="btn-luz-remove" onclick="removeLight(${l.id})">✖</button>`}
-                    </div>
-                    <div class="light-feedback" id="res-${l.id}"></div>
-                `; c.appendChild(r); 
+            const container = document.getElementById('lightsContainer'); 
+            if (!container) return; 
+            container.innerHTML = ''; 
+            
+            const cenario = document.getElementById('cenarioFundo').value; 
+            const principal = lights.find(l => l.role === 'Principal'); 
+            
+            lights.forEach(function(light) { 
+                const isPrincipal = light.role === 'Principal'; 
+                const row = document.createElement('div'); 
+                row.className = `card light-card ${isPrincipal ? 'principal' : ''}`; 
                 
-                const rD = document.getElementById(`res-${l.id}`); let rH = ""; const d = fStopsData[l.baseStop];
-                if (isP) { 
-                    const adv = l.tenths<=1 ? `📸 Câmera: Use <strong>f/${d.f}</strong> (Ponto inteiro)` : l.tenths===2 ? `⚠️ -2/10 para <strong>f/${d.f}</strong> ou +1/10 para <strong>f/${d.t1}</strong>` : l.tenths<=4 ? `📸 Câmera: Use <strong>f/${d.t1}</strong> (1º Terço)` : l.tenths===5 ? `⚠️ 1/2 ponto para <strong>f/${d.f}</strong> ou <strong>f/${d.next}</strong>` : l.tenths<=7 ? `📸 Câmera: Use <strong>f/${d.t2}</strong> (2º Terço)` : l.tenths===8 ? `⚠️ -1/10 para <strong>f/${d.t2}</strong> ou +2/10 para <strong>f/${d.next}</strong>` : `📸 Câmera: Use <strong>f/${d.next}</strong>`;
-                    rH = `<div style="color:${l.tenths===2||l.tenths===5||l.tenths===8?'var(--accent-warning)':'var(--text-main)'}; margin-bottom:12px;">${adv}</div><div style="color:#4caf50; font-weight:700; display:flex; align-items:center; gap:6px;">⚓ Luz de Referência (Âncora)</div>`;
-                } else if (p) { 
-                    const pA = (p.baseStop*10)+p.tenths; const lA = (l.baseStop*10)+l.tenths; const df = lA - pA; let iT=false, tM="", sA="";
-                    if(l.role==='Preenchimento'){if(df===-20)iT=true;tM="2 stops abaixo da principal";}else if(l.role==='Recorte'||l.role==='Cabelo'){if(df===20)iT=true;tM="2 stops acima da principal";}else if(cenario==='branco'){if(l.role==='Fundo'){if(df>=10&&df<=20)iT=true;tM="1 a 2 stops acima (+1.5 ideal)";}else if(l.role==='Retorno'){if(df<=0)iT=true;tM="Máx igual à principal";if(df>0)sA=`<div style="color:var(--accent-danger); margin-top:8px; font-weight:700;">⚠️ Vazamento! Reduza ${(df/2).toFixed(1)}/10 no fundo.</div>`;}}else if(cenario==='cinza'){if(l.role==='Fundo'){if(df>=-40&&df<=-20)iT=true;tM="2 a 4 stops abaixo";}}
-                    if(iT) rH=`<div class="light-success-box"><div class="light-success-title">✅ Intenção Atingida:</div><span style="color:var(--text-main);">${tM}</span></div>`;
-                    else {
-                        if(df===0 && tM) rH=`<div style="color:var(--cat-convocatoria); font-weight:700; margin-bottom:8px;">✅ Nivelada. Passo 2: Ajustar [${tM}]</div>`;
-                        else { const dE = pA-lA; rH=`<div style="margin-bottom:8px; color:var(--text-main);">⚙️ Na tocha, ${dE>0?'Aumente':'Reduza'} <strong>${Math.floor(Math.abs(dE)/5)} clicks (½)</strong> e <strong>${Math.abs(dE)%5} clicks (⅒)</strong> para igualar.</div>`; if(tM)rH+=`<div style="color:var(--text-muted); font-size:0.85rem;">🎯 Regra final: ${tM}</div>`; }
-                        if(sA) rH+=sA;
-                    }
-                } rD.innerHTML = rH; 
+                // Mapeamento dinâmico dos selects
+                let optionsRole = `<option ${light.role === 'Principal' ? 'selected' : ''}>Principal</option>
+                                   <option ${light.role === 'Preenchimento' ? 'selected' : ''}>Preenchimento</option>
+                                   <option ${light.role === 'Recorte' ? 'selected' : ''}>Recorte</option>
+                                   <option ${light.role === 'Cabelo' ? 'selected' : ''}>Cabelo</option>
+                                   <option ${light.role === 'Fundo' ? 'selected' : ''}>Fundo</option>
+                                   <option ${light.role === 'Retorno' ? 'selected' : ''}>Retorno</option>`;
+
+                let optionsStop = fStopsData.map(function(d, i) { 
+                    return `<option value="${i}" ${light.baseStop === i ? 'selected' : ''}>${fStopsFull[i]}</option>`; 
+                }).join('');
+
+                let optionsTenths = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9].map(function(t) {
+                    return `<option value="${t}" ${light.tenths === t ? 'selected' : ''}>${t}/10</option>`;
+                }).join('');
+
+                let deleteBtn = isPrincipal ? '' : `<button class="btn-luz-remove" onclick="removeLight(${light.id})">✖</button>`;
+
+                row.innerHTML = `
+                    <div class="light-controls-row">
+                        <select onchange="updateLight(${light.id}, 'role', this.value)">${optionsRole}</select>
+                        <select onchange="updateLight(${light.id}, 'baseStop', parseInt(this.value))">${optionsStop}</select>
+                        <select onchange="updateLight(${light.id}, 'tenths', parseInt(this.value))">${optionsTenths}</select>
+                    </div>
+                    <div class="light-actions-row" style="margin-top: 8px;">
+                        <button class="btn-luz-math" onclick="nudgeLight(${light.id}, -5)">-½</button>
+                        <button class="btn-luz-math" onclick="nudgeLight(${light.id}, -1)">-⅒</button>
+                        <button class="btn-luz-math" onclick="nudgeLight(${light.id}, 1)">+⅒</button>
+                        <button class="btn-luz-math" onclick="nudgeLight(${light.id}, 5)">+½</button>
+                        ${deleteBtn}
+                    </div>
+                    <div class="light-feedback" id="res-${light.id}"></div>
+                `; 
+                
+                container.appendChild(row); 
+                
+                const resDiv = document.getElementById(`res-${light.id}`); 
+                let resultHTML = ""; 
+                
+                if (isPrincipal) { 
+                    const advice = getCameraAdvice(light.baseStop, light.tenths); 
+                    const colorFeedback = advice.isWarning ? 'var(--accent-warning)' : 'var(--text-main)';
+                    const weightFeedback = advice.isWarning ? '800' : 'normal';
+                    
+                    resultHTML = `<div style="color:${colorFeedback}; margin-bottom:12px; font-weight:${weightFeedback}; font-size: 0.95rem;">${advice.message}</div>
+                                  <div style="color:#4caf50; font-weight:800; font-size: 0.85rem; text-transform: uppercase; letter-spacing: 0.5px;">⚓ Luz de Referência (Âncora)</div>`;
+                } else if (principal) { 
+                    const pAbs = getAbsoluteValue(principal.baseStop, principal.tenths); 
+                    const lAbs = getAbsoluteValue(light.baseStop, light.tenths); 
+                    const diffFromMain = lAbs - pAbs; 
+                    
+                    let isAtTarget = false; 
+                    let targetMsg = ""; 
+                    let splitAdvice = ""; 
+                    
+                    if (light.role === 'Preenchimento') { 
+                        if (diffFromMain === -20) isAtTarget = true; 
+                        targetMsg = "2 stops abaixo da principal (-2.0)"; 
+                    } 
+                    else if (light.role === 'Recorte' || light.role === 'Cabelo') { 
+                        if (diffFromMain === 20) isAtTarget = true; 
+                        targetMsg = "2 stops acima da principal (+2.0)"; 
+                    } 
+                    else if (cenario === 'branco') { 
+                        if (light.role === 'Fundo') { 
+                            if (diffFromMain >= 10 && diffFromMain <= 20) isAtTarget = true; 
+                            targetMsg = "1 a 2 stops acima (+1.5 ideal)"; 
+                        } 
+                        else if (light.role === 'Retorno') { 
+                            if (diffFromMain <= 0) isAtTarget = true; 
+                            targetMsg = "Potência igual ou menor que a principal"; 
+                            if (diffFromMain > 0) { 
+                                splitAdvice = `<div style="color:var(--accent-danger); margin-top:12px; font-weight:700; background:rgba(239,68,68,0.1); padding:8px; border-radius:6px;">⚠️ Cuidado com o Vazamento! <br>Reduza ${(diffFromMain/2).toFixed(1)}/10 em cada flash do fundo.</div>`; 
+                            } 
+                        } 
+                    } 
+                    else if (cenario === 'cinza') { 
+                        if (light.role === 'Fundo') { 
+                            if (diffFromMain >= -40 && diffFromMain <= -20) isAtTarget = true; 
+                            targetMsg = "2 a 4 stops abaixo da principal"; 
+                        } 
+                    } 
+                    
+                    if (isAtTarget) { 
+                        resultHTML = `<div class="light-success-box">
+                                        <div class="light-success-title">✅ Intenção Atingida</div>
+                                        <span style="color:var(--text-main); font-weight:600;">${targetMsg}</span>
+                                      </div>`;
+                    } 
+                    else { 
+                        if (diffFromMain === 0 && targetMsg !== "") { 
+                            resultHTML = `<div style="color:var(--cat-convocatoria); font-weight:700; margin-bottom:8px; padding:8px; background:rgba(59,130,246,0.1); border-radius:6px;">✅ Tocha Nivelada. <br>Passo 2: Agora aplique [ ${targetMsg} ]</div>`; 
+                        } 
+                        else { 
+                            const diffToEqualize = pAbs - lAbs; 
+                            const direction = diffToEqualize > 0 ? "Aumente" : "Reduza"; 
+                            
+                            resultHTML = `<div style="margin-bottom:8px; color:var(--text-main); line-height: 1.5;">
+                                            ⚙️ <strong>Passo 1 (Nivelar Tocha):</strong><br>
+                                            ${direction} <strong>${Math.floor(Math.abs(diffToEqualize)/5)} clicks de (½)</strong> e <strong>${Math.abs(diffToEqualize)%5} clicks de (⅒)</strong> para igualar com a Principal.
+                                          </div>`; 
+                                          
+                            if (targetMsg) {
+                                resultHTML += `<div style="color:var(--text-muted); font-size:0.85rem; font-weight:700; text-transform:uppercase; letter-spacing:0.5px;">🎯 Regra do Estúdio: ${targetMsg}</div>`; 
+                            }
+                        } 
+                        if (splitAdvice) {
+                            resultHTML += splitAdvice; 
+                        }
+                    } 
+                } 
+                resDiv.innerHTML = resultHTML; 
             }); 
+        }
+
+        // ==========================================
+        // CONTADOR DE VISITAS INVISÍVEL (API)
+        // ==========================================
+        async function atualizarContador() {
+            try {
+                const namespace = "clara_project_hb_2026"; 
+                const key = "main_hits";
+                const response = await fetch(`https://api.countapi.xyz/hit/${namespace}/${key}`);
+                const data = await response.json();
+                
+                const counterElement = document.getElementById('visitor-counter'); 
+                if (counterElement) {
+                    counterElement.innerText = `ID: ${data.value}`;
+                }
+            } catch (error) {
+                // Silencioso em caso de adblocker ou rede
+            }
         }
     </script>
 </body>
