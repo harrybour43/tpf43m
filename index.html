@@ -62,6 +62,17 @@
             padding: 0; 
             box-sizing: border-box; 
             -webkit-tap-highlight-color: transparent; 
+            -webkit-user-drag: none; /* Impede de arrastar imagens/SVG para fora */
+        }
+
+        body {
+            user-select: none; /* Impede a seleção e cópia de texto na tela inteira */
+            -webkit-user-select: none;
+        }
+
+        input, select, textarea {
+            user-select: auto; /* Libera a digitação apenas nos campos de busca e senha */
+            -webkit-user-select: auto;
         }
 
         html {
@@ -603,7 +614,7 @@
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">V5.2.0 • Harry Bour • 2026</div>
+        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">V5.3.0 • Harry Bour • 2026</div>
     </div>
 
     <header class="app-header">
@@ -2522,6 +2533,35 @@
                 // Falha silenciosa ignorada no console para não sujar o debug
             }
         }
+
+        // ==========================================
+        // SISTEMA DE PROTEÇÃO (ANTI-INSPECT / ANTI-COPY)
+        // ==========================================
+        
+        // 1. Bloqueia o clique do Botão Direito
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 2. Bloqueia atalhos de teclado (F12, Ctrl+U, Ctrl+Shift+I, etc)
+        document.addEventListener('keydown', function(e) {
+            // F12 (Inspecionar)
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // Ctrl + Shift + I / J / C (Ferramentas de Desenvolvedor)
+            if (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'i' || e.key === 'J' || e.key === 'j' || e.key === 'C' || e.key === 'c')) {
+                e.preventDefault();
+            }
+            // Ctrl + U (Ver Código-Fonte)
+            if (e.ctrlKey && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+            }
+            // Ctrl + S (Salvar Página)
+            if (e.ctrlKey && (e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+            }
+        });
     </script>
 </body>
 </html>
