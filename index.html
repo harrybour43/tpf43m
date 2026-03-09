@@ -474,7 +474,7 @@
             right: 0;
             margin: 0 auto;
             max-width: 800px;
-            background: radial-gradient(circle at center, #2e1700 0%, #0c0c0c 70%);
+            background: radial-gradient(circle at center, #2e1700 0%, #000000 70%);
             z-index: 9999; 
             display: flex; 
             flex-direction: column; 
@@ -601,7 +601,9 @@
     <div id="splash-screen">
         <div class="app-icon-container">🎓</div>
         <div class="brand-font" style="font-size: 3rem; margin-bottom: 8px; color: #fff;">CLARA</div>
-        <div style="color: var(--accent-snc); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px;">Central de Luz e Apoio ao Repertório de Artistas do Audiovisual</div>
+        <div style="color: var(--accent-snc); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-align: center; padding-inline: 20px;">
+            Central de Luz e Apoio ao Repertório de Artistas do Audiovisual
+        </div>
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
@@ -765,8 +767,8 @@
                 <select id="filtroUC" class="input-box"><option value="">-- Todas as datas --</option></select>
             </div>
             
-            <div id="painel-aulas" style="flex:1;"></div>
-            <div id="resultado-pesquisa" style="display: none; flex:1;"></div>
+            <div id="painel-aulas" style="flex:1; width: 100%;"></div>
+            <div id="resultado-pesquisa" style="display: none; flex:1; width: 100%;"></div>
             
             <div style="display: flex; gap: 8px; margin-top: 16px;">
                 <button class="btn btn-outline" style="padding: 12px 8px; font-size: 0.85rem;" id="btn-passada" onclick="mudarSemana(-1)">Semana Passada</button>
@@ -1242,7 +1244,8 @@
                 });
             }
             
-            let htmlHTML = `<div class="card" style="border-top-width:4px; border-top-color:#f59e0b;">
+            // Substitua esta linha específica:
+            let htmlHTML = `<div class="card" style="border-top-width:4px; border-top-color:#f59e0b; width: 100%;">
                         <button onclick="window.limparBusca()" class="btn btn-outline" style="border-color:#f59e0b; color:#f59e0b; padding:8px; margin-bottom:16px;">Limpar Busca</button>
                         <h3 style="color:#f59e0b; margin-bottom:16px;">${nomesUC[ucSelec]}</h3>`; 
             
@@ -1660,7 +1663,7 @@
                 const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${urlTitulo}&dates=${dateStart}/${dateEnd}&details=${urlDetalhe}&location=${urlLocal}`;
 
                 htmlHTML += `
-                    <div class="card datas-int ${classeBordaPrincipal}" ${isPast ? 'style="opacity:0.5;"' : ''}>
+                        <div class="card datas-int ${classeBordaPrincipal}">
                         <div style="margin-bottom: 12px;">${tagsHTML}</div>
                         <div class="ev-titulo">${ev.titulo}</div>
                         <div class="ev-periodo">📅 ${periodoHTML}</div>
