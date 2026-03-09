@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <title>CLARA</title>
+    <title>CLARA v5.4.0</title>
     
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="theme-color" content="#0c0c0c">
-    <meta name="apple-mobile-web-app-title" content="CLARA">
+    <meta name="apple-mobile-web-app-title" content="CLARA v5.4.0">
 
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f4f4f5'%3E%3Cpath d='M4 6C2.9 6 2 6.9 2 8V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H16.83L15 4H9L7.17 6H4ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z'/%3E%3C/svg%3E">
     <link rel="apple-touch-icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23f4f4f5'%3E%3Cpath d='M4 6C2.9 6 2 6.9 2 8V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H16.83L15 4H9L7.17 6H4ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z'/%3E%3C/svg%3E">
@@ -607,7 +607,7 @@
                 <path d="M4 6C2.9 6 2 6.9 2 8V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H16.83L15 4H9L7.17 6H4ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"/>
             </svg>
         </div>
-        <div class="brand-font" style="font-size: 3rem; margin-bottom: 8px; color: #fff;">CLARA</div>
+        <div class="brand-font" style="font-size: 3rem; margin-bottom: 8px; color: #fff;">C.L.A.R.A.</div>
         <div style="color: var(--accent-snc); font-weight: 800; font-size: 0.85rem; letter-spacing: 2px; text-align: center; padding-inline: 20px;">
             Central de Luz e Apoio ao Repertório de Artistas do Audiovisual
         </div>
@@ -942,7 +942,33 @@
             document.getElementById('sheet-kicker').style.color = "var(--text-muted)";
             document.getElementById('sheet-title').innerText = `${ucNome}`;
             document.getElementById('sheet-subtitle').innerText = `Aula ${numAula} • Prof. ${profNome}`;
-            document.getElementById('sheet-body').innerHTML = "<em>Nenhum material extra cadastrado na base de dados.</em>";
+            
+            // NOVO: Cruzamento de dados. Procura eventos da turma que acontecem nesta mesma data
+            const eventosDoDia = baseEventos.filter(function(ev) {
+                const dt = processarDataInteligente(ev.data);
+                return dt && dt.iso === dataISO;
+            });
+
+            let bodyHTML = "";
+
+            // Se encontrou eventos, desenha cards bonitos dentro do modal
+            if (eventosDoDia.length > 0) {
+                bodyHTML = `<div style="margin-bottom: 12px; font-size: 0.75rem; color: var(--accent-eventos); text-transform: uppercase; font-weight: 700; letter-spacing: 1px;">📌 Programação Extra na Data:</div>`;
+                
+                eventosDoDia.forEach(function(ev) {
+                    bodyHTML += `
+                        <div style="background: rgba(217, 70, 239, 0.1); border-left: 3px solid var(--accent-eventos); padding: 16px; border-radius: 8px; margin-bottom: 12px;">
+                            <div style="font-family: 'Cormorant Garamond', serif; font-weight: 700; font-size: 1.3rem; color: #fff; margin-bottom: 6px;">${ev.titulo}</div>
+                            <div style="color: #ccc; font-size: 0.95rem; line-height: 1.5; white-space: pre-wrap;">${ev.desc}</div>
+                        </div>
+                    `;
+                });
+            } else {
+                // Se não tem evento, mantém a mensagem padrão
+                bodyHTML = "<em>Nenhum material extra ou evento cadastrado para esta data.</em>";
+            }
+
+            document.getElementById('sheet-body').innerHTML = bodyHTML;
             
             document.getElementById('sheet-backdrop').classList.add('active');
             document.getElementById('bottom-sheet').classList.add('active');
