@@ -1,11 +1,15 @@
-// Alteração gerada em: 10/03/2026 - 11:00
-const CACHE_NAME = 'clara-cache-v6.3.0'; // Mude aqui para atualizar o código visual
+// Alteração gerada em: 10/03/2026 - 12:00
+const CACHE_NAME = 'clara-cache-v6.3.0'; 
 const ASSETS = [
   '/clara/',
   '/clara/index.html',
+  '/clara/style.css',   // <--- ADICIONAMOS O CSS AQUI
+  '/clara/app.js',      // <--- ADICIONAMOS O JS AQUI
   'https://cdnjs.cloudflare.com/ajax/libs/suncalc/1.9.0/suncalc.min.js',
   'https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&display=swap'
 ];
+
+// ... (O restante do seu arquivo sw.js continua igualzinho)
 
 // Instalação: Salva os arquivos essenciais no celular
 self.addEventListener('install', (event) => {
