@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
+    <link rel="manifest" href="manifest.json">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>CLARA</title>
@@ -104,25 +105,23 @@
            2. LAYOUT APP NATIVO (Header, Viewport, TabBar)
            ========================================== */
         
+        /* Alteração gerada em: 10/03/2026 - 00:08 */
         .app-header {
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            right: 0; 
-            margin: 0 auto;
-            width: 100%;
-            max-width: 800px;
-            height: calc(60px + var(--sat)); 
-            padding-top: var(--sat);
-            background: rgba(12, 12, 12, 0.85);
-            backdrop-filter: blur(12px); 
-            -webkit-backdrop-filter: blur(12px);
-            display: flex; 
-            align-items: center; 
-            justify-content: space-between;
-            padding-inline: 20px; 
-            z-index: 1000; 
-            border-bottom: 1px solid var(--border-color);
+            position: fixed; top: 0; left: 0; right: 0; margin: 0 auto;
+            width: 100%; max-width: 800px; height: calc(60px + var(--sat)); 
+            padding-top: var(--sat); background: rgba(12, 12, 12, 0.85);
+            backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+            display: flex; align-items: center; justify-content: space-between;
+            padding-inline: 20px; z-index: 1000; border-bottom: 1px solid var(--border-color);
+        }
+
+        /* Menu fixado à direita mas abrindo da esquerda para direita */
+        .side-menu {
+            position: fixed; top: 0; left: 0; width: 280px; height: 100dvh;
+            background: var(--bg-panel); z-index: 4000; transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 1px solid var(--border-color); padding: calc(20px + var(--sat)) 20px 20px;
+            display: flex; flex-direction: column;
         }
         
         .header-title { 
@@ -530,6 +529,34 @@
         /* ==========================================
            7. MÓDULOS ESPECÍFICOS E CHIPS
            ========================================== */
+
+        /* Alteração gerada em: 09/03/2026 - 23:45 */
+        /* Menu Lateral e Filtros */
+        .side-menu {
+            position: fixed; top: 0; left: 0; width: 280px; height: 100dvh;
+            background: var(--bg-panel); z-index: 4000; transform: translateX(-100%);
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-right: 1px solid var(--border-color); padding: calc(20px + var(--sat)) 20px 20px;
+        }
+        .side-menu.active { transform: translateX(0); }
+
+        .filter-header {
+            display: flex; justify-content: space-between; align-items: center;
+            padding: 12px 16px; background: var(--bg-elevated); border-radius: 12px
+            ;
+            cursor: pointer; border: 1px solid var(--border-color);
+        }
+        .filter-body { 
+            max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out;
+        }
+        .filter-body.expanded { max-height: 1000px; padding-top: 12px; }
+
+        .btn-add-inline {
+            background: var(--bg-elevated); border: 1px solid var(--border-color);
+            color: var(--accent-datas); width: 40px; height: 40px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 1.4rem; cursor: pointer;
+        }
+        
         .filter-container { background: var(--bg-panel); padding: 16px; border-radius: 16px; margin-bottom: 24px; border: 1px solid var(--border-color); }
         .filter-title { font-size: 0.75rem; color: var(--text-muted); font-weight: 700; margin-bottom: 12px; display: block; text-transform: uppercase; letter-spacing: 0.5px;}
         .filter-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
@@ -630,37 +657,62 @@
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">v5.8.1 • Harry Bour • 2026</div>
+        <div id="version-display" style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;"></div>
     </div>
 
     <header class="app-header">
-        <div class="header-title">
-            <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+        <div class="header-title" style="gap: 10px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="currentColor">
                 <path d="M4 6C2.9 6 2 6.9 2 8V18C2 19.1 2.9 20 4 20H20C21.1 20 22 19.1 22 18V8C22 6.9 21.1 6 20 6H16.83L15 4H9L7.17 6H4ZM12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17ZM12 9C10.34 9 9 10.34 9 12C9 13.66 10.34 15 12 15C13.66 15 15 13.66 15 12C15 10.34 13.66 9 12 9Z"/>
             </svg>
-            CLARA
+            <span class="brand-font" style="font-size: 1.6rem; letter-spacing: 1px;">CLARA</span>
         </div>
-        <button id="btn-force-sync" class="sync-btn" onclick="forceSync()" title="Forçar Atualização">🔄</button>
+        <button class="sync-btn" onclick="toggleMenu()" style="border:none; background:transparent; font-size: 1.6rem;">☰</button>
     </header>
+
+    <nav id="side-menu" class="side-menu">
+        <div style="display:flex; justify-content: space-between; align-items:center; margin-bottom: 30px;">
+            <span class="brand-font" style="font-size: 1.8rem; color: #fff;">Menu</span>
+            <button onclick="toggleMenu()" style="background:transparent; border:none; color:var(--text-muted); font-size:1.2rem; cursor: pointer;">✕</button>
+        </div>
+        
+        <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
+            <button id="btn-sync-menu" class="btn btn-primary" onclick="forceSync();" style="background: var(--bg-elevated); color: #fff; justify-content: flex-start;">🔄 Sincronizar Dados</button>
+            
+            <button class="btn btn-primary" onclick="toggleMenu(); openPush('push-settings');" style="background: var(--bg-elevated); color: #fff; justify-content: flex-start;">⚙️ Notificações</button>
+        </div>
+
+        <div id="pwa-install-footer" style="padding-top: 20px; border-top: 1px solid var(--border-color); text-align: center;">
+            <button id="btn-install-pwa" class="btn btn-outline" style="font-size: 0.8rem; border-color: var(--accent-snc); color: var(--accent-snc);">📥 Baixar Aplicativo CLARA</button>
+            <p id="pwa-installed-msg" class="hidden" style="font-size: 0.7rem; color: var(--accent-aulas); font-weight: 700;">✅ App instalado e pronto para uso offline.</p>
+        </div>
+    </nav>
 
     <main class="app-viewport">
         
         <section id="view-datas" class="view-tab active">
-            <h1 class="page-title" style="color: var(--accent-datas);">Radar Cultural</h1>
-            
-            <button class="btn btn-outline" style="margin-bottom: 24px;" onclick="openPush('push-contribuir')">
-                <span>➕</span> Sugerir novo evento
-            </button>
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                <h1 class="page-title" style="color: var(--accent-datas); margin-bottom: 0; padding-bottom: 0;">Radar Cultural</h1>
+                <button class="btn-add-inline" onclick="openPush('push-contribuir')" title="Sugerir Evento">+</button>
+            </div>
 
-            <div class="filter-container" id="painel-filtros" style="display: none;">
-                <span class="filter-title">Categorias</span>
-                <div class="filter-row" id="filtros-categoria"></div>
-                
-                <span class="filter-title" style="margin-top: 16px;">Estado (UF)</span>
-                <div class="filter-row" id="filtros-uf"></div>
-                
-                <span class="filter-title" id="titulo-filtro-urgencia" style="margin-top: 16px; display: none; color: var(--accent-warning);">NÃO PERCA!</span>
-                <div class="filter-row" id="filtros-urgencia" style="display: none;"></div>
+            <div id="painel-filtros-container" class="card" style="padding: 0; overflow: hidden; background: transparent; border: none; box-shadow: none; margin-bottom: 16px;">
+                <div class="filter-header" onclick="toggleFiltros()">
+                    <span style="font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px; color: var(--text-main);">🔍 FILTROS</span>
+                    <span id="filter-chevron" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
+                </div>
+                <div id="filter-body" class="filter-body">
+                    <div class="filter-container" id="painel-filtros" style="display: none; border: none; margin-bottom: 0; padding: 0 16px 16px 16px; background: transparent;">
+                        <span class="filter-title">Categorias</span>
+                        <div class="filter-row" id="filtros-categoria"></div>
+                        
+                        <span class="filter-title" style="margin-top: 16px;">Estado (UF)</span>
+                        <div class="filter-row" id="filtros-uf"></div>
+                        
+                        <span class="filter-title" id="titulo-filtro-urgencia" style="margin-top: 16px; display: none; color: var(--accent-warning);">STATUS</span>
+                        <div class="filter-row" id="filtros-urgencia" style="display: none;"></div>
+                    </div>
+                </div>
             </div>
 
             <div id="lista-datas">
@@ -691,16 +743,24 @@
         <section id="view-suncalc" class="view-tab">
             <h1 class="page-title" style="color: var(--accent-sun);">Luz Natural</h1>
             
-            <div class="card" style="border-top-color: var(--accent-sun); border-top-width: 4px;">
-                <label style="display:block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">LOCALIDADE DO ENSAIO</label>
-                <div style="display: flex; gap: 8px; margin-bottom: 16px;">
-                    <input type="text" id="buscaLocalSunCalc" class="input-box" placeholder="Ex: Ubatuba, SP...">
-                    <button class="btn btn-primary" style="width: auto; background: var(--accent-sun); color: #000;" id="btn-buscar-local" onclick="buscarLocalidadeSunCalc()">Buscar</button>
+            <div id="sun-filters-container" class="card" style="padding: 0; overflow: hidden; background: transparent; border: none; box-shadow: none; margin-bottom: 16px;">
+                <div class="filter-header" onclick="toggleFiltrosLocal()">
+                    <span style="font-weight: 700; font-size: 0.9rem; letter-spacing: 0.5px; color: var(--text-main);">📍 LOCAL E DATA</span>
+                    <span id="sun-filter-chevron" style="color: var(--text-muted); font-size: 0.8rem;">▼</span>
                 </div>
-                <button class="btn btn-outline" style="border-color: var(--accent-sun); color: var(--accent-sun); margin-bottom: 20px;" id="btn-gps" onclick="getMyLocation()">📍 Usar meu GPS atual</button>
-                
-                <label style="display:block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">DATA DO ENSAIO</label>
-                <input type="date" id="dataSunCalc" class="input-box" onchange="atualizarDataSunCalc()" style="color-scheme: dark;">
+                <div id="sun-filter-body" class="filter-body">
+                    <div class="card" style="border-top-color: var(--accent-sun); border-top-width: 4px; margin-top: 12px;">
+                        <label style="display:block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">LOCALIDADE DO ENSAIO</label>
+                        <div style="display: flex; gap: 8px; margin-bottom: 16px;">
+                            <input type="text" id="buscaLocalSunCalc" class="input-box" placeholder="Ex: Ubatuba, SP...">
+                            <button class="btn btn-primary" style="width: auto; background: var(--accent-sun); color: #000;" onclick="buscarLocalidadeSunCalc()">Buscar</button>
+                        </div>
+                        <button id="btn-gps" class="btn btn-outline" style="border-color: var(--accent-sun); color: var(--accent-sun); margin-bottom: 20px;" onclick="getMyLocation()">📍 Usar meu GPS atual</button>
+                        
+                        <label style="display:block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">DATA DO ENSAIO</label>
+                        <input type="date" id="dataSunCalc" class="input-box" onchange="atualizarDataSunCalc()" style="color-scheme: dark;">
+                    </div>
+                </div>
             </div>
             
             <div id="local-ref-title" style="margin-bottom: 16px; color: var(--text-muted); font-size: 0.85rem; font-weight: 700; text-align: center; text-transform: uppercase; letter-spacing: 0.5px;"></div>
@@ -833,6 +893,40 @@
         </div>
     </aside>
 
+    <aside id="push-settings" class="push-screen">
+        <header class="push-header">
+            <button class="btn-back" onclick="closePush('push-settings')">‹ Voltar</button>
+            <div class="push-title">Configurações</div>
+        </header>
+        <div class="push-content">
+            <h3 class="brand-font" style="font-size: 1.8rem; margin-bottom: 20px; color: #fff;">Notificações</h3>
+            
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 16px;">
+                <div>
+                    <div style="font-weight: 700; color: #fff;">Alertas do Radar</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Eventos em 'Últimos Dias'</div>
+                </div>
+                <input type="checkbox" id="notify-radar" style="width: 24px; height: 24px; accent-color: var(--accent-snc);">
+            </div>
+
+            <div class="card" style="display: flex; justify-content: space-between; align-items: center; padding: 16px;">
+                <div>
+                    <div style="font-weight: 700; color: #fff;">Ciclo Solar</div>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">Início da Hora Dourada</div>
+                </div>
+                <input type="checkbox" id="notify-sun" style="width: 24px; height: 24px; accent-color: var(--accent-snc);">
+            </div>
+
+            <button class="btn btn-primary" onclick="solicitarPermissaoNotificacao()" style="margin-top: 20px;">
+                ATIVAR NOTIFICAÇÕES (PWA)
+            </button>
+            
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 24px; text-align: center; line-height: 1.5;">
+                Nota: O envio de notificações requer que o app esteja instalado na tela inicial do seu dispositivo.
+            </p>
+        </div>
+    </aside>
+
     <div class="bottom-sheet-backdrop" id="sheet-backdrop" onclick="closeBottomSheet()"></div>
     <div class="bottom-sheet" id="bottom-sheet">
         <div class="sheet-handle"></div>
@@ -883,12 +977,12 @@
     <div id="visitor-counter" style="color: var(--bg-color); position: fixed; bottom: 0; left: 0; right: 0; margin: 0 auto; max-width: 800px; font-size: 0.1rem; user-select: all; opacity: 0; pointer-events: none;">0</div>
 
     <script>
-        //Projeto: C.L.A.R.A.
-        // Descrição: Central de Luz e Apoio ao Repertório de Artistas do Audiovisual. Uma ferramenta PWA para fotógrafos e cinegrafistas com calculadoras de estúdio, radar cultural, enciclopédia e monitoramento de luz natural.
-        // Versão: 5.7.2
-        // Mudanças da Versão: Correção de contraste e UX nos botões de paginação do Cronograma de Aulas.
-        // Data da Versão: 09/03/2026 - 21:57
-        // Desenvolvedor: Harry Bour
+        // Projeto: C.L.A.R.A.
+        // Descrição: Central de Luz e Apoio ao Repertório de Artistas do Audiovisual.
+        // Versão: 6.3.0
+        // Mudanças da Versão: Migração para PWA Network-First (atualização automática transparente) e injeção dinâmica de versão no botão de sincronia.
+        // Data da Versão: 10/03/2026 - 11:45
+        // Desenvolvedor: Harry Bour 
         
         // ==========================================
         // VARIÁVEIS GLOBAIS E LINKS DAS PLANILHAS
@@ -897,7 +991,7 @@
         const LINK_PLANILHA_EVENTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv";
         const LINK_PLANILHA_DATAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=2069138341&single=true&output=tsv";
         const LINK_PLANILHA_DICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1758081988&single=true&output=tsv"; 
-        
+        const APP_VERSION = "6.3.0"; // ÚNICO LUGAR PARA MUDAR A VERSÃO NO FUTURO!
         let aulasArray = []; 
         let baseEventos = []; 
         let baseDatas = []; 
@@ -975,9 +1069,11 @@
             document.getElementById('bottom-sheet').classList.add('active');
         }
 
+        // Alteração gerada em: 09/03/2026 - 23:45
         function closeBottomSheet() {
             document.getElementById('sheet-backdrop').classList.remove('active');
             document.getElementById('bottom-sheet').classList.remove('active');
+            document.getElementById('side-menu').classList.remove('active'); // Garante que feche o menu também
         }
 
         function abrirModal(dataISO, ucNome, profNome, numAula) { 
@@ -1062,29 +1158,27 @@
         // INICIALIZAÇÃO BLINDADA DO APLICATIVO
         // ==========================================
         document.addEventListener('DOMContentLoaded', function() {
-            const currentVersion = "5.1.1";
+            // Injeta a versão visualmente no botão e no rodapé
+            const versionDisplay = document.getElementById('version-display');
+            if (versionDisplay) versionDisplay.innerText = `v${APP_VERSION} • Harry Bour • 2026`;
             
-            if (localStorage.getItem('clara_version') !== currentVersion) {
+            const btnSyncMenu = document.getElementById('btn-sync-menu');
+            if (btnSyncMenu) btnSyncMenu.innerHTML = `🔄 Sincronizar Dados (v${APP_VERSION})`;
+
+            // Limpa o cache das planilhas se a versão do app mudar
+            if (localStorage.getItem('clara_version') !== APP_VERSION) {
                 localStorage.removeItem('tpf43m_aulas'); 
                 localStorage.removeItem('tpf43m_eventos'); 
                 localStorage.removeItem('tpf43m_datas'); 
                 localStorage.removeItem('tpf43m_dicio');
-                localStorage.setItem('clara_version', currentVersion);
+                localStorage.setItem('clara_version', APP_VERSION);
             }
             
             // Carrega do Cache primeiro para velocidade
-            if (localStorage.getItem('tpf43m_aulas')) {
-                processarAulas(localStorage.getItem('tpf43m_aulas'));
-            }
-            if (localStorage.getItem('tpf43m_eventos')) {
-                processarEventos(localStorage.getItem('tpf43m_eventos'));
-            }
-            if (localStorage.getItem('tpf43m_datas')) {
-                processarDatas(localStorage.getItem('tpf43m_datas'));
-            }
-            if (localStorage.getItem('tpf43m_dicio')) {
-                processarDicio(localStorage.getItem('tpf43m_dicio'));
-            }
+            if (localStorage.getItem('tpf43m_aulas')) processarAulas(localStorage.getItem('tpf43m_aulas'));
+            if (localStorage.getItem('tpf43m_eventos')) processarEventos(localStorage.getItem('tpf43m_eventos'));
+            if (localStorage.getItem('tpf43m_datas')) processarDatas(localStorage.getItem('tpf43m_datas'));
+            if (localStorage.getItem('tpf43m_dicio')) processarDicio(localStorage.getItem('tpf43m_dicio'));
 
             if (lights.length === 0) { 
                 addLight('Principal', 6, 0); 
@@ -1095,7 +1189,7 @@
             fetchGoogleSheets();
             atualizarContador();
         });
-
+        
         function dismissSplash() {
             document.getElementById('splash-screen').style.opacity = '0';
             setTimeout(function() { 
@@ -1103,9 +1197,29 @@
             }, 500);
         }
 
-        function forceSync() {
-            document.getElementById('btn-force-sync').classList.add('spinning');
-            fetchGoogleSheets();
+        // Alteração gerada em: 10/03/2026 - 00:15
+        async function forceSync() {
+            const btnMenu = document.getElementById('btn-sync-menu');
+            if(!btnMenu) return;
+            
+            const textoOriginal = btnMenu.innerHTML;
+            btnMenu.innerHTML = "⏳ Sincronizando...";
+            btnMenu.style.opacity = "0.7";
+            btnMenu.disabled = true;
+
+            await fetchGoogleSheets();
+
+            setTimeout(() => {
+                btnMenu.innerHTML = "✅ Versão Atualizada!";
+                btnMenu.style.color = "var(--accent-aulas)";
+                
+                setTimeout(() => {
+                    btnMenu.innerHTML = textoOriginal;
+                    btnMenu.style.opacity = "1";
+                    btnMenu.style.color = "#fff";
+                    btnMenu.disabled = false;
+                }, 3000);
+            }, 1000);
         }
 
         // FETCH BLINDADO: Garante que o botão Entrar sempre aparecerá
@@ -2366,6 +2480,7 @@
             `;
         }
         
+        // Alteração gerada em: 10/03/2026 - 10:50
         function initSunCalc() { 
             const hoje = new Date(); 
             const dataInput = document.getElementById('dataSunCalc'); 
@@ -2373,9 +2488,27 @@
                 dataInput.value = toISODate(hoje); 
             } 
             renderSunCalc(hoje); 
+            autoSwitchSunTab(); // <-- AGORA SIM ELA ESTÁ SENDO EXECUTADA AQUI DENTRO!
+        }
+
+        function autoSwitchSunTab() {
+            const hora = new Date().getHours();
+            // Se for entre 18h e 5h, abre em Astros e Lua
+            if (hora >= 18 || hora <= 5) {
+                switchLuzTab('noturna');
+            } else {
+                switchLuzTab('diurna');
+            }
+        }
+
+        function toggleFiltrosLocal() {
+            const body = document.getElementById('sun-filter-body');
+            const chevron = document.getElementById('sun-filter-chevron');
+            body.classList.toggle('expanded');
+            chevron.innerText = body.classList.contains('expanded') ? '▲' : '▼';
         }
         
-        function atualizarDataSunCalc() { 
+            function atualizarDataSunCalc() { 
             const dataString = document.getElementById('dataSunCalc').value; 
             if(!dataString) { return; }
             const partes = dataString.split('-'); 
@@ -2746,6 +2879,39 @@
             }); 
         }
 
+        // Alteração gerada em: 09/03/2026 - 23:45
+        // ==========================================
+        // MOTOR DE INTERFACE E NOTIFICAÇÕES
+        // ==========================================
+        function toggleMenu() {
+            document.getElementById('side-menu').classList.toggle('active');
+            document.getElementById('sheet-backdrop').classList.toggle('active');
+        }
+
+        function toggleFiltros() {
+            const body = document.getElementById('filter-body');
+            const chevron = document.getElementById('filter-chevron');
+            body.classList.toggle('expanded');
+            chevron.innerText = body.classList.contains('expanded') ? '▲' : '▼';
+        }
+
+        async function solicitarPermissaoNotificacao() {
+            if (!("Notification" in window)) {
+                alert("Este navegador não suporta notificações.");
+                return;
+            }
+
+            const permissao = await Notification.requestPermission();
+            if (permissao === "granted") {
+                new Notification("C.L.A.R.A. Ativada!", {
+                    body: "Permissão concedida. Você receberá alertas sobre luz e eventos.",
+                    icon: "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%23ff7b00'%3E%3Cpath d='M12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z'/%3E%3C/svg%3E"
+                });
+            } else {
+                alert("Para receber alertas, você precisa autorizar as notificações nas configurações do seu celular ou navegador.");
+            }
+        }
+
         // ==========================================
         // CONTADOR DE VISITAS INVISÍVEL (API)
         // ==========================================
@@ -2764,6 +2930,58 @@
                 // Falha silenciosa ignorada no console para não sujar o debug
             }
         }
+
+        // Alteração gerada em: 10/03/2026 - 11:15
+        // ==========================================
+        // MOTOR PWA (INSTALAÇÃO DO APP)
+        // ==========================================
+        let deferredPrompt;
+        
+        // Ouve o sinal nativo de "PWA pronto para instalar" do navegador
+        window.addEventListener('beforeinstallprompt', (e) => {
+            // Impede o aviso padrão (chatito) do Chrome de aparecer sozinho
+            e.preventDefault();
+            // Guarda o evento para dispararmos apenas quando o usuário clicar no botão
+            deferredPrompt = e;
+            
+            // Garante que o botão fique visível se o app ainda não estiver instalado
+            const installBtn = document.getElementById('btn-install-pwa');
+            const installedMsg = document.getElementById('pwa-installed-msg');
+            if(installBtn) installBtn.style.display = 'inline-flex';
+            if(installedMsg) installedMsg.classList.add('hidden');
+        });
+
+        // Conecta o clique do botão ao instalador nativo
+        document.addEventListener('DOMContentLoaded', () => {
+            const installBtn = document.getElementById('btn-install-pwa');
+            if (installBtn) {
+                installBtn.addEventListener('click', async () => {
+                    if (deferredPrompt) {
+                        // Dispara a janela de instalação do Android/iOS
+                        deferredPrompt.prompt();
+                        // Aguarda o usuário clicar em "Instalar" ou "Cancelar"
+                        const { outcome } = await deferredPrompt.userChoice;
+                        // Anula o prompt para não ser usado duas vezes
+                        deferredPrompt = null;
+                    } else {
+                        // Failsafe para iOS ou navegadores que não suportam o botão nativo
+                        alert("Para instalar no iOS: toque no botão de 'Compartilhar' (quadrado com seta para cima) e depois em 'Adicionar à Tela de Início'.");
+                    }
+                });
+            }
+        });
+
+        // Ouve quando a instalação é concluída com sucesso
+        window.addEventListener('appinstalled', () => {
+            const installBtn = document.getElementById('btn-install-pwa');
+            const installedMsg = document.getElementById('pwa-installed-msg');
+            
+            // Esconde o botão e mostra o check verde no menu
+            if(installBtn) installBtn.style.display = 'none';
+            if(installedMsg) installedMsg.classList.remove('hidden');
+            
+            deferredPrompt = null;
+        });
 
         // ==========================================
         // SISTEMA DE PROTEÇÃO (ANTI-INSPECT / ANTI-COPY)
@@ -2794,5 +3012,12 @@
             }
         });
     </script>
+
+    <script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('./sw.js');
+  }
+</script>
+    
 </body>
 </html>
