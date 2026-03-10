@@ -657,7 +657,7 @@
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">v6.2.1 • Harry Bour • 2026</div>
+        <div id="version-display" style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;"></div>
     </div>
 
     <header class="app-header">
@@ -677,7 +677,7 @@
         </div>
         
         <div style="flex: 1; display: flex; flex-direction: column; gap: 12px;">
-            <button class="btn btn-primary" onclick="forceSync();" style="background: var(--bg-elevated); color: #fff; justify-content: flex-start;">🔄 Sincronizar Dados</button>
+            <button id="btn-sync-menu" class="btn btn-primary" onclick="forceSync();" style="background: var(--bg-elevated); color: #fff; justify-content: flex-start;">🔄 Sincronizar Dados</button>
             
             <button class="btn btn-primary" onclick="toggleMenu(); openPush('push-settings');" style="background: var(--bg-elevated); color: #fff; justify-content: flex-start;">⚙️ Notificações</button>
         </div>
@@ -979,9 +979,9 @@
     <script>
         // Projeto: C.L.A.R.A.
         // Descrição: Central de Luz e Apoio ao Repertório de Artistas do Audiovisual.
-        // Versão: 6.2.1
-        // Mudanças da Versão: Unificação de menus no topo à direita, cabeçalho alinhado à esquerda, automação diurna/noturna na Luz Natural e filtros de localidade colapsáveis.
-        // Data da Versão: 10/03/2026 - 00:08
+        // Versão: 6.3.0
+        // Mudanças da Versão: Migração para PWA Network-First (atualização automática transparente) e injeção dinâmica de versão no botão de sincronia.
+        // Data da Versão: 10/03/2026 - 11:45
         // Desenvolvedor: Harry Bour 
         
         // ==========================================
@@ -991,7 +991,7 @@
         const LINK_PLANILHA_EVENTOS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1213067383&single=true&output=tsv";
         const LINK_PLANILHA_DATAS = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=2069138341&single=true&output=tsv";
         const LINK_PLANILHA_DICIO = "https://docs.google.com/spreadsheets/d/e/2PACX-1vRqOEEEZGFugY9MN7_0OsVjxvl02CxltDPfTx3LbUtte0mY7nLHWJxmu-ISbymcrS7cbyK__ixm43fI/pub?gid=1758081988&single=true&output=tsv"; 
-        
+        const APP_VERSION = "6.3.0"; // ÚNICO LUGAR PARA MUDAR A VERSÃO NO FUTURO!
         let aulasArray = []; 
         let baseEventos = []; 
         let baseDatas = []; 
@@ -1158,29 +1158,27 @@
         // INICIALIZAÇÃO BLINDADA DO APLICATIVO
         // ==========================================
         document.addEventListener('DOMContentLoaded', function() {
-            const currentVersion = "5.1.1";
+            // Injeta a versão visualmente no botão e no rodapé
+            const versionDisplay = document.getElementById('version-display');
+            if (versionDisplay) versionDisplay.innerText = `v${APP_VERSION} • Harry Bour • 2026`;
             
-            if (localStorage.getItem('clara_version') !== currentVersion) {
+            const btnSyncMenu = document.getElementById('btn-sync-menu');
+            if (btnSyncMenu) btnSyncMenu.innerHTML = `🔄 Sincronizar Dados (v${APP_VERSION})`;
+
+            // Limpa o cache das planilhas se a versão do app mudar
+            if (localStorage.getItem('clara_version') !== APP_VERSION) {
                 localStorage.removeItem('tpf43m_aulas'); 
                 localStorage.removeItem('tpf43m_eventos'); 
                 localStorage.removeItem('tpf43m_datas'); 
                 localStorage.removeItem('tpf43m_dicio');
-                localStorage.setItem('clara_version', currentVersion);
+                localStorage.setItem('clara_version', APP_VERSION);
             }
             
             // Carrega do Cache primeiro para velocidade
-            if (localStorage.getItem('tpf43m_aulas')) {
-                processarAulas(localStorage.getItem('tpf43m_aulas'));
-            }
-            if (localStorage.getItem('tpf43m_eventos')) {
-                processarEventos(localStorage.getItem('tpf43m_eventos'));
-            }
-            if (localStorage.getItem('tpf43m_datas')) {
-                processarDatas(localStorage.getItem('tpf43m_datas'));
-            }
-            if (localStorage.getItem('tpf43m_dicio')) {
-                processarDicio(localStorage.getItem('tpf43m_dicio'));
-            }
+            if (localStorage.getItem('tpf43m_aulas')) processarAulas(localStorage.getItem('tpf43m_aulas'));
+            if (localStorage.getItem('tpf43m_eventos')) processarEventos(localStorage.getItem('tpf43m_eventos'));
+            if (localStorage.getItem('tpf43m_datas')) processarDatas(localStorage.getItem('tpf43m_datas'));
+            if (localStorage.getItem('tpf43m_dicio')) processarDicio(localStorage.getItem('tpf43m_dicio'));
 
             if (lights.length === 0) { 
                 addLight('Principal', 6, 0); 
@@ -1191,7 +1189,7 @@
             fetchGoogleSheets();
             atualizarContador();
         });
-
+        
         function dismissSplash() {
             document.getElementById('splash-screen').style.opacity = '0';
             setTimeout(function() { 
@@ -1201,24 +1199,20 @@
 
         // Alteração gerada em: 10/03/2026 - 00:15
         async function forceSync() {
-            const btn = document.getElementById('btn-install-pwa'); // Referência ao botão no menu
-            // Se o botão de força sync for o do header ou o do menu:
-            const btnMenu = document.querySelector('button[onclick*="forceSync"]');
+            const btnMenu = document.getElementById('btn-sync-menu');
+            if(!btnMenu) return;
             
             const textoOriginal = btnMenu.innerHTML;
             btnMenu.innerHTML = "⏳ Sincronizando...";
             btnMenu.style.opacity = "0.7";
             btnMenu.disabled = true;
 
-            // Dispara a busca real das planilhas
             await fetchGoogleSheets();
 
-            // Pequeno delay para o usuário conseguir ler o estado final
             setTimeout(() => {
                 btnMenu.innerHTML = "✅ Versão Atualizada!";
                 btnMenu.style.color = "var(--accent-aulas)";
                 
-                // Retorna ao estado normal após 3 segundos
                 setTimeout(() => {
                     btnMenu.innerHTML = textoOriginal;
                     btnMenu.style.opacity = "1";
