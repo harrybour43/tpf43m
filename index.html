@@ -657,7 +657,7 @@
         <div id="loading-text" style="color: var(--text-muted); font-size: 0.85rem; margin-top: 32px;">Sincronizando bancos de dados...</div>
         
         <button id="btn-entrar" class="btn btn-primary hidden" style="margin-top: 32px; width: auto; padding: 16px 40px; border-radius: 99px; box-shadow: 0 4px 20px rgba(255, 123, 0, 0.3);" onclick="dismissSplash()">ENTRAR NO APP</button>
-        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">v6.2.0 • Harry Bour • 2026</div>
+        <div style="position: absolute; bottom: 40px; font-size: 0.7rem; color: #555; text-transform: uppercase; letter-spacing: 1px; font-weight: 700;">v6.2.1 • Harry Bour • 2026</div>
     </div>
 
     <header class="app-header">
@@ -755,7 +755,7 @@
                             <input type="text" id="buscaLocalSunCalc" class="input-box" placeholder="Ex: Ubatuba, SP...">
                             <button class="btn btn-primary" style="width: auto; background: var(--accent-sun); color: #000;" onclick="buscarLocalidadeSunCalc()">Buscar</button>
                         </div>
-                        <button class="btn btn-outline" style="border-color: var(--accent-sun); color: var(--accent-sun); margin-bottom: 20px;" onclick="getMyLocation()">📍 Usar meu GPS atual</button>
+                        <button id="btn-gps" class="btn btn-outline" style="border-color: var(--accent-sun); color: var(--accent-sun); margin-bottom: 20px;" onclick="getMyLocation()">📍 Usar meu GPS atual</button>
                         
                         <label style="display:block; font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 8px;">DATA DO ENSAIO</label>
                         <input type="date" id="dataSunCalc" class="input-box" onchange="atualizarDataSunCalc()" style="color-scheme: dark;">
@@ -979,7 +979,7 @@
     <script>
         // Projeto: C.L.A.R.A.
         // Descrição: Central de Luz e Apoio ao Repertório de Artistas do Audiovisual.
-        // Versão: 6.2.0
+        // Versão: 6.2.1
         // Mudanças da Versão: Unificação de menus no topo à direita, cabeçalho alinhado à esquerda, automação diurna/noturna na Luz Natural e filtros de localidade colapsáveis.
         // Data da Versão: 10/03/2026 - 00:08
         // Desenvolvedor: Harry Bour 
