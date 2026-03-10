@@ -1,4 +1,3 @@
-<script>
         // Projeto: C.L.A.R.A.
         // Descrição: Central de Luz e Apoio ao Repertório de Artistas do Audiovisual.
         // Versão: 6.3.0
@@ -2040,4 +2039,3 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('./sw.js');
         }
-</script>
