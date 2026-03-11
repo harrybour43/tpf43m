@@ -1,5 +1,5 @@
 // Alteração gerada em: 10/03/2026 - 11:00
-const CACHE_NAME = 'clara-cache-v6.3.0'; // Mude aqui para atualizar o código visual
+const CACHE_NAME = 'clara-cache-v6.3.1'; // Mude aqui para atualizar o código visual
 const ASSETS = [
   '/clara/',
   '/clara/index.html',
