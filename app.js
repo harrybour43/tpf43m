@@ -2501,7 +2501,7 @@ function calculateZonasExposure() {
     verdict.className = "verdict ok";
     verdict.innerHTML = `✅ Cena Segura (${rangeStops.toFixed(
       1
-    )} stops).<br>Exposição única com a velocidade acima atende.`;
+    )} stops).<br>Exposição única com a velocidade acima.`;
   } else {
     verdict.className = "verdict hdr";
     verdict.innerHTML = `⚠️ Contraste Alto (${rangeStops.toFixed(
