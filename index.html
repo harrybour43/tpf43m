@@ -555,9 +555,41 @@
       </section>
 
       <section id="view-zonas" class="view-tab">
-        <h1 class="page-title" style="color: var(--accent-zonas)">
-          Sistema de Zonas
-        </h1>
+        <div
+          style="
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 24px;
+          "
+        >
+          <h1
+            class="page-title"
+            style="
+              color: var(--accent-zonas);
+              margin-bottom: 0;
+              padding-bottom: 0;
+            "
+          >
+            Sistema de Zonas
+          </h1>
+          <button
+            onclick="abrirGuiaZonas()"
+            style="
+              background: transparent;
+              color: var(--accent-zonas);
+              border: 2px solid var(--accent-zonas);
+              border-radius: 50%;
+              width: 30px;
+              height: 30px;
+              font-weight: 800;
+              font-family: 'Cormorant Garamond', serif;
+              cursor: pointer;
+            "
+          >
+            ?
+          </button>
+        </div>
 
         <div class="checklist">
           <strong>Checklist para Arquitetura e Paisagem:</strong>
@@ -574,66 +606,140 @@
           </ul>
         </div>
 
-        <div class="card">
-          <h2
-            style="
-              font-size: 1rem;
-              color: var(--text-muted);
-              margin-bottom: 10px;
-              font-weight: 700;
-            "
-          >
-            1. Sensor e Distância Focal
-          </h2>
+        <div
+          class="card"
+          style="padding: 0; overflow: hidden; margin-bottom: 16px"
+        >
           <div
-            style="
-              display: flex;
-              gap: 10px;
-              margin-bottom: 10px;
-              align-items: center;
-            "
+            class="filter-header"
+            onclick="toggleZonasBox('box1-zonas', 'chev1-zonas')"
           >
-            <label style="flex: 1; font-size: 0.9rem">Sensor:</label>
-            <select
-              id="sensor-coc"
-              class="input-box"
-              style="flex: 2; padding: 10px"
+            <h2
+              style="
+                font-size: 1rem;
+                color: var(--text-muted);
+                font-weight: 700;
+                margin: 0;
+              "
             >
-              <option value="0.030">Full Frame (0.030mm)</option>
-              <option value="0.019">APS-C Canon (0.019mm)</option>
-              <option value="0.020">APS-C Nikon/Sony (0.020mm)</option>
-            </select>
-          </div>
-          <div
-            style="
-              display: flex;
-              gap: 10px;
-              margin-bottom: 10px;
-              align-items: center;
-            "
-          >
-            <label style="flex: 1; font-size: 0.9rem"
-              >Distância Focal (mm):</label
+              1. Sensor e Distância Focal
+            </h2>
+            <span
+              id="chev1-zonas"
+              style="color: var(--text-muted); font-size: 0.8rem"
+              >▼</span
             >
-            <input
-              type="number"
-              id="focal-length"
-              class="input-box"
-              style="flex: 2; padding: 10px"
-              placeholder="Ex: 24"
-              value="24"
-            />
           </div>
+          <div id="box1-zonas" class="filter-body">
+            <div style="padding: 16px">
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  margin-bottom: 10px;
+                  align-items: center;
+                "
+              >
+                <label style="flex: 1; font-size: 0.9rem">Sensor:</label>
+                <select
+                  id="sensor-coc"
+                  class="input-box"
+                  style="flex: 2; padding: 10px"
+                >
+                  <option value="0.030">Full Frame (0.030mm)</option>
+                  <option value="0.019">APS-C Canon (0.019mm)</option>
+                  <option value="0.020">APS-C Nikon/Sony (0.020mm)</option>
+                </select>
+              </div>
+              <div
+                style="
+                  display: flex;
+                  gap: 10px;
+                  margin-bottom: 10px;
+                  align-items: center;
+                "
+              >
+                <label style="flex: 1; font-size: 0.9rem"
+                  >Dist. Focal (mm):</label
+                >
+                <input
+                  type="number"
+                  id="focal-length"
+                  class="input-box"
+                  style="flex: 2; padding: 10px"
+                  placeholder="Ex: 24"
+                  value="24"
+                />
+              </div>
+              <div
+                id="hyperfocal-result"
+                style="
+                  margin-top: 10px;
+                  font-size: 0.85rem;
+                  color: #aaa;
+                  line-height: 1.5;
+                "
+              >
+                <em>Insira a focal para calcular.</em>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="card"
+          style="padding: 0; overflow: hidden; margin-bottom: 16px"
+        >
           <div
-            id="hyperfocal-result"
-            style="
-              margin-top: 10px;
-              font-size: 0.85rem;
-              color: #aaa;
-              line-height: 1.5;
-            "
+            class="filter-header"
+            onclick="toggleZonasBox('box2-zonas', 'chev2-zonas')"
           >
-            <em>Insira a focal para calcular.</em>
+            <h2
+              style="
+                font-size: 1rem;
+                color: var(--text-muted);
+                font-weight: 700;
+                margin: 0;
+              "
+            >
+              2. Filtros (ND)
+            </h2>
+            <span
+              id="chev2-zonas"
+              style="color: var(--text-muted); font-size: 0.8rem"
+              >▼</span
+            >
+          </div>
+          <div id="box2-zonas" class="filter-body">
+            <div style="padding: 16px">
+              <select
+                id="nd-filter-select"
+                class="input-box"
+                style="padding: 10px; margin-bottom: 12px"
+              >
+                <option value="0">Sem Filtro ND</option>
+                <option value="1">ND2 (Corta 1 Stop)</option>
+                <option value="2">ND4 (Corta 2 Stops)</option>
+                <option value="3">ND8 (Corta 3 Stops)</option>
+                <option value="4">ND16 (Corta 4 Stops)</option>
+                <option value="5">ND32 (Corta 5 Stops)</option>
+                <option value="6">ND64 (Corta 6 Stops)</option>
+                <option value="7">ND128 (Corta 7 Stops)</option>
+                <option value="8">ND256 (Corta 8 Stops)</option>
+                <option value="9">ND512 (Corta 9 Stops)</option>
+                <option value="10">ND1000 (Corta 10 Stops)</option>
+              </select>
+              <div
+                style="
+                  font-size: 0.8rem;
+                  color: var(--text-muted);
+                  line-height: 1.4;
+                "
+              >
+                💡 <strong>Dica:</strong> Se empilhar filtros, some os stops
+                (Ex: ND8 [3] + ND64 [6] = 9 Stops). Não multiplique os nomes.
+              </div>
+            </div>
           </div>
         </div>
 
@@ -646,7 +752,7 @@
               font-weight: 700;
             "
           >
-            2. 2. Leituras do Fotômetro (Velocidade)
+            3. Leituras do Fotômetro
           </h2>
           <div
             id="zonas-inputs-container"
@@ -660,7 +766,7 @@
               /><input
                 type="text"
                 class="input-box input-speed-zona"
-                placeholder="1/500"
+                placeholder="1/250"
                 style="width: 90px; text-align: center"
               />
             </div>
@@ -672,7 +778,7 @@
               /><input
                 type="text"
                 class="input-box input-speed-zona"
-                placeholder="1/125"
+                placeholder="1/100"
                 style="width: 90px; text-align: center"
               />
             </div>
@@ -684,7 +790,7 @@
               /><input
                 type="text"
                 class="input-box input-speed-zona"
-                placeholder="1/30"
+                placeholder="1/10"
                 style="width: 90px; text-align: center"
               />
             </div>
@@ -696,7 +802,7 @@
               /><input
                 type="text"
                 class="input-box input-speed-zona"
-                placeholder="1/8"
+                placeholder="0.4"
                 style="width: 90px; text-align: center"
               />
             </div>
@@ -708,7 +814,7 @@
               /><input
                 type="text"
                 class="input-box input-speed-zona"
-                placeholder="1/2"
+                placeholder="2s"
                 style="width: 90px; text-align: center"
               />
             </div>
@@ -760,32 +866,91 @@
 
             <div class="meter-container">
               <div class="meter-line"></div>
-              <div class="meter-ticks">
-                <div class="tick">
+              <div
+                class="meter-ticks"
+                style="
+                  display: block;
+                  position: absolute;
+                  width: calc(100% - 20px);
+                  left: 10px;
+                  top: 40px;
+                  padding: 0;
+                "
+              >
+                <div
+                  class="tick"
+                  style="
+                    position: absolute;
+                    left: 0%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">-3</div>
                 </div>
-                <div class="tick">
+                <div
+                  class="tick"
+                  style="
+                    position: absolute;
+                    left: 16.666%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">-2</div>
                 </div>
-                <div class="tick">
+                <div
+                  class="tick"
+                  style="
+                    position: absolute;
+                    left: 33.333%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">-1</div>
                 </div>
-                <div class="tick zero">
+                <div
+                  class="tick zero"
+                  style="
+                    position: absolute;
+                    left: 50%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">0</div>
                 </div>
-                <div class="tick">
+                <div
+                  class="tick"
+                  style="
+                    position: absolute;
+                    left: 66.666%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">+1</div>
                 </div>
-                <div class="tick">
+                <div
+                  class="tick"
+                  style="
+                    position: absolute;
+                    left: 83.333%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">+2</div>
                 </div>
-                <div class="tick">
+                <div
+                  class="tick"
+                  style="
+                    position: absolute;
+                    left: 100%;
+                    transform: translateX(-50%);
+                  "
+                >
                   <div class="tick-mark"></div>
                   <div class="tick-label">+3</div>
                 </div>
@@ -1418,6 +1583,55 @@
         Principal. Uma vez que as luzes estão niveladas, o Passo 2 te dá o
         comando final de "clicks" para atingir a intenção artística com
         perfeição.
+      </p>
+    </template>
+
+    <template id="guia-zonas-content">
+      <p>
+        Esta ferramenta ajuda a encontrar o Ponto Zero (Cinza 18%) de uma cena
+        avaliando o contraste entre as áreas mais claras e mais escuras medidas
+        no seu fotômetro.
+      </p>
+
+      <p>
+        <strong style="color: var(--accent-zonas)"
+          >A Lógica dos Filtros ND (Densidade Neutra)</strong
+        ><br />
+        Os filtros ND funcionam como "óculos escuros" para a sua lente. Eles
+        cortam a entrada de luz para permitir longas exposições (como borrar a
+        água de uma cachoeira) ou grandes aberturas em dias muito ensolarados,
+        sem alterar as cores da cena.
+      </p>
+
+      <p>
+        • <strong>Uso e Efeito (Stops):</strong><br />
+        Cada número do filtro ND representa a quantidade de "stops" (pontos de
+        luz) que ele corta:<br />
+        - <strong>ND2:</strong> Corta 1 stop (Reduz a luz pela metade)<br />
+        - <strong>ND4:</strong> Corta 2 stops<br />
+        - <strong>ND8:</strong> Corta 3 stops<br />
+        - <strong>ND64:</strong> Corta 6 stops<br />
+        - <strong>ND1000:</strong> Corta 10 stops
+      </p>
+
+      <p>
+        • <strong>Soma de Filtros (Empilhamento):</strong><br />
+        Se você rosquear dois filtros na lente, você <strong>não</strong> deve
+        multiplicar os nomes deles, mas sim <strong>somar os stops</strong>.
+        <br />
+        <em>Exemplo:</em> Um filtro ND8 (corta 3 stops) + um filtro ND64 (corta
+        6 stops) = Corte total de <strong>9 stops</strong> (o que seria
+        equivalente a um filtro ND512).
+      </p>
+
+      <p>
+        <strong style="color: var(--accent-warning)"
+          >Como usar a Calculadora:</strong
+        ><br />
+        Faça a medição da luz na cena <strong>SEM</strong> o filtro ND e insira
+        os valores no Box 3. Depois, informe no Box 2 qual filtro você vai
+        rosquear na lente. A calculadora fará a compensação automaticamente e te
+        dará a nova velocidade final do obturador.
       </p>
     </template>
 
