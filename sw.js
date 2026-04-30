@@ -1,11 +1,11 @@
 // Alteração gerada em: 30/04/2026
-const CACHE_NAME = "clara-cache-v6.6.0"; // Versão atualizada para Arquitetura Modular
+const CACHE_NAME = "clara-cache-v6.6.1"; // Subi a versão para quebrar o cache travado
 const ASSETS = [
   "/clara/",
   "/clara/index.html",
   "/clara/style.css",
   "/clara/manifest.json",
-  "/clara/core.js",
+  "/clara/globals.js", // AQUI ESTAVA O ERRO DE CACHE
   "/clara/ui.js",
   "/clara/turma.js",
   "/clara/radar.js",
