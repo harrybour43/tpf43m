@@ -743,82 +743,61 @@
           </div>
         </div>
 
+        <!-- BOX 3: Leituras do Fotômetro (Nova Interface Deslizável) -->
         <div class="card">
-          <h2
-            style="
-              font-size: 1rem;
-              color: var(--text-muted);
-              margin-bottom: 15px;
-              font-weight: 700;
-            "
-          >
+          <h2 style="font-size: 1rem; color: var(--text-muted); margin-bottom: 15px; font-weight: 700;">
             3. Leituras do Fotômetro
           </h2>
-          <div
-            id="zonas-inputs-container"
-            style="display: flex; flex-direction: column; gap: 10px"
-          >
-            <div style="display: flex; gap: 10px">
-              <input
-                type="text"
-                class="input-box input-name-zona"
-                placeholder="Luz Alta (Ex: Janela)"
-              /><input
-                type="text"
-                class="input-box input-speed-zona"
-                placeholder="1/250"
-                style="width: 90px; text-align: center"
-              />
-            </div>
-            <div style="display: flex; gap: 10px">
-              <input
-                type="text"
-                class="input-box input-name-zona"
-                placeholder="Meio-tom Claro"
-              /><input
-                type="text"
-                class="input-box input-speed-zona"
-                placeholder="1/100"
-                style="width: 90px; text-align: center"
-              />
-            </div>
-            <div style="display: flex; gap: 10px">
-              <input
-                type="text"
-                class="input-box input-name-zona"
-                placeholder="Cinza 18% (Parede)"
-              /><input
-                type="text"
-                class="input-box input-speed-zona"
-                placeholder="1/10"
-                style="width: 90px; text-align: center"
-              />
-            </div>
-            <div style="display: flex; gap: 10px">
-              <input
-                type="text"
-                class="input-box input-name-zona"
-                placeholder="Meio-tom Escuro"
-              /><input
-                type="text"
-                class="input-box input-speed-zona"
-                placeholder="0.4"
-                style="width: 90px; text-align: center"
-              />
-            </div>
-            <div style="display: flex; gap: 10px">
-              <input
-                type="text"
-                class="input-box input-name-zona"
-                placeholder="Sombra Profunda"
-              /><input
-                type="text"
-                class="input-box input-speed-zona"
-                placeholder="2s"
-                style="width: 90px; text-align: center"
-              />
+          
+          <div style="text-align: center; color: var(--text-muted); font-size: 0.8rem; margin-bottom: 8px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;">Deslize para selecionar</div>
+          
+          <!-- Dial Deslizável -->
+          <div style="position: relative; width: 100%; height: 60px; background: #0a0a0a; border-radius: 8px; border: 1px solid #222; overflow: hidden; display: flex; align-items: center; margin-bottom: 16px;">
+            <!-- Indicador Central (Seta e Linha) -->
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 2px; height: 100%; background: var(--accent-zonas); z-index: 10; pointer-events: none;"></div>
+            <div style="position: absolute; top: 0; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-top: 6px solid var(--accent-zonas); z-index: 10;"></div>
+            <div style="position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); width: 0; height: 0; border-left: 6px solid transparent; border-right: 6px solid transparent; border-bottom: 6px solid var(--accent-zonas); z-index: 10;"></div>
+
+            <!-- Scroll Container -->
+            <div id="zonas-dial-container" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; width: 100%; height: 100%; align-items: center; scrollbar-width: none; -ms-overflow-style: none; padding: 0 calc(50% - 40px);">
+              <!-- JS vai injetar os itens aqui. -->
             </div>
           </div>
+          <style>#zonas-dial-container::-webkit-scrollbar { display: none; }</style>
+
+          <button class="btn btn-outline" style="border-style: dashed; color: var(--accent-zonas); border-color: var(--accent-zonas);" onclick="inserirLeituraZonas()">
+            + Inserir Valor no Sistema
+          </button>
+
+          <!-- Tabela de Leituras Dinâmica -->
+          <div id="zonas-tabela-leituras" style="margin-top: 16px; display: flex; flex-direction: column; gap: 8px;">
+            <!-- JS injeta as leituras aqui -->
+          </div>
+
+          <button class="btn btn-primary" style="background: var(--accent-zonas); margin-top: 24px;" onclick="calculateZonasExposure()">
+            Calcular Ponto Zero (0 EV)
+          </button>
+
+          <div class="result-box" id="zonas-exposure-result" style="display: none; text-align: center; margin-top: 24px">
+            <p style="color: var(--text-muted); font-size: 0.9rem">Velocidade para zerar o fotômetro:</p>
+            <div class="base-speed" id="zonas-base-speed-val" style="font-size: 2.5rem; font-weight: bold; color: var(--accent-zonas); margin: 10px 0 40px 0;">1/30</div>
+
+            <div class="meter-container">
+              <div class="meter-line"></div>
+              <div class="meter-ticks" style="display: block; position: absolute; width: calc(100% - 20px); left: 10px; top: 40px; padding: 0;">
+                <div class="tick" style="position: absolute; left: 0%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">-3</div></div>
+                <div class="tick" style="position: absolute; left: 16.666%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">-2</div></div>
+                <div class="tick" style="position: absolute; left: 33.333%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">-1</div></div>
+                <div class="tick zero" style="position: absolute; left: 50%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">0</div></div>
+                <div class="tick" style="position: absolute; left: 66.666%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">+1</div></div>
+                <div class="tick" style="position: absolute; left: 83.333%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">+2</div></div>
+                <div class="tick" style="position: absolute; left: 100%; transform: translateX(-50%);"><div class="tick-mark"></div><div class="tick-label">+3</div></div>
+              </div>
+              <div id="zonas-meter-points-layer"></div>
+            </div>
+            <div id="zonas-verdict-box" class="verdict" style="margin-top: 20px"></div>
+          </div>
+        </div>
 
           <button
             id="btn-add-zona"
